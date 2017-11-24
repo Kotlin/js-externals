@@ -1,3 +1,3 @@
 package jquery
 
-external fun jq() {}
+external fun jq(): Nothing = definedExternally

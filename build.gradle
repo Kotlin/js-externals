@@ -1,0 +1,111 @@
+import groovy.json.JsonException
+import groovy.json.JsonSlurper
+
+buildscript {
+    ext.kotlin_version = '1.2.0'
+
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+    }
+}
+
+def dryRun = hasProperty("dryRun") ? property("dryRun") : "false"
+def authToken = hasProperty("authToken") ? property("authToken") : ""
+def deployTag = hasProperty("deployTag") ? property("deployTag") : "dev"
+
+subprojects.stream().filter { it.parent != rootProject }.each { p ->
+    configure(p) {
+        apply plugin: 'kotlin2js'
+        apply plugin: 'com.moowork.node'
+
+        node {
+            download = true
+            workDir = file("${rootProject.buildDir}/nodejs")
+        }
+
+        repositories {
+            mavenCentral()
+        }
+
+        dependencies {
+            compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+        }
+
+        compileKotlin2Js {
+            kotlinOptions {
+                moduleKind = "commonjs"
+                sourceMap = true
+            }
+        }
+
+        sourceSets {
+            main.kotlin.srcDirs += "${projectDir}"
+        }
+
+        def libraryPath = projectDir.parent
+        def packageJsonPath = "${libraryPath}/package.json"
+        def readmePath = "${libraryPath}/README.md"
+        def deployDir = "${buildDir}/deploy_to_npm"
+        def konfigPath = "${projectDir}/konfig.json"
+
+        task validate {
+            doFirst {
+                if (!file(packageJsonPath).exists()) throw new GradleException("${packageJsonPath} doesn't exist")
+                if (!file(readmePath).exists()) throw new GradleException("Readme file ${readmePath} doesn't exist")
+                if (!file(konfigPath).exists()) throw new GradleException("Configuration file ${konfigPath} doesn't exist")
+
+                try {
+                    validate.ext.deployVersion = new JsonSlurper().parseText(file(konfigPath).text).version
+                } catch (JsonException e) {
+                    throw new GradleException("Error while processing ${konfigPath}", e)
+                }
+            }
+        }
+
+        check.dependsOn(validate)
+
+        task cleanDeployDir(type: Delete) {
+            delete = deployDir
+        }
+
+        task copyTemplate(type: Copy, dependsOn: [validate, cleanDeployDir]) {
+            from packageJsonPath
+            from readmePath
+            into deployDir
+
+            doFirst {
+                expand(version: validate.deployVersion)
+            }
+        }
+
+        task copySources(type: Copy, dependsOn: [compileKotlin2Js, cleanDeployDir]) {
+            from compileKotlin2Js.destinationDir
+            into deployDir
+        }
+
+        task publishToNpm(type: NpmTask, dependsOn: [copyTemplate, copySources]) {
+            workingDir = file(deployDir)
+
+            def deployArgs = ['publish',
+                              '--access=public',
+                              "--//registry.npmjs.org/:_authToken=${authToken}",
+                              "--tag=${deployTag}"]
+
+            if (dryRun == "true") {
+                doFirst {
+                    // Run during execution, not configuration
+                    println("${deployDir} \$ npm arguments: ${deployArgs.join(" ")}");
+                }
+                args = ['pack']
+            } else {
+                args = deployArgs
+            }
+        }
+    }
+}
