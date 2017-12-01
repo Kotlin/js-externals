@@ -34,12 +34,12 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         }
 
         dependencies {
-            compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+            compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
         }
 
         compileKotlin2Js {
             kotlinOptions {
-                moduleKind = "commonjs"
+                moduleKind = "umd"
                 sourceMap = true
             }
         }
