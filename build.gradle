@@ -1,6 +1,8 @@
 import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
+import java.nio.file.Paths
+
 buildscript {
     ext.kotlin_version = '1.2.0'
 
@@ -15,9 +17,61 @@ buildscript {
     }
 }
 
+def npmScope = hasProperty("scope") ? property("scope") : "ktypes"
 def dryRun = hasProperty("dryRun") ? property("dryRun") : "false"
 def authToken = hasProperty("authToken") ? property("authToken") : ""
 def deployTag = hasProperty("deployTag") ? property("deployTag") : "dev"
+def mockNpmPort = hasProperty("mockNpmPort") ? property("mockNpmPort") : "3676"
+
+// Reads from InputStream `sin` until the empty line is reached
+// Looks for "content-length" header and returns its value as Integer
+// Returns 0 is the header was not found
+static def parseHeadersAndGetContentLength(def br) {
+    def result = 0
+    def line = br.readLine()
+    while (!line.isEmpty()) {
+        println(line)
+        def contentLengthString = "content-length: "
+        if (line.toLowerCase().startsWith(contentLengthString)) {
+            result = Integer.parseInt(line.substring(contentLengthString.length()).trim())
+        }
+        line = br.readLine()
+    }
+    return result
+}
+
+// Reads `n` bytes from Reader
+// Throws IOException if unsuccessfull
+// Returns a byte array of length `n`
+static def readNBytes(def reader, def n) {
+    def result = new char[n]
+    def count = 0
+    while (count < result.length) {
+        def bytesRead = reader.read(result, count, result.length - count)
+        if (bytesRead < 0) throw new IOException("Unexpected EOF")
+        count += bytesRead
+    }
+    return result
+}
+
+def MOCK_NPM_RESPONSE = """HTTP/1.1 201
+content-type: application/json
+content-length: 2
+
+{}
+"""
+
+static def assertEquals(def msg, def expected, def actual) {
+    if (expected != actual) {
+        throw new GradleException("$msg. Expected: '$expected'; actual: '$actual'.")
+    }
+}
+
+def assertFileExists(def path) {
+    if (!file(path).exists()) {
+        throw new GradleException("File doesn't exist: ${path}")
+    }
+}
 
 subprojects.stream().filter { it.parent != rootProject }.each { p ->
     configure(p) {
@@ -35,10 +89,24 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
 
         dependencies {
             compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+            compile 'org.apache.commons:commons-compress:1.14'
         }
+
+        def libraryPath = projectDir.parent
+        def libraryName = file(libraryPath).name
+        def packageJsonPath = "${libraryPath}/package.json"
+        def readmePath = "${libraryPath}/README.md"
+        def deployDir = "${buildDir}/deploy_to_npm"
+        def konfigPath = "${projectDir}/konfig.json"
+
+        def mockNpmDir = "${buildDir}/mock_npm"
+        def publishedJsonPath = "${mockNpmDir}/published.json"
+        def tarballPath = "${mockNpmDir}/${libraryName}.tgz"
+        def tarballExtractedPath = "${mockNpmDir}/${libraryName}"
 
         compileKotlin2Js {
             kotlinOptions {
+                outputFile = "${destinationDir}/${libraryName}.js"
                 moduleKind = "umd"
                 sourceMap = true
             }
@@ -47,12 +115,6 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         sourceSets {
             main.kotlin.srcDirs += "${projectDir}"
         }
-
-        def libraryPath = projectDir.parent
-        def packageJsonPath = "${libraryPath}/package.json"
-        def readmePath = "${libraryPath}/README.md"
-        def deployDir = "${buildDir}/deploy_to_npm"
-        def konfigPath = "${projectDir}/konfig.json"
 
         task validate {
             doFirst {
@@ -80,7 +142,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             into deployDir
 
             doFirst {
-                expand(version: validate.deployVersion)
+                expand(version: validate.deployVersion, scope: npmScope)
             }
         }
 
@@ -92,19 +154,69 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         task publishToNpm(type: NpmTask, dependsOn: [copyTemplate, copySources]) {
             workingDir = file(deployDir)
 
-            def deployArgs = ['publish',
-                              '--access=public',
-                              "--//registry.npmjs.org/:_authToken=${authToken}",
-                              "--tag=${deployTag}"]
+            args = ['publish',
+                    '--access=public',
+                    "--//registry.npmjs.org/:_authToken=${authToken}",
+                    "--tag=${deployTag}"]
 
             if (dryRun == "true") {
+                args += ["--reg=http://localhost:${mockNpmPort}",
+                         "--//localhost:${mockNpmPort}/:_password=mock!!password",
+                         "--//localhost:${mockNpmPort}/:username=mock!!user",
+                         "--//localhost:${mockNpmPort}/:email=mock@email.com",
+                         "--//localhost:${mockNpmPort}/:always-auth=false"]
+
                 doFirst {
                     // Run during execution, not configuration
-                    println("${deployDir} \$ npm arguments: ${deployArgs.join(" ")}");
+                    println("${deployDir} \$ npm arguments: ${args.join(" ")}")
+
+                    new Thread({
+                        new ServerSocket(Integer.parseInt(mockNpmPort as String)).withCloseable {
+                            it.setSoTimeout(1000)
+                            it.accept().withCloseable { s ->
+                                def br = new BufferedReader(new InputStreamReader(s.getInputStream()))
+
+                                file(mockNpmDir).mkdir()
+                                file(publishedJsonPath).text = new String(readNBytes(br, parseHeadersAndGetContentLength(br)))
+
+                                new PrintWriter(s.getOutputStream(), true).println(MOCK_NPM_RESPONSE)
+                            }
+                        }
+                    }).start()
                 }
-                args = ['pack']
-            } else {
-                args = deployArgs
+
+                doLast {
+                    def json = new JsonSlurper().parseText(file(publishedJsonPath).text)
+
+                    assertEquals("Unexpected package name", "@$npmScope/$libraryName", json.name)
+                    assertEquals("Wrong version", validate.deployVersion, json["dist-tags"][deployTag as String])
+
+                    def tarball = json._attachments["${json.name}-${validate.deployVersion}.tgz"].data
+                    file(tarballPath).bytes = Base64.decoder.decode(tarball as String)
+                    copy {
+                        from tarTree(tarballPath)
+                        into tarballExtractedPath
+                    }
+
+                    def packagePath = "${tarballExtractedPath}/package"
+
+                    assertFileExists("$packagePath/$libraryName")
+                    assertFileExists("$packagePath/${libraryName}.js")
+                    assertFileExists("$packagePath/${libraryName}.js.map")
+                    assertFileExists("$packagePath/${libraryName}.meta.js")
+                    assertFileExists("$packagePath/package.json")
+
+                    file(packagePath).eachFileRecurse {
+                        if (it.isFile()) {
+                            def relativePath = Paths.get(packagePath).relativize(Paths.get(it.path))
+                            def originalFile = "$deployDir/$relativePath"
+
+                            if (it.text != file(originalFile).text) {
+                                throw new GradleException("File content differs. Original: $originalFile; Published: ${it.path}")
+                            }
+                        }
+                    }
+                }
             }
         }
     }
