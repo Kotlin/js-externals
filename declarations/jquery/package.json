@@ -1,5 +1,5 @@
 {
-  "name": "jquery",
+  "name": "@$scope/jquery",
   "version": "$version",
   "description": "JQuery"
 }
