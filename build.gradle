@@ -112,7 +112,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         }
 
         sourceSets {
-            main.kotlin.srcDirs += "$projectDir"
+            main.kotlin.srcDirs += "$projectDir/src"
         }
 
         task validate {
