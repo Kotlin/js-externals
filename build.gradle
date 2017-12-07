@@ -69,7 +69,7 @@ static def assertEquals(def msg, def expected, def actual) {
 
 def assertFileExists(def path) {
     if (!file(path).exists()) {
-        throw new GradleException("File doesn't exist: ${path}")
+        throw new GradleException("File doesn't exist: $path")
     }
 }
 
@@ -89,43 +89,42 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
 
         dependencies {
             compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-            compile 'org.apache.commons:commons-compress:1.14'
         }
 
         def libraryPath = projectDir.parent
         def libraryName = file(libraryPath).name
-        def packageJsonPath = "${libraryPath}/package.json"
-        def readmePath = "${libraryPath}/README.md"
-        def deployDir = "${buildDir}/deploy_to_npm"
-        def konfigPath = "${projectDir}/konfig.json"
+        def packageJsonPath = "$libraryPath/package.json"
+        def readmePath = "$libraryPath/README.md"
+        def deployDir = "$buildDir/deploy_to_npm"
+        def konfigPath = "$projectDir/konfig.json"
 
-        def mockNpmDir = "${buildDir}/mock_npm"
-        def publishedJsonPath = "${mockNpmDir}/published.json"
-        def tarballPath = "${mockNpmDir}/${libraryName}.tgz"
-        def tarballExtractedPath = "${mockNpmDir}/${libraryName}"
+        def mockNpmDir = "$buildDir/mock_npm"
+        def publishedJsonPath = "$mockNpmDir/published.json"
+        def tarballPath = "$mockNpmDir/${libraryName}.tgz"
+        def tarballExtractedPath = "$mockNpmDir/$libraryName"
 
         compileKotlin2Js {
             kotlinOptions {
-                outputFile = "${destinationDir}/${libraryName}.js"
+                outputFile = "$destinationDir/${libraryName}.js"
                 moduleKind = "umd"
                 sourceMap = true
             }
         }
 
         sourceSets {
-            main.kotlin.srcDirs += "${projectDir}"
+            main.kotlin.srcDirs += "$projectDir"
         }
 
         task validate {
             doFirst {
-                if (!file(packageJsonPath).exists()) throw new GradleException("${packageJsonPath} doesn't exist")
-                if (!file(readmePath).exists()) throw new GradleException("Readme file ${readmePath} doesn't exist")
-                if (!file(konfigPath).exists()) throw new GradleException("Configuration file ${konfigPath} doesn't exist")
+                if (!file(packageJsonPath).exists()) throw new GradleException("$packageJsonPath doesn't exist")
+                if (!file(readmePath).exists()) throw new GradleException("Readme file $readmePath doesn't exist")
+                if (!file(konfigPath).exists()) throw new GradleException("Configuration file $konfigPath doesn't exist")
 
                 try {
                     validate.ext.deployVersion = new JsonSlurper().parseText(file(konfigPath).text).version
                 } catch (JsonException e) {
-                    throw new GradleException("Error while processing ${konfigPath}", e)
+                    throw new GradleException("Error while processing $konfigPath", e)
                 }
             }
         }
@@ -156,19 +155,19 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
 
             args = ['publish',
                     '--access=public',
-                    "--//registry.npmjs.org/:_authToken=${authToken}",
-                    "--tag=${deployTag}"]
+                    "--//registry.npmjs.org/:_authToken=$authToken",
+                    "--tag=$deployTag"]
 
             if (dryRun == "true") {
-                args += ["--reg=http://localhost:${mockNpmPort}",
-                         "--//localhost:${mockNpmPort}/:_password=mock!!password",
-                         "--//localhost:${mockNpmPort}/:username=mock!!user",
-                         "--//localhost:${mockNpmPort}/:email=mock@email.com",
-                         "--//localhost:${mockNpmPort}/:always-auth=false"]
+                args += ["--reg=http://localhost:$mockNpmPort",
+                         "--//localhost:$mockNpmPort/:_password=mock!!password",
+                         "--//localhost:$mockNpmPort/:username=mock!!user",
+                         "--//localhost:$mockNpmPort/:email=mock@email.com",
+                         "--//localhost:$mockNpmPort/:always-auth=false"]
 
                 doFirst {
                     // Run during execution, not configuration
-                    println("${deployDir} \$ npm arguments: ${args.join(" ")}")
+                    println("$deployDir \$ npm arguments: ${args.join(" ")}")
 
                     new Thread({
                         new ServerSocket(Integer.parseInt(mockNpmPort as String)).withCloseable {
@@ -198,7 +197,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
                         into tarballExtractedPath
                     }
 
-                    def packagePath = "${tarballExtractedPath}/package"
+                    def packagePath = "$tarballExtractedPath/package"
 
                     assertFileExists("$packagePath/$libraryName")
                     assertFileExists("$packagePath/${libraryName}.js")
