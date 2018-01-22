@@ -1,4 +1,3 @@
-import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
 import java.nio.file.Paths
@@ -14,10 +13,11 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
-def npmScope = hasProperty("scope") ? property("scope") : "ktypes"
+def npmScope = hasProperty("scope") ? property("scope") : "kotlin-externals"
 def dryRun = hasProperty("dryRun") ? property("dryRun") : "false"
 def authToken = hasProperty("authToken") ? property("authToken") : ""
 def deployTag = hasProperty("deployTag") ? property("deployTag") : "dev"
@@ -77,6 +77,8 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
     configure(p) {
         apply plugin: 'kotlin2js'
         apply plugin: 'com.moowork.node'
+        apply plugin: 'maven-publish'
+        apply plugin: 'com.jfrog.bintray'
 
         node {
             download = true
@@ -93,10 +95,54 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
 
         def libraryPath = projectDir.parent
         def libraryName = file(libraryPath).name
+        buildDir = file("${rootProject.buildDir}/kotlin-externals/${libraryName}")
+
         def packageJsonPath = "$libraryPath/package.json"
         def readmePath = "$libraryPath/README.md"
         def deployDir = "$buildDir/deploy_to_npm"
         def konfigPath = "$projectDir/konfig.json"
+
+        def deployVersion = '0.0.0'
+        def versionLoadingErrors = false
+        // Attempt to load version. Version '0.0.0' will be used on error.
+        // Errors will be reported in the 'validate' task.
+        try {
+            deployVersion = new JsonSlurper().parseText(file(konfigPath).text).version
+        } catch (Throwable t) {
+            versionLoadingErrors = true
+        }
+
+        task packToJar(type: Jar, dependsOn: "preparePublish") {
+            from deployDir
+        }
+
+        publishing {
+            publications {
+                maven(MavenPublication) {
+                    groupId 'kotlin.js.externals'
+                    artifactId "kotlin-js-$libraryName"
+                    version deployVersion
+
+                    artifact packToJar
+                }
+            }
+        }
+
+        bintray {
+            user = findProperty('deployRepoUsername') ?: findProperty('kotlin.bintray.user')
+            key = findProperty('deployRepoPassword') ?: findProperty('kotlin.bintray.password')
+            publications = ['maven']
+            publish = true
+            pkg {
+                repo = findProperty('deployRepoUrl') ?: 'js-externals'
+                name = libraryName
+                licenses = ['Apache-2.0']
+                vcsUrl = 'https://github.com/kotlin/js-externals.git'
+                version {
+                    name = deployVersion
+                }
+            }
+        }
 
         def mockNpmDir = "$buildDir/mock_npm"
         def publishedJsonPath = "$mockNpmDir/published.json"
@@ -121,9 +167,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
                 if (!file(readmePath).exists()) throw new GradleException("Readme file $readmePath doesn't exist")
                 if (!file(konfigPath).exists()) throw new GradleException("Configuration file $konfigPath doesn't exist")
 
-                try {
-                    validate.ext.deployVersion = new JsonSlurper().parseText(file(konfigPath).text).version
-                } catch (JsonException e) {
+                if (versionLoadingErrors) {
                     throw new GradleException("Error while processing $konfigPath", e)
                 }
             }
@@ -140,9 +184,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             from readmePath
             into deployDir
 
-            doFirst {
-                expand(version: validate.deployVersion, scope: npmScope)
-            }
+            expand(version: deployVersion, scope: npmScope)
         }
 
         task copySources(type: Copy, dependsOn: [compileKotlin2Js, cleanDeployDir]) {
@@ -150,7 +192,11 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             into deployDir
         }
 
-        task publishToNpm(type: NpmTask, dependsOn: [copyTemplate, copySources]) {
+        task preparePublish(dependsOn: [copyTemplate, copySources])
+
+        bintrayUpload.dependsOn(preparePublish)
+
+        task publishToNpm(type: NpmTask, dependsOn: preparePublish) {
             workingDir = file(deployDir)
 
             args = ['publish',
@@ -188,9 +234,9 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
                     def json = new JsonSlurper().parseText(file(publishedJsonPath).text)
 
                     assertEquals("Unexpected package name", "@$npmScope/$libraryName", json.name)
-                    assertEquals("Wrong version", validate.deployVersion, json["dist-tags"][deployTag as String])
+                    assertEquals("Wrong version", deployVersion, json["dist-tags"][deployTag as String])
 
-                    def tarball = json._attachments["${json.name}-${validate.deployVersion}.tgz"].data
+                    def tarball = json._attachments["${json.name}-${deployVersion}.tgz"].data
                     file(tarballPath).bytes = Base64.decoder.decode(tarball as String)
                     copy {
                         from tarTree(tarballPath)
