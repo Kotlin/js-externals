@@ -1,4 +1,4 @@
-file("${rootProject.projectDir}/declarations").listFiles().each { libDir ->
+file("${rootProject.projectDir}/externals").listFiles().each { libDir ->
     libDir.listFiles().each { versionDir ->
         if (versionDir.isDirectory()) {
             include "${libDir.name}:${versionDir.name}"
