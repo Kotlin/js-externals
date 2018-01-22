@@ -17,7 +17,7 @@ buildscript {
     }
 }
 
-def npmScope = hasProperty("scope") ? property("scope") : "ktypes"
+def npmScope = hasProperty("scope") ? property("scope") : "kotlin-externals"
 def dryRun = hasProperty("dryRun") ? property("dryRun") : "false"
 def authToken = hasProperty("authToken") ? property("authToken") : ""
 def deployTag = hasProperty("deployTag") ? property("deployTag") : "dev"
@@ -117,8 +117,8 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         publishing {
             publications {
                 maven(MavenPublication) {
-                    groupId 'definitelykotlin'
-                    artifactId libraryName
+                    groupId 'kotlin.js.externals'
+                    artifactId "kotlin-js-$libraryName"
                     version deployVersion
 
                     artifact packToJar
@@ -132,10 +132,10 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             publications = ['maven']
             publish = true
             pkg {
-                repo = findProperty('deployRepoUrl') ?: 'kotlin-dev'
+                repo = findProperty('deployRepoUrl') ?: 'js-externals'
                 name = libraryName
                 licenses = ['Apache-2.0']
-                vcsUrl = 'https://github.com/bashor/DefinitelyKotlin.git'
+                vcsUrl = 'https://github.com/kotlin/js-externals.git'
                 version {
                     name = deployVersion
                 }
