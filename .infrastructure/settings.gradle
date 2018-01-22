@@ -1,0 +1,12 @@
+rootProject.name = 'kotlin-externals-infrastructure'
+
+file("${rootProject.projectDir}/..").listFiles().each { libDir ->
+    if (!libDir.name.startsWith('.')) {
+        libDir.listFiles().each { versionDir ->
+            if (versionDir.isDirectory()) {
+                include "${libDir.name}:${versionDir.name}"
+                project(":${libDir.name}:${versionDir.name}").projectDir = versionDir
+            }
+        }
+    }
+}

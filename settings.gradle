@@ -1,8 +1,0 @@
-file("${rootProject.projectDir}/declarations").listFiles().each { libDir ->
-    libDir.listFiles().each { versionDir ->
-        if (versionDir.isDirectory()) {
-            include "${libDir.name}:${versionDir.name}"
-            project(":${libDir.name}:${versionDir.name}").projectDir = versionDir
-        }
-    }
-}
