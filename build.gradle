@@ -114,6 +114,12 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             from deployDir
         }
 
+        task sourcesJar(type: Jar) {
+            from "$projectDir/src"
+
+            classifier = 'sources'
+        } 
+
         publishing {
             publications {
                 maven(MavenPublication) {
@@ -122,6 +128,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
                     version deployVersion
 
                     artifact packToJar
+                    artifact sourcesJar
                 }
             }
         }
