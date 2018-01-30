@@ -1,0 +1,5 @@
+{
+  "name": "@$scope/bootstrap",
+  "version": "$version",
+  "description": "Bootstrap"
+}

@@ -3,7 +3,7 @@ import groovy.json.JsonSlurper
 import java.nio.file.Paths
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
+    ext.kotlin_version = '1.2.20'
 
     repositories {
         mavenCentral()
@@ -22,6 +22,7 @@ def dryRun = hasProperty("dryRun") ? property("dryRun") : "false"
 def authToken = hasProperty("authToken") ? property("authToken") : ""
 def deployTag = hasProperty("deployTag") ? property("deployTag") : "dev"
 def mockNpmPort = hasProperty("mockNpmPort") ? property("mockNpmPort") : "3676"
+def autoPublish = hasProperty("autoPublish") ? property("autoPublish") == "true" : false
 
 // Reads from InputStream `sin` until the empty line is reached
 // Looks for "content-length" header and returns its value as Integer
@@ -137,7 +138,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             user = findProperty('deployRepoUsername') ?: findProperty('kotlin.bintray.user')
             key = findProperty('deployRepoPassword') ?: findProperty('kotlin.bintray.password')
             publications = ['maven']
-            publish = true
+            publish = autoPublish
             pkg {
                 repo = findProperty('deployRepoUrl') ?: 'js-externals'
                 name = libraryName
