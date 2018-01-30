@@ -3,7 +3,7 @@ import groovy.json.JsonSlurper
 import java.nio.file.Paths
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
+    ext.kotlin_version = '1.2.20'
 
     repositories {
         mavenCentral()
