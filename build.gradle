@@ -17,11 +17,11 @@ buildscript {
     }
 }
 
-def npmScope = hasProperty("scope") ? property("scope") : "kotlin-externals"
-def dryRun = hasProperty("dryRun") ? property("dryRun") : "false"
-def authToken = hasProperty("authToken") ? property("authToken") : ""
-def deployTag = hasProperty("deployTag") ? property("deployTag") : "dev"
-def mockNpmPort = hasProperty("mockNpmPort") ? property("mockNpmPort") : "3676"
+def npmScope = findProperty('scope') ?: 'kotlin-externals'
+def dryRun = findProperty('dryRun') ?: 'false'
+def authToken = findProperty('authToken') ?: findProperty('kotlin.npmjs.auth.token') ?: ''
+def deployTag = findProperty('deployTag') ?: 'dev'
+def mockNpmPort = findProperty('mockNpmPort') ?: '3676'
 def autoPublish = hasProperty("autoPublish") ? property("autoPublish") == "true" : false
 
 // Reads from InputStream `sin` until the empty line is reached
