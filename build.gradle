@@ -142,6 +142,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             pkg {
                 repo = findProperty('deployRepoUrl') ?: 'js-externals'
                 name = libraryName
+                userOrg = findProperty('deployRepoOrg') ?: 'kotlin'
                 licenses = ['Apache-2.0']
                 vcsUrl = 'https://github.com/kotlin/js-externals.git'
                 version {
