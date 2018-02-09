@@ -1,6 +1,6 @@
 file("${rootProject.projectDir}/externals").listFiles().each { libDir ->
     libDir.listFiles().each { versionDir ->
-        if (versionDir.isDirectory()) {
+        if (versionDir.isDirectory() && !versionDir.name.startsWith("_testShared")) {
             include "${libDir.name}:${versionDir.name}"
             project(":${libDir.name}:${versionDir.name}").projectDir = versionDir
         }

@@ -166,6 +166,53 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
 
         sourceSets {
             main.kotlin.srcDirs += "$projectDir/src"
+            testUMD {
+                kotlin.srcDirs += "$projectDir/test"
+                kotlin.srcDirs += "$projectDir/testUMD"
+                kotlin.srcDirs += "$projectDir/../_testShared"
+                kotlin.srcDirs += "$projectDir/../_testSharedUMD"
+
+                compileClasspath = test.compileClasspath
+            }
+
+            testPlain {
+                kotlin.srcDirs += "$projectDir/test"
+                kotlin.srcDirs += "$projectDir/testPlain"
+                kotlin.srcDirs += "$projectDir/../_testShared"
+                kotlin.srcDirs += "$projectDir/../_testSharedPlain"
+
+                compileClasspath = test.compileClasspath
+            }
+
+            testCommonJS {
+                kotlin.srcDirs += "$projectDir/test"
+                kotlin.srcDirs += "$projectDir/testCommonJS"
+                kotlin.srcDirs += "$projectDir/../_testShared"
+                kotlin.srcDirs += "$projectDir/../_testSharedCommonJS"
+
+                compileClasspath = test.compileClasspath
+            }
+        }
+
+        tasks.withType(org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile).forEach {
+            if (it.name.startsWith("compileTest") && it.name.endsWith("Kotlin2Js")) {
+
+                def start = "compileTest".length()
+
+                def end = it.name.lastIndexOf("OnlyKotlin2Js")
+                if (end < 0) {
+                    end = it.name.lastIndexOf("Kotlin2Js")
+                }
+
+                def moduleKind = it.name.substring(start, end).toLowerCase()
+
+                if (moduleKind.isEmpty()) {
+                    moduleKind = "umd"
+                }
+
+                it.kotlinOptions.moduleKind = moduleKind
+                test.dependsOn(it)
+            }
         }
 
         task validate {
