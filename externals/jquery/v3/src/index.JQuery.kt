@@ -1,22 +1,11 @@
-@file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
+@file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE", "PACKAGE_OR_CLASSIFIER_REDECLARATION")
 @file:JsQualifier("JQuery")
 
 package js.externals.jquery.JQuery
 
-import kotlin.js.*
-import kotlin.js.Json
-import org.khronos.webgl.*
-import org.w3c.dom.*
-import org.w3c.dom.events.*
-import org.w3c.dom.parsing.*
-import org.w3c.dom.svg.*
-import org.w3c.dom.url.*
-import org.w3c.fetch.*
-import org.w3c.files.*
-import org.w3c.notifications.*
-import org.w3c.performance.*
-import org.w3c.workers.*
-import org.w3c.xhr.*
+import js.externals.jquery.JQuery.Ajax.AjaxSettingsBase
+import js.externals.jquery.JQuery.Ajax.StatusCodeCallbacks
+import org.w3c.dom.events.EventTarget
 
 external interface PlainObject<T> {
     @nativeGetter
@@ -24,451 +13,41 @@ external interface PlainObject<T> {
     @nativeSetter
     operator fun set(key: String, value: T)
 }
-external interface AjaxSettings<TContext> : JQuery.Ajax.AjaxSettingsBase<TContext> {
+external interface AjaxSettings<TContext> : AjaxSettingsBase<TContext> {
     var url: String? get() = definedExternally; set(value) = definedExternally
-    val beforeSend: ((`this`: TContext, jqXHR: jqXHR<Any>, settings: AjaxSettings<TContext>) -> dynamic /* Boolean | Unit */)? get() = definedExternally
+//    override val beforeSend: ((`this`: TContext, jqXHR: jqXHR<Any>, settings: AjaxSettings<TContext>) -> dynamic /* Boolean | Unit */)? get() = definedExternally
 }
-external interface UrlAjaxSettings<TContext> : JQuery.Ajax.AjaxSettingsBase<TContext> {
+external interface UrlAjaxSettings<TContext> : AjaxSettingsBase<TContext> {
     var url: String
-    val beforeSend: ((`this`: TContext, jqXHR: jqXHR<Any>, settings: UrlAjaxSettings<TContext>) -> dynamic /* Boolean | Unit */)? get() = definedExternally
+//    override val beforeSend: ((`this`: TContext, jqXHR: jqXHR<Any>, settings: UrlAjaxSettings<TContext>) -> dynamic /* Boolean | Unit */)? get() = definedExternally
 }
 external interface Transport {
-    fun send(headers: PlainObject<Any>, completeCallback: JQuery.Transport.SuccessCallback)
+    fun send(headers: PlainObject<Any>, completeCallback: SuccessCallback)
     fun abort()
     interface SuccessCallback {
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "error" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "error" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "success" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "success" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "notmodified" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "notmodified" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "nocontent" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "nocontent" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "timeout" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "timeout" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "abort" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "abort" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
         @nativeInvoke
-        operator fun invoke(status: Number, statusText: String /* "parsererror" */, responses: JQuery.PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
+        operator fun invoke(status: Number, statusText: String /* "parsererror" */, responses: PlainObject<Any>? = definedExternally /* null */, headers: String? = definedExternally /* null */)
     }
 }
-external interface `T$4` {
-    var `200`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `201`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `202`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `203`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `204`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `205`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `206`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `207`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `208`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `209`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `210`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `211`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `212`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `213`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `214`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `215`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `216`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `217`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `218`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `219`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `220`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `221`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `222`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `223`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `224`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `225`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `226`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `227`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `228`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `229`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `230`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `231`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `232`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `233`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `234`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `235`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `236`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `237`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `238`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `239`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `240`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `241`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `242`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `243`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `244`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `245`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `246`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `247`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `248`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `249`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `250`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `251`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `252`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `253`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `254`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `255`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `256`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `257`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `258`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `259`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `260`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `261`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `262`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `263`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `264`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `265`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `266`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `267`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `268`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `269`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `270`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `271`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `272`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `273`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `274`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `275`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `276`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `277`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `278`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `279`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `280`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `281`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `282`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `283`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `284`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `285`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `286`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `287`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `288`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `289`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `290`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `291`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `292`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `293`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `294`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `295`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `296`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `297`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `298`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `299`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `304`: JQuery.Ajax.SuccessCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `300`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `301`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `302`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `303`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `305`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `306`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `307`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `308`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `309`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `310`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `311`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `312`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `313`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `314`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `315`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `316`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `317`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `318`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `319`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `320`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `321`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `322`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `323`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `324`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `325`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `326`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `327`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `328`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `329`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `330`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `331`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `332`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `333`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `334`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `335`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `336`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `337`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `338`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `339`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `340`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `341`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `342`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `343`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `344`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `345`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `346`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `347`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `348`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `349`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `350`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `351`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `352`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `353`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `354`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `355`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `356`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `357`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `358`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `359`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `360`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `361`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `362`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `363`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `364`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `365`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `366`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `367`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `368`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `369`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `370`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `371`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `372`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `373`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `374`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `375`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `376`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `377`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `378`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `379`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `380`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `381`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `382`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `383`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `384`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `385`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `386`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `387`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `388`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `389`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `390`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `391`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `392`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `393`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `394`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `395`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `396`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `397`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `398`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `399`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `400`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `401`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `402`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `403`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `404`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `405`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `406`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `407`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `408`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `409`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `410`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `411`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `412`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `413`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `414`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `415`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `416`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `417`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `418`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `419`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `420`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `421`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `422`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `423`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `424`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `425`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `426`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `427`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `428`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `429`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `430`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `431`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `432`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `433`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `434`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `435`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `436`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `437`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `438`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `439`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `440`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `441`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `442`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `443`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `444`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `445`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `446`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `447`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `448`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `449`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `450`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `451`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `452`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `453`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `454`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `455`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `456`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `457`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `458`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `459`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `460`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `461`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `462`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `463`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `464`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `465`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `466`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `467`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `468`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `469`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `470`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `471`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `472`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `473`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `474`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `475`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `476`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `477`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `478`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `479`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `480`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `481`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `482`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `483`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `484`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `485`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `486`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `487`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `488`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `489`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `490`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `491`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `492`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `493`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `494`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `495`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `496`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `497`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `498`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `499`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `500`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `501`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `502`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `503`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `504`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `505`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `506`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `507`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `508`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `509`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `510`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `511`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `512`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `513`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `514`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `515`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `516`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `517`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `518`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `519`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `520`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `521`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `522`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `523`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `524`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `525`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `526`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `527`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `528`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `529`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `530`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `531`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `532`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `533`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `534`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `535`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `536`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `537`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `538`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `539`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `540`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `541`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `542`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `543`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `544`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `545`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `546`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `547`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `548`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `549`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `550`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `551`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `552`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `553`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `554`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `555`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `556`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `557`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `558`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `559`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `560`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `561`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `562`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `563`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `564`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `565`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `566`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `567`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `568`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `569`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `570`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `571`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `572`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `573`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `574`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `575`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `576`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `577`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `578`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `579`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `580`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `581`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `582`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `583`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `584`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `585`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `586`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `587`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `588`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `589`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `590`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `591`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `592`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `593`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `594`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `595`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `596`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `597`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `598`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-    var `599`: JQuery.Ajax.ErrorCallback<TContext>? get() = definedExternally; set(value) = definedExternally
-}
-external interface `T$5` {
-    @nativeGetter
-    operator fun get(index: Number): dynamic /* JQuery.Ajax.SuccessCallback<TContext> | JQuery.Ajax.ErrorCallback<TContext> */
-    @nativeSetter
-    operator fun set(index: Number, value: JQuery.Ajax.SuccessCallback<TContext>)
-    @nativeSetter
-    operator fun set(index: Number, value: JQuery.Ajax.ErrorCallback<TContext>)
-}
-external interface jqXHR<TResolve> : Promise3<TResolve, jqXHR<TResolve>, Any?, dynamic /* String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ */, dynamic /* String /* "error" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, Any?, jqXHR<TResolve>, String, Any?>, Any?, Any? {
+external interface jqXHR<TResolve> : Promise3<TResolve, jqXHR<TResolve>, Any?, dynamic /* String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ */, dynamic /* String /* "error" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, Any?, jqXHR<TResolve>, String, Any?>, Any {
     var responseJSON: Any? get() = definedExternally; set(value) = definedExternally
     override fun state(): dynamic /* String /* "pending" */ | String /* "resolved" */ | String /* "rejected" */ */
-    fun statusCode(map: `T$4` /* `T$4` & `T$5` */)
-    interface DoneCallback<TResolve, TjqXHR> : JQuery.Deferred.Callback3<TResolve, dynamic /* String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ */, TjqXHR>
-    interface FailCallback<TjqXHR> : JQuery.Deferred.Callback3<TjqXHR, dynamic /* String /* "error" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, String>
-    interface AlwaysCallback<TResolve, TjqXHR> : JQuery.Deferred.Callback3<dynamic /* TResolve | TjqXHR */, dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, dynamic /* String | TjqXHR */>
+    fun statusCode(map: StatusCodeCallbacks<Any> /* StatusCodeCallbacks<TContext> & `T$5` */)
+    interface DoneCallback<TResolve, TjqXHR> : Deferred.Callback3<TResolve, dynamic /* String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ */, TjqXHR>
+    interface FailCallback<TjqXHR> : Deferred.Callback3<TjqXHR, dynamic /* String /* "error" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, String>
+    interface AlwaysCallback<TResolve, TjqXHR> : Deferred.Callback3<dynamic /* TResolve | TjqXHR */, dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, dynamic /* String | TjqXHR */>
 }
 external interface Callbacks<T : Function<*>> {
     fun add(callback: T, vararg callbacks: T): Callbacks<T> /* this */
@@ -479,7 +58,7 @@ external interface Callbacks<T : Function<*>> {
     fun disabled(): Boolean
     fun empty(): Callbacks<T> /* this */
     fun fire(vararg args: Any): Callbacks<T> /* this */
-    fun fireWith(context: Any, args: ArrayLike<Any>? = definedExternally /* null */): Callbacks<T> /* this */
+    fun fireWith(context: Any, args: Array<Any>? = definedExternally /* null */): Callbacks<T> /* this */
     fun fired(): Boolean
     fun has(callback: T? = definedExternally /* null */): Boolean
     fun lock(): Callbacks<T> /* this */
@@ -490,25 +69,27 @@ external interface CSSHook<TElement> {
     fun get(`this`: CSSHook<TElement> /* this */, elem: TElement, computed: Any, extra: Any): Any
     fun set(`this`: CSSHook<TElement> /* this */, elem: TElement, value: Any)
 }
-external interface Thenable<T> : PromiseLike<T>
-external interface PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> : Promise<TR>, PromiseLike<TR> {
-    fun always(alwaysCallback: JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>, vararg alwaysCallbacks: JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun always(alwaysCallback: JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>, vararg alwaysCallbacks: Array<JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun always(alwaysCallback: Array<JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>, vararg alwaysCallbacks: JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun always(alwaysCallback: Array<JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>, vararg alwaysCallbacks: Array<JQuery.Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun done(doneCallback: JQuery.Deferred.CallbackBase<TR, UR, VR, SR>, vararg doneCallbacks: JQuery.Deferred.CallbackBase<TR, UR, VR, SR>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun done(doneCallback: JQuery.Deferred.CallbackBase<TR, UR, VR, SR>, vararg doneCallbacks: Array<JQuery.Deferred.CallbackBase<TR, UR, VR, SR>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun done(doneCallback: Array<JQuery.Deferred.CallbackBase<TR, UR, VR, SR>>, vararg doneCallbacks: JQuery.Deferred.CallbackBase<TR, UR, VR, SR>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun done(doneCallback: Array<JQuery.Deferred.CallbackBase<TR, UR, VR, SR>>, vararg doneCallbacks: Array<JQuery.Deferred.CallbackBase<TR, UR, VR, SR>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun fail(failCallback: JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>, vararg failCallbacks: JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun fail(failCallback: JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>, vararg failCallbacks: Array<JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun fail(failCallback: Array<JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>>, vararg failCallbacks: JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun fail(failCallback: Array<JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>>, vararg failCallbacks: Array<JQuery.Deferred.CallbackBase<TJ, UJ, VJ, SJ>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun progress(progressCallback: JQuery.Deferred.CallbackBase<TN, UN, VN, SN>, vararg progressCallbacks: JQuery.Deferred.CallbackBase<TN, UN, VN, SN>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun progress(progressCallback: JQuery.Deferred.CallbackBase<TN, UN, VN, SN>, vararg progressCallbacks: Array<JQuery.Deferred.CallbackBase<TN, UN, VN, SN>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun progress(progressCallback: Array<JQuery.Deferred.CallbackBase<TN, UN, VN, SN>>, vararg progressCallbacks: JQuery.Deferred.CallbackBase<TN, UN, VN, SN>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun progress(progressCallback: Array<JQuery.Deferred.CallbackBase<TN, UN, VN, SN>>, vararg progressCallbacks: Array<JQuery.Deferred.CallbackBase<TN, UN, VN, SN>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
-    fun <TTarget : Any> promise(target: TTarget): PromiseBase /* PromiseBase & TTarget */
+external interface Thenable<T> {
+    //TODO
+}
+external interface PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> : kotlin.js.Promise<TR> {
+    fun always(alwaysCallback: Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>, vararg alwaysCallbacks: Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun always(alwaysCallback: Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>, vararg alwaysCallbacks: Array<Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun always(alwaysCallback: Array<Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>, vararg alwaysCallbacks: Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun always(alwaysCallback: Array<Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>, vararg alwaysCallbacks: Array<Deferred.CallbackBase<dynamic /* TR | TJ */, dynamic /* UR | UJ */, dynamic /* VR | VJ */, dynamic /* SR | SJ */>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun done(doneCallback: Deferred.CallbackBase<TR, UR, VR, SR>, vararg doneCallbacks: Deferred.CallbackBase<TR, UR, VR, SR>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun done(doneCallback: Deferred.CallbackBase<TR, UR, VR, SR>, vararg doneCallbacks: Array<Deferred.CallbackBase<TR, UR, VR, SR>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun done(doneCallback: Array<Deferred.CallbackBase<TR, UR, VR, SR>>, vararg doneCallbacks: Deferred.CallbackBase<TR, UR, VR, SR>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun done(doneCallback: Array<Deferred.CallbackBase<TR, UR, VR, SR>>, vararg doneCallbacks: Array<Deferred.CallbackBase<TR, UR, VR, SR>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun fail(failCallback: Deferred.CallbackBase<TJ, UJ, VJ, SJ>, vararg failCallbacks: Deferred.CallbackBase<TJ, UJ, VJ, SJ>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun fail(failCallback: Deferred.CallbackBase<TJ, UJ, VJ, SJ>, vararg failCallbacks: Array<Deferred.CallbackBase<TJ, UJ, VJ, SJ>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun fail(failCallback: Array<Deferred.CallbackBase<TJ, UJ, VJ, SJ>>, vararg failCallbacks: Deferred.CallbackBase<TJ, UJ, VJ, SJ>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun fail(failCallback: Array<Deferred.CallbackBase<TJ, UJ, VJ, SJ>>, vararg failCallbacks: Array<Deferred.CallbackBase<TJ, UJ, VJ, SJ>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun progress(progressCallback: Deferred.CallbackBase<TN, UN, VN, SN>, vararg progressCallbacks: Deferred.CallbackBase<TN, UN, VN, SN>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun progress(progressCallback: Deferred.CallbackBase<TN, UN, VN, SN>, vararg progressCallbacks: Array<Deferred.CallbackBase<TN, UN, VN, SN>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun progress(progressCallback: Array<Deferred.CallbackBase<TN, UN, VN, SN>>, vararg progressCallbacks: Deferred.CallbackBase<TN, UN, VN, SN>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun progress(progressCallback: Array<Deferred.CallbackBase<TN, UN, VN, SN>>, vararg progressCallbacks: Array<Deferred.CallbackBase<TN, UN, VN, SN>>): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
+    fun <TTarget : Any> promise(target: TTarget): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* PromiseBase & TTarget */
     fun promise(): PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> /* this */
     fun state(): dynamic /* String /* "pending" */ | String /* "resolved" */ | String /* "rejected" */ */
     fun <ARD, AJD, AND, BRD, BJD, BND, CRD, CJD, CND, RRD, RJD, RND, ARF, AJF, ANF, BRF, BJF, BNF, CRF, CJF, CNF, RRF, RJF, RNF, ARP, AJP, ANP, BRP, BJP, BNP, CRP, CJP, CNP, RRP, RJP, RNP> pipe(doneFilter: (t: TR, u: UR, v: VR, s: SR) -> dynamic /* ARD | PromiseBase<ARD, AJD, AND, BRD, BJD, BND, CRD, CJD, CND, RRD, RJD, RND> | Thenable<ARD> */, failFilter: (t: TJ, u: UJ, v: VJ, s: SJ) -> dynamic /* AJF | PromiseBase<ARF, AJF, ANF, BRF, BJF, BNF, CRF, CJF, CNF, RRF, RJF, RNF> | Thenable<AJF> */, progressFilter: (t: TN, u: UN, v: VN, s: SN) -> dynamic /* ANP | PromiseBase<ARP, AJP, ANP, BRP, BJP, BNP, CRP, CJP, CNP, RRP, RJP, RNP> | Thenable<ANP> */): PromiseBase<dynamic /* ARD | ARF | ARP */, dynamic /* AJD | AJF | AJP */, dynamic /* AND | ANF | ANP */, dynamic /* BRD | BRF | BRP */, dynamic /* BJD | BJF | BJP */, dynamic /* BND | BNF | BNP */, dynamic /* CRD | CRF | CRP */, dynamic /* CJD | CJF | CJP */, dynamic /* CND | CNF | CNP */, dynamic /* RRD | RRF | RRP */, dynamic /* RJD | RJF | RJP */, dynamic /* RND | RNF | RNP */>
@@ -529,7 +110,7 @@ external interface PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, SR, SJ, SN> :
 }
 external interface Promise3<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN> : PromiseBase<TR, TJ, TN, UR, UJ, UN, VR, VJ, VN, Any?, Any?, Any?>
 external interface Promise2<TR, TJ, TN, UR, UJ, UN> : PromiseBase<TR, TJ, TN, UR, UJ, UN, Any?, Any?, Any?, Any?, Any?, Any?>
-external interface Promise<TR, TJ, TN> : PromiseBase<TR, TJ, TN, TR, TJ, TN, TR, TJ, TN, TR, TJ, TN>
+external interface Promise<TR, TJ /* = Any */, TN /* = Any */> : PromiseBase<TR, TJ, TN, TR, TJ, TN, TR, TJ, TN, TR, TJ, TN>
 external interface DeferredStatic {
     var exceptionHook: Any
     @nativeInvoke
@@ -537,27 +118,27 @@ external interface DeferredStatic {
 }
 external interface Deferred<TR, TJ, TN> {
     fun notify(vararg args: TN): Deferred<TR, TJ, TN> /* this */
-    fun notifyWith(context: Any, args: ArrayLike<TN>? = definedExternally /* null */): Deferred<TR, TJ, TN> /* this */
+    fun notifyWith(context: Any, args: Array<TN>? = definedExternally /* null */): Deferred<TR, TJ, TN> /* this */
     fun reject(vararg args: TJ): Deferred<TR, TJ, TN> /* this */
-    fun rejectWith(context: Any, args: ArrayLike<TJ>? = definedExternally /* null */): Deferred<TR, TJ, TN> /* this */
+    fun rejectWith(context: Any, args: Array<TJ>? = definedExternally /* null */): Deferred<TR, TJ, TN> /* this */
     fun resolve(vararg args: TR): Deferred<TR, TJ, TN> /* this */
-    fun resolveWith(context: Any, args: ArrayLike<TR>? = definedExternally /* null */): Deferred<TR, TJ, TN> /* this */
-    fun always(alwaysCallback: JQuery.Deferred.Callback<dynamic /* TR | TJ */>, vararg alwaysCallbacks: JQuery.Deferred.Callback<dynamic /* TR | TJ */>): Deferred<TR, TJ, TN> /* this */
-    fun always(alwaysCallback: JQuery.Deferred.Callback<dynamic /* TR | TJ */>, vararg alwaysCallbacks: Array<JQuery.Deferred.Callback<dynamic /* TR | TJ */>>): Deferred<TR, TJ, TN> /* this */
-    fun always(alwaysCallback: Array<JQuery.Deferred.Callback<dynamic /* TR | TJ */>>, vararg alwaysCallbacks: JQuery.Deferred.Callback<dynamic /* TR | TJ */>): Deferred<TR, TJ, TN> /* this */
-    fun always(alwaysCallback: Array<JQuery.Deferred.Callback<dynamic /* TR | TJ */>>, vararg alwaysCallbacks: Array<JQuery.Deferred.Callback<dynamic /* TR | TJ */>>): Deferred<TR, TJ, TN> /* this */
-    fun done(doneCallback: JQuery.Deferred.Callback<TR>, vararg doneCallbacks: JQuery.Deferred.Callback<TR>): Deferred<TR, TJ, TN> /* this */
-    fun done(doneCallback: JQuery.Deferred.Callback<TR>, vararg doneCallbacks: Array<JQuery.Deferred.Callback<TR>>): Deferred<TR, TJ, TN> /* this */
-    fun done(doneCallback: Array<JQuery.Deferred.Callback<TR>>, vararg doneCallbacks: JQuery.Deferred.Callback<TR>): Deferred<TR, TJ, TN> /* this */
-    fun done(doneCallback: Array<JQuery.Deferred.Callback<TR>>, vararg doneCallbacks: Array<JQuery.Deferred.Callback<TR>>): Deferred<TR, TJ, TN> /* this */
-    fun fail(failCallback: JQuery.Deferred.Callback<TJ>, vararg failCallbacks: JQuery.Deferred.Callback<TJ>): Deferred<TR, TJ, TN> /* this */
-    fun fail(failCallback: JQuery.Deferred.Callback<TJ>, vararg failCallbacks: Array<JQuery.Deferred.Callback<TJ>>): Deferred<TR, TJ, TN> /* this */
-    fun fail(failCallback: Array<JQuery.Deferred.Callback<TJ>>, vararg failCallbacks: JQuery.Deferred.Callback<TJ>): Deferred<TR, TJ, TN> /* this */
-    fun fail(failCallback: Array<JQuery.Deferred.Callback<TJ>>, vararg failCallbacks: Array<JQuery.Deferred.Callback<TJ>>): Deferred<TR, TJ, TN> /* this */
-    fun progress(progressCallback: JQuery.Deferred.Callback<TN>, vararg progressCallbacks: JQuery.Deferred.Callback<TN>): Deferred<TR, TJ, TN> /* this */
-    fun progress(progressCallback: JQuery.Deferred.Callback<TN>, vararg progressCallbacks: Array<JQuery.Deferred.Callback<TN>>): Deferred<TR, TJ, TN> /* this */
-    fun progress(progressCallback: Array<JQuery.Deferred.Callback<TN>>, vararg progressCallbacks: JQuery.Deferred.Callback<TN>): Deferred<TR, TJ, TN> /* this */
-    fun progress(progressCallback: Array<JQuery.Deferred.Callback<TN>>, vararg progressCallbacks: Array<JQuery.Deferred.Callback<TN>>): Deferred<TR, TJ, TN> /* this */
+    fun resolveWith(context: Any, args: Array<TR>? = definedExternally /* null */): Deferred<TR, TJ, TN> /* this */
+    fun always(alwaysCallback: Deferred.Callback<dynamic /* TR | TJ */>, vararg alwaysCallbacks: Deferred.Callback<dynamic /* TR | TJ */>): Deferred<TR, TJ, TN> /* this */
+    fun always(alwaysCallback: Deferred.Callback<dynamic /* TR | TJ */>, vararg alwaysCallbacks: Array<Deferred.Callback<dynamic /* TR | TJ */>>): Deferred<TR, TJ, TN> /* this */
+    fun always(alwaysCallback: Array<Deferred.Callback<dynamic /* TR | TJ */>>, vararg alwaysCallbacks: Deferred.Callback<dynamic /* TR | TJ */>): Deferred<TR, TJ, TN> /* this */
+    fun always(alwaysCallback: Array<Deferred.Callback<dynamic /* TR | TJ */>>, vararg alwaysCallbacks: Array<Deferred.Callback<dynamic /* TR | TJ */>>): Deferred<TR, TJ, TN> /* this */
+    fun done(doneCallback: Deferred.Callback<TR>, vararg doneCallbacks: Deferred.Callback<TR>): Deferred<TR, TJ, TN> /* this */
+    fun done(doneCallback: Deferred.Callback<TR>, vararg doneCallbacks: Array<Deferred.Callback<TR>>): Deferred<TR, TJ, TN> /* this */
+    fun done(doneCallback: Array<Deferred.Callback<TR>>, vararg doneCallbacks: Deferred.Callback<TR>): Deferred<TR, TJ, TN> /* this */
+    fun done(doneCallback: Array<Deferred.Callback<TR>>, vararg doneCallbacks: Array<Deferred.Callback<TR>>): Deferred<TR, TJ, TN> /* this */
+    fun fail(failCallback: Deferred.Callback<TJ>, vararg failCallbacks: Deferred.Callback<TJ>): Deferred<TR, TJ, TN> /* this */
+    fun fail(failCallback: Deferred.Callback<TJ>, vararg failCallbacks: Array<Deferred.Callback<TJ>>): Deferred<TR, TJ, TN> /* this */
+    fun fail(failCallback: Array<Deferred.Callback<TJ>>, vararg failCallbacks: Deferred.Callback<TJ>): Deferred<TR, TJ, TN> /* this */
+    fun fail(failCallback: Array<Deferred.Callback<TJ>>, vararg failCallbacks: Array<Deferred.Callback<TJ>>): Deferred<TR, TJ, TN> /* this */
+    fun progress(progressCallback: Deferred.Callback<TN>, vararg progressCallbacks: Deferred.Callback<TN>): Deferred<TR, TJ, TN> /* this */
+    fun progress(progressCallback: Deferred.Callback<TN>, vararg progressCallbacks: Array<Deferred.Callback<TN>>): Deferred<TR, TJ, TN> /* this */
+    fun progress(progressCallback: Array<Deferred.Callback<TN>>, vararg progressCallbacks: Deferred.Callback<TN>): Deferred<TR, TJ, TN> /* this */
+    fun progress(progressCallback: Array<Deferred.Callback<TN>>, vararg progressCallbacks: Array<Deferred.Callback<TN>>): Deferred<TR, TJ, TN> /* this */
     fun <TTarget : Any> promise(target: TTarget): Promise<TR, TJ, TN> /* Promise<TR, TJ, TN> & TTarget */
     fun promise(): Promise<TR, TJ, TN>
     fun state(): dynamic /* String /* "pending" */ | String /* "resolved" */ | String /* "rejected" */ */
@@ -633,7 +214,7 @@ external interface EventStatic<TTarget> {
     @nativeInvoke
     operator fun <T : EventLike> invoke(properties: T): Event<TTarget, Nothing?> /* Event<TTarget, Nothing?> & T */
 }
-external interface Event {
+external interface Event<TTarget, TData> {
     var metaKey: Boolean
     var namespace: String
     var pageX: Number
@@ -651,7 +232,7 @@ external interface Event {
     var currentTarget: TTarget
     var data: TData
     var delegateTarget: TTarget
-    var originalEvent: Event
+    var originalEvent: Event<*, *>
     var relatedTarget: TTarget?
     var target: TTarget
 }

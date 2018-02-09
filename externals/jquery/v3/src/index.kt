@@ -29,39 +29,39 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
 
-@file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
+@file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE", "PACKAGE_OR_CLASSIFIER_REDECLARATION")
 
 package js.externals.jquery
 
+import js.externals.jquery.JQuery.*
 import org.w3c.dom.*
-import org.w3c.dom.events.Event
 import org.w3c.dom.events.EventTarget
 
 @JsModule("jquery")
-@JsModule("jquery/dist/jquery.slim")
+@JsNonModule
 external val jQuery: JQueryStatic<HTMLElement> = definedExternally
 external var `$`: JQueryStatic<HTMLElement> = definedExternally
 external interface `T$0` {
     var interval: Number
     var off: Boolean
-    var step: JQuery.PlainObject<JQuery.AnimationHook<Node>>
+    var step: PlainObject<AnimationHook<Node>>
 }
 external interface `T$1` {
-    var `0`: String
+//    var `0`: String
 }
 external interface JQueryStatic<TElement : Node> {
-    var ajaxSettings: JQuery.AjaxSettings<Any>
-    var Deferred: JQuery.DeferredStatic
-    var Event: JQuery.EventStatic<TElement>
-    var cssHooks: JQuery.PlainObject<JQuery.CSSHook<TElement>>
-    var cssNumber: JQuery.PlainObject<Boolean>
+    var ajaxSettings: AjaxSettings<Any>
+    var Deferred: DeferredStatic
+    var Event: EventStatic<TElement>
+    var cssHooks: PlainObject<CSSHook<TElement>>
+    var cssNumber: PlainObject<Boolean>
     var fn: JQuery<TElement>
     var fx: `T$0`
-    var ready: JQuery.Thenable<JQueryStatic<TElement>>
-    var support: JQuery.PlainObject<Any>
-    var valHooks: JQuery.PlainObject<JQuery.ValHook<TElement>>
+    var ready: Thenable<JQueryStatic<TElement>>
+    var support: PlainObject<Any>
+    var valHooks: PlainObject<ValHook<TElement>>
     @nativeInvoke
-    operator fun invoke(html: String, ownerDocument_attributes: JQuery.PlainObject<Any>): JQuery<TElement>
+    operator fun invoke(html: String, ownerDocument_attributes: PlainObject<Any>): JQuery<TElement>
     @nativeInvoke
     operator fun invoke(html: String, ownerDocument_attributes: Document): JQuery<TElement>
     @nativeInvoke
@@ -79,20 +79,20 @@ external interface JQueryStatic<TElement : Node> {
     @nativeInvoke
     operator fun invoke(selector_object_callback: Element? = definedExternally /* null */): JQuery<TElement>
     @nativeInvoke
-    operator fun invoke(selector_object_callback: JQuery.PlainObject<Any>? = definedExternally /* null */): JQuery<TElement>
+    operator fun invoke(selector_object_callback: PlainObject<Any>? = definedExternally /* null */): JQuery<TElement>
     @nativeInvoke
     operator fun invoke(selector_object_callback: JQuery<HTMLElement>? = definedExternally /* null */): JQuery<TElement>
     @nativeInvoke
     operator fun invoke(selector_object_callback: Array<Element>? = definedExternally /* null */): JQuery<TElement>
     @nativeInvoke
     operator fun invoke(selector_object_callback: ((`this`: Document, `$`: JQueryStatic<TElement>) -> Unit)? = definedExternally /* null */): JQuery<TElement>
-    fun <T : Function<*>> Callbacks(flags: String? = definedExternally /* null */): JQuery.Callbacks<T>
-    fun ajax(url: String, settings: JQuery.AjaxSettings<Any>? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun ajax(settings: JQuery.AjaxSettings<Any>? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun ajaxPrefilter(dataTypes: String, handler: (options: JQuery.AjaxSettings<Any>, originalOptions: JQuery.AjaxSettings<Any>, jqXHR: JQuery.jqXHR<Any>) -> dynamic /* String | Unit */)
-    fun ajaxPrefilter(handler: (options: JQuery.AjaxSettings<Any>, originalOptions: JQuery.AjaxSettings<Any>, jqXHR: JQuery.jqXHR<Any>) -> dynamic /* String | Unit */)
-    fun ajaxSetup(options: JQuery.AjaxSettings<Any>): JQuery.AjaxSettings<Any>
-    fun ajaxTransport(dataType: String, handler: (options: JQuery.AjaxSettings<Any>, originalOptions: JQuery.AjaxSettings<Any>, jqXHR: JQuery.jqXHR<Any>) -> dynamic /* Unit | JQuery.Transport */)
+    fun <T : Function<*>> Callbacks(flags: String? = definedExternally /* null */): Callbacks<T>
+    fun ajax(url: String, settings: AjaxSettings<Any>? = definedExternally /* null */): jqXHR<Any>
+    fun ajax(settings: AjaxSettings<Any>? = definedExternally /* null */): jqXHR<Any>
+    fun ajaxPrefilter(dataTypes: String, handler: (options: AjaxSettings<Any>, originalOptions: AjaxSettings<Any>, jqXHR: jqXHR<Any>) -> dynamic /* String | Unit */)
+    fun ajaxPrefilter(handler: (options: AjaxSettings<Any>, originalOptions: AjaxSettings<Any>, jqXHR: jqXHR<Any>) -> dynamic /* String | Unit */)
+    fun ajaxSetup(options: AjaxSettings<Any>): AjaxSettings<Any>
+    fun ajaxTransport(dataType: String, handler: (options: AjaxSettings<Any>, originalOptions: AjaxSettings<Any>, jqXHR: jqXHR<Any>) -> dynamic /* Unit | Transport */)
     fun camelCase(value: String): String
     fun contains(container: Element, contained: Element): Boolean
     fun css(elem: Element, unknown: Any): Any
@@ -100,7 +100,7 @@ external interface JQueryStatic<TElement : Node> {
     fun <T> data(element: Element, key: String, value: T): T
     fun data(element: Element, key: String? = definedExternally /* null */): Any
     fun dequeue(element: Element, queueName: String? = definedExternally /* null */)
-    fun <T> each(array: ArrayLike<T>, callback: (`this`: T, indexInArray: Number, value: T) -> dynamic /* Boolean | Any */): ArrayLike<T>
+    fun <T> each(array: Array<T>, callback: (`this`: T, indexInArray: Number, value: T) -> dynamic /* Boolean | Any */): Array<T>
     fun <T, K : Any?> each(obj: T, callback: (`this`: Any?, propertyName: K, valueOfProperty: Any?) -> dynamic /* Boolean | Any */): T
     fun error(message: String): Any
     fun escapeSelector(selector: String): String
@@ -118,22 +118,22 @@ external interface JQueryStatic<TElement : Node> {
     fun <T, U, V> extend(target: T, object1: U, object2: V): T /* T & U & V */
     fun <T, U> extend(target: T, object1: U): T /* T & U */
     fun extend(target: Any, object1: Any, vararg objects: Any): Any
-    fun get(url: String, data: String, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>?, dataType: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun get(url: String, data: JQuery.PlainObject<Any>, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>?, dataType: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun get(url: String, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>?, dataType: String): JQuery.jqXHR<Any>
-    fun get(url: String, success_data: String): JQuery.jqXHR<Any>
-    fun get(url: String, success_data: JQuery.PlainObject<Any>): JQuery.jqXHR<Any>
-    fun get(url: String, success_data: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>): JQuery.jqXHR<Any>
-    fun get(url_settings: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun get(url_settings: JQuery.UrlAjaxSettings<Any>? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun getJSON(url: String, data: String, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>): JQuery.jqXHR<Any>
-    fun getJSON(url: String, data: JQuery.PlainObject<Any>, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>): JQuery.jqXHR<Any>
-    fun getJSON(url: String, success_data: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun getJSON(url: String, success_data: JQuery.PlainObject<Any>? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun getJSON(url: String, success_data: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun getScript(url: String, success: JQuery.jqXHR.DoneCallback<String?, JQuery.jqXHR<String>>? = definedExternally /* null */): JQuery.jqXHR<String?>
+    fun get(url: String, data: String, success: jqXHR.DoneCallback<Any, jqXHR<Any>>?, dataType: String? = definedExternally /* null */): jqXHR<Any>
+    fun get(url: String, data: PlainObject<Any>, success: jqXHR.DoneCallback<Any, jqXHR<Any>>?, dataType: String? = definedExternally /* null */): jqXHR<Any>
+    fun get(url: String, success: jqXHR.DoneCallback<Any, jqXHR<Any>>?, dataType: String): jqXHR<Any>
+    fun get(url: String, success_data: String): jqXHR<Any>
+    fun get(url: String, success_data: PlainObject<Any>): jqXHR<Any>
+    fun get(url: String, success_data: jqXHR.DoneCallback<Any, jqXHR<Any>>): jqXHR<Any>
+    fun get(url_settings: String? = definedExternally /* null */): jqXHR<Any>
+    fun get(url_settings: UrlAjaxSettings<Any>? = definedExternally /* null */): jqXHR<Any>
+    fun getJSON(url: String, data: String, success: jqXHR.DoneCallback<Any, jqXHR<Any>>): jqXHR<Any>
+    fun getJSON(url: String, data: PlainObject<Any>, success: jqXHR.DoneCallback<Any, jqXHR<Any>>): jqXHR<Any>
+    fun getJSON(url: String, success_data: String? = definedExternally /* null */): jqXHR<Any>
+    fun getJSON(url: String, success_data: PlainObject<Any>? = definedExternally /* null */): jqXHR<Any>
+    fun getJSON(url: String, success_data: jqXHR.DoneCallback<Any, jqXHR<Any>>? = definedExternally /* null */): jqXHR<Any>
+    fun getScript(url: String, success: jqXHR.DoneCallback<String?, jqXHR<String>>? = definedExternally /* null */): jqXHR<String?>
     fun globalEval(code: String)
-    fun <T> grep(array: ArrayLike<T>, fn: (elementOfArray: T, indexInArray: Number) -> Boolean, invert: Boolean? = definedExternally /* null */): Array<T>
+    fun <T> grep(array: Array<T>, fn: (elementOfArray: T, indexInArray: Number) -> Boolean, invert: Boolean? = definedExternally /* null */): Array<T>
     fun hasData(element: Element): Boolean
     fun holdReady(hold: Boolean)
     fun htmlPrefilter(html: String): String
@@ -145,15 +145,15 @@ external interface JQueryStatic<TElement : Node> {
     fun isPlainObject(obj: Any): Boolean
     fun isWindow(obj: Any): Boolean
     fun isXMLDoc(node: Node): Boolean
-    fun <T> makeArray(obj: ArrayLike<T>): Array<T>
+    fun <T> makeArray(obj: Array<T>): Array<T>
     fun <T, R> map(array: Array<T>, callback: (elementOfArray: T, indexInArray: Number) -> R): Array<R>
     fun <T, K : Any?, R> map(obj: T, callback: (propertyOfObject: Any?, key: K) -> R): Array<R>
-    fun <T, U> merge(first: ArrayLike<T>, second: ArrayLike<U>): Array<dynamic /* T | U */>
+    fun <T, U> merge(first: Array<T>, second: Array<U>): Array<dynamic /* T | U */>
     fun noConflict(removeAll: Boolean? = definedExternally /* null */): JQueryStatic<TElement> /* this */
     fun noop(): Nothing?
     fun now(): Number
     fun param(obj: Array<Any>, traditional: Boolean? = definedExternally /* null */): String
-    fun param(obj: JQuery.PlainObject<Any>, traditional: Boolean? = definedExternally /* null */): String
+    fun param(obj: PlainObject<Any>, traditional: Boolean? = definedExternally /* null */): String
     fun param(obj: JQuery<HTMLElement>, traditional: Boolean? = definedExternally /* null */): String
     fun parseHTML(data: String, context: Document?, keepScripts: Boolean): Array<dynamic /* Element | Text | Comment */>
     fun parseHTML(data: String, context_keepScripts: Boolean? = definedExternally /* null */): Array<dynamic /* Element | Text | Comment */>
@@ -161,14 +161,14 @@ external interface JQueryStatic<TElement : Node> {
     fun parseHTML(data: String, context_keepScripts: Nothing? = definedExternally /* null */): Array<dynamic /* Element | Text | Comment */>
     fun parseJSON(json: String): Any
     fun parseXML(data: String): XMLDocument
-    fun post(url: String, data: String, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>?, dataType: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun post(url: String, data: JQuery.PlainObject<Any>, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>?, dataType: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun post(url: String, success: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>?, dataType: String): JQuery.jqXHR<Any>
-    fun post(url: String, success_data: String): JQuery.jqXHR<Any>
-    fun post(url: String, success_data: JQuery.PlainObject<Any>): JQuery.jqXHR<Any>
-    fun post(url: String, success_data: JQuery.jqXHR.DoneCallback<Any, JQuery.jqXHR<Any>>): JQuery.jqXHR<Any>
-    fun post(url_settings: String? = definedExternally /* null */): JQuery.jqXHR<Any>
-    fun post(url_settings: JQuery.UrlAjaxSettings<Any>? = definedExternally /* null */): JQuery.jqXHR<Any>
+    fun post(url: String, data: String, success: jqXHR.DoneCallback<Any, jqXHR<Any>>?, dataType: String? = definedExternally /* null */): jqXHR<Any>
+    fun post(url: String, data: PlainObject<Any>, success: jqXHR.DoneCallback<Any, jqXHR<Any>>?, dataType: String? = definedExternally /* null */): jqXHR<Any>
+    fun post(url: String, success: jqXHR.DoneCallback<Any, jqXHR<Any>>?, dataType: String): jqXHR<Any>
+    fun post(url: String, success_data: String): jqXHR<Any>
+    fun post(url: String, success_data: PlainObject<Any>): jqXHR<Any>
+    fun post(url: String, success_data: jqXHR.DoneCallback<Any, jqXHR<Any>>): jqXHR<Any>
+    fun post(url_settings: String? = definedExternally /* null */): jqXHR<Any>
+    fun post(url_settings: UrlAjaxSettings<Any>? = definedExternally /* null */): jqXHR<Any>
     fun <TReturn, A, B, C, D, E, F, G> proxy(fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) -> TReturn, context: Nothing?, a: A, b: B, c: C, d: D, e: E, f: F, g: G): () -> TReturn
     fun <TReturn, A, B, C, D, E, F> proxy(fn: (a: A, b: B, c: C, d: D, e: E, f: F) -> TReturn, context: Nothing?, a: A, b: B, c: C, d: D, e: E, f: F): () -> TReturn
     fun <TReturn, A, B, C, D, E> proxy(fn: (a: A, b: B, c: C, d: D, e: E) -> TReturn, context: Nothing?, a: A, b: B, c: C, d: D, e: E): () -> TReturn
@@ -300,63 +300,63 @@ external interface JQueryStatic<TElement : Node> {
     fun <TContext : Any, TReturn, T, U, V, W, X, Y, Z> proxy(fn: (t: T, u: U, v: V, w: W, x: X, y: Y, z: Z, args: Any) -> TReturn, context: TContext): (`this`: TContext, t: T, u: U, v: V, w: W, x: X, y: Y, z: Z, args: Any) -> TReturn
     fun <TContext : Any, TReturn> proxy(fn: (args: Any) -> TReturn, context: TContext, vararg additionalArguments: Any): (`this`: TContext, args: Any) -> TReturn
     fun <TContext : Any> proxy(context: TContext, name: Any?, vararg additionalArguments: Any): (`this`: TContext, args: Any) -> Any
-    fun <T : Element> queue(element: T, queueName: String? = definedExternally /* null */, newQueue: JQuery.QueueFunction<T>? = definedExternally /* null */): `T$1` /* `T$1` & Array<JQuery.QueueFunction<T>> */
-    fun <T : Element> queue(element: T, queueName: String? = definedExternally /* null */, newQueue: Array<JQuery.QueueFunction<T>>? = definedExternally /* null */): `T$1` /* `T$1` & Array<JQuery.QueueFunction<T>> */
+    fun <T : Element> queue(element: T, queueName: String? = definedExternally /* null */, newQueue: QueueFunction<T>? = definedExternally /* null */): Array<QueueFunction<T>> /* `T$1` & Array<QueueFunction<T>> */
+    fun <T : Element> queue(element: T, queueName: String? = definedExternally /* null */, newQueue: Array<QueueFunction<T>>? = definedExternally /* null */): Array<QueueFunction<T>> /* `T$1` & Array<QueueFunction<T>> */
     fun readyException(error: Error): Any
     fun removeData(element: Element, name: String? = definedExternally /* null */)
-    fun speed(duration: Number, easing: String, complete: (`this`: TElement) -> Unit): JQuery.EffectsOptions<TElement>
-    fun speed(duration: String /* "fast" */, easing: String, complete: (`this`: TElement) -> Unit): JQuery.EffectsOptions<TElement>
-    fun speed(duration: String /* "slow" */, easing: String, complete: (`this`: TElement) -> Unit): JQuery.EffectsOptions<TElement>
-    fun speed(duration: Number, easing_complete: String): JQuery.EffectsOptions<TElement>
-    fun speed(duration: Number, easing_complete: (`this`: TElement) -> Unit): JQuery.EffectsOptions<TElement>
-    fun speed(duration: String /* "fast" */, easing_complete: String): JQuery.EffectsOptions<TElement>
-    fun speed(duration: String /* "fast" */, easing_complete: (`this`: TElement) -> Unit): JQuery.EffectsOptions<TElement>
-    fun speed(duration: String /* "slow" */, easing_complete: String): JQuery.EffectsOptions<TElement>
-    fun speed(duration: String /* "slow" */, easing_complete: (`this`: TElement) -> Unit): JQuery.EffectsOptions<TElement>
-    fun speed(duration_complete_settings: Number? = definedExternally /* null */): JQuery.EffectsOptions<TElement>
-    fun speed(duration_complete_settings: String? /* "fast" */ = definedExternally /* null */): JQuery.EffectsOptions<TElement>
-    fun speed(duration_complete_settings: String? /* "slow" */ = definedExternally /* null */): JQuery.EffectsOptions<TElement>
-    fun speed(duration_complete_settings: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery.EffectsOptions<TElement>
-    fun speed(duration_complete_settings: JQuery.SpeedSettings<TElement>? = definedExternally /* null */): JQuery.EffectsOptions<TElement>
+    fun speed(duration: Number, easing: String, complete: (`this`: TElement) -> Unit): EffectsOptions<TElement>
+    fun speed(duration: String /* "fast" */, easing: String, complete: (`this`: TElement) -> Unit): EffectsOptions<TElement>
+    fun speed(duration: String /* "slow" */, easing: String, complete: (`this`: TElement) -> Unit): EffectsOptions<TElement>
+    fun speed(duration: Number, easing_complete: String): EffectsOptions<TElement>
+    fun speed(duration: Number, easing_complete: (`this`: TElement) -> Unit): EffectsOptions<TElement>
+    fun speed(duration: String /* "fast" */, easing_complete: String): EffectsOptions<TElement>
+    fun speed(duration: String /* "fast" */, easing_complete: (`this`: TElement) -> Unit): EffectsOptions<TElement>
+    fun speed(duration: String /* "slow" */, easing_complete: String): EffectsOptions<TElement>
+    fun speed(duration: String /* "slow" */, easing_complete: (`this`: TElement) -> Unit): EffectsOptions<TElement>
+    fun speed(duration_complete_settings: Number? = definedExternally /* null */): EffectsOptions<TElement>
+    fun speed(duration_complete_settings: String? /* "fast" */ = definedExternally /* null */): EffectsOptions<TElement>
+    fun speed(duration_complete_settings: String? /* "slow" */ = definedExternally /* null */): EffectsOptions<TElement>
+    fun speed(duration_complete_settings: ((`this`: TElement) -> Unit)? = definedExternally /* null */): EffectsOptions<TElement>
+    fun speed(duration_complete_settings: SpeedSettings<TElement>? = definedExternally /* null */): EffectsOptions<TElement>
     fun trim(str: String): String
     fun type(obj: Any): dynamic /* String /* "string" */ | String /* "number" */ | String /* "boolean" */ | String /* "symbol" */ | String /* "undefined" */ | String /* "object" */ | String /* "function" */ | String /* "array" */ | String /* "date" */ | String /* "error" */ | String /* "null" */ | String /* "regexp" */ */
     fun <T : Element> unique(array: Array<T>): Array<T>
     fun <T : Element> uniqueSort(array: Array<T>): Array<T>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: TR1, deferredU: UR1, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: TR1, deferredU: JQuery.Promise<UR1, UJ1, Any>, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: TR1, deferredU: JQuery.Thenable<UR1>, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: JQuery.Promise<TR1, TJ1, Any>, deferredU: UR1, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: JQuery.Promise<TR1, TJ1, Any>, deferredU: JQuery.Promise<UR1, UJ1, Any>, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: JQuery.Promise<TR1, TJ1, Any>, deferredU: JQuery.Thenable<UR1>, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: JQuery.Thenable<TR1>, deferredU: UR1, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: JQuery.Thenable<TR1>, deferredU: JQuery.Promise<UR1, UJ1, Any>, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: JQuery.Thenable<TR1>, deferredU: JQuery.Thenable<UR1>, deferredV: dynamic /* VR1 | JQuery.Promise<VR1, VJ1, Any> | JQuery.Thenable<VR1> */): JQuery.Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: TR1, deferredU: UR1): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: TR1, deferredU: JQuery.Promise<UR1, UJ1, Any>): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: TR1, deferredU: JQuery.Thenable<UR1>): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: JQuery.Promise<TR1, TJ1, Any>, deferredU: UR1): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: JQuery.Promise<TR1, TJ1, Any>, deferredU: JQuery.Promise<UR1, UJ1, Any>): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: JQuery.Promise<TR1, TJ1, Any>, deferredU: JQuery.Thenable<UR1>): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: JQuery.Thenable<TR1>, deferredU: UR1): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: JQuery.Thenable<TR1>, deferredU: JQuery.Promise<UR1, UJ1, Any>): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: JQuery.Thenable<TR1>, deferredU: JQuery.Thenable<UR1>): JQuery.Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
-    fun <TR1, TJ1, TR2, TJ2, TR3, TJ3> `when`(deferredT: JQuery.Promise3<TR1, TJ1, Any, TR2, TJ2, Any, TR3, TJ3, Any>): JQuery.Promise3<TR1, TJ1, Any?, TR2, TJ2, Any?, TR3, TJ3, Any?>
-    fun <TR1, TJ1, TR2, TJ2, TR3, TJ3> `when`(deferredT: JQuery.Promise2<TR1, TJ1, Any, TR2, TJ2, Any>): JQuery.Promise3<TR1, TJ1, Any?, TR2, TJ2, Any?, TR3, TJ3, Any?>
-    fun <TR1, TJ1> `when`(deferred: TR1): JQuery.Promise<TR1, TJ1, Any?>
-    fun <TR1, TJ1> `when`(deferred: JQuery.Promise<TR1, TJ1, Any>): JQuery.Promise<TR1, TJ1, Any?>
-    fun <TR1, TJ1> `when`(deferred: JQuery.Thenable<TR1>): JQuery.Promise<TR1, TJ1, Any?>
-    fun <TR1, TJ1> `when`(vararg deferreds: TR1): JQuery.Promise<TR1, TJ1, Any?>
-    fun <TR1, TJ1> `when`(vararg deferreds: JQuery.Promise<TR1, TJ1, Any>): JQuery.Promise<TR1, TJ1, Any?>
-    fun <TR1, TJ1> `when`(vararg deferreds: JQuery.Thenable<TR1>): JQuery.Promise<TR1, TJ1, Any?>
-    fun `when`(vararg deferreds: Any): JQuery.Promise<Any, Any, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: TR1, deferredU: UR1, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: TR1, deferredU: Promise<UR1, UJ1, Any>, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: TR1, deferredU: Thenable<UR1>, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: Promise<TR1, TJ1, Any>, deferredU: UR1, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: Promise<TR1, TJ1, Any>, deferredU: Promise<UR1, UJ1, Any>, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: Promise<TR1, TJ1, Any>, deferredU: Thenable<UR1>, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: Thenable<TR1>, deferredU: UR1, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: Thenable<TR1>, deferredU: Promise<UR1, UJ1, Any>, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, VR1, TJ1, UJ1, VJ1> `when`(deferredT: Thenable<TR1>, deferredU: Thenable<UR1>, deferredV: dynamic /* VR1 | Promise<VR1, VJ1, Any> | Thenable<VR1> */): Promise3<TR1, TJ1, Any?, UR1, UJ1, Any?, VR1, VJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: TR1, deferredU: UR1): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: TR1, deferredU: Promise<UR1, UJ1, Any>): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: TR1, deferredU: Thenable<UR1>): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: Promise<TR1, TJ1, Any>, deferredU: UR1): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: Promise<TR1, TJ1, Any>, deferredU: Promise<UR1, UJ1, Any>): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: Promise<TR1, TJ1, Any>, deferredU: Thenable<UR1>): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: Thenable<TR1>, deferredU: UR1): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: Thenable<TR1>, deferredU: Promise<UR1, UJ1, Any>): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, UR1, TJ1, UJ1> `when`(deferredT: Thenable<TR1>, deferredU: Thenable<UR1>): Promise2<TR1, TJ1, Any?, UR1, UJ1, Any?>
+    fun <TR1, TJ1, TR2, TJ2, TR3, TJ3> `when`(deferredT: Promise3<TR1, TJ1, Any, TR2, TJ2, Any, TR3, TJ3, Any>): Promise3<TR1, TJ1, Any?, TR2, TJ2, Any?, TR3, TJ3, Any?>
+    fun <TR1, TJ1, TR2, TJ2, TR3, TJ3> `when`(deferredT: Promise2<TR1, TJ1, Any, TR2, TJ2, Any>): Promise3<TR1, TJ1, Any?, TR2, TJ2, Any?, TR3, TJ3, Any?>
+    fun <TR1, TJ1> `when`(deferred: TR1): Promise<TR1, TJ1, Any?>
+    fun <TR1, TJ1> `when`(deferred: Promise<TR1, TJ1, Any>): Promise<TR1, TJ1, Any?>
+    fun <TR1, TJ1> `when`(deferred: Thenable<TR1>): Promise<TR1, TJ1, Any?>
+    fun <TR1, TJ1> `when`(vararg deferreds: TR1): Promise<TR1, TJ1, Any?>
+    fun <TR1, TJ1> `when`(vararg deferreds: Promise<TR1, TJ1, Any>): Promise<TR1, TJ1, Any?>
+    fun <TR1, TJ1> `when`(vararg deferreds: Thenable<TR1>): Promise<TR1, TJ1, Any?>
+    fun `when`(vararg deferreds: Any): Promise<Any, Any, Any?>
     @nativeInvoke
     operator fun invoke(): JQuery<TElement>
-    fun get(): JQuery.jqXHR<Any>
-    fun getJSON(url: String): JQuery.jqXHR<Any>
+    fun get(): jqXHR<Any>
+    fun getJSON(url: String): jqXHR<Any>
     fun parseHTML(data: String): Array<dynamic /* Element | Text | Comment */>
-    fun post(): JQuery.jqXHR<Any>
-    fun <T : Element> queue(element: T): `T$1` /* `T$1` & Array<JQuery.QueueFunction<T>> */
-    fun speed(): JQuery.EffectsOptions<TElement>
+    fun post(): jqXHR<Any>
+    fun <T : Element> queue(element: T): Array<QueueFunction<T>> /* `T$1` & Array<QueueFunction<T>> */
+    fun speed(): EffectsOptions<TElement>
 }
 external interface JQuery<TElement : Node> : Iterable<TElement> {
     var jquery: String
@@ -377,19 +377,19 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun after(vararg contents: JQuery<dynamic /* Element | Text | Comment */>): JQuery<TElement> /* this */
     fun after(vararg contents: Array<dynamic /* Element | Text | Comment | JQuery<dynamic /* Element | Text | Comment */> */>): JQuery<TElement> /* this */
     fun after(fn: (`this`: TElement, index: Number, html: String) -> dynamic /* String | Element | Text | Comment | JQuery<dynamic /* Element | Text | Comment */> | Array<dynamic /* Element | Text | Comment | JQuery<dynamic /* Element | Text | Comment */> */> */): JQuery<TElement> /* this */
-    fun ajaxComplete(handler: (`this`: Document, event: JQuery.Event<Document, Nothing?>, jqXHR: JQuery.jqXHR<Any>, ajaxOptions: JQuery.AjaxSettings<Any>) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
-    fun ajaxError(handler: (`this`: Document, event: JQuery.Event<Document, Nothing?>, jqXHR: JQuery.jqXHR<Any>, ajaxSettings: JQuery.AjaxSettings<Any>, thrownError: String) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
-    fun ajaxSend(handler: (`this`: Document, event: JQuery.Event<Document, Nothing?>, jqXHR: JQuery.jqXHR<Any>, ajaxOptions: JQuery.AjaxSettings<Any>) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
+    fun ajaxComplete(handler: (`this`: Document, event: Event<Document, Nothing?>, jqXHR: jqXHR<Any>, ajaxOptions: AjaxSettings<Any>) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
+    fun ajaxError(handler: (`this`: Document, event: Event<Document, Nothing?>, jqXHR: jqXHR<Any>, ajaxSettings: AjaxSettings<Any>, thrownError: String) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
+    fun ajaxSend(handler: (`this`: Document, event: Event<Document, Nothing?>, jqXHR: jqXHR<Any>, ajaxOptions: AjaxSettings<Any>) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
     fun ajaxStart(handler: (`this`: Document) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
     fun ajaxStop(handler: (`this`: Document) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
-    fun ajaxSuccess(handler: (`this`: Document, event: JQuery.Event<Document, Nothing?>, jqXHR: JQuery.jqXHR<Any>, ajaxOptions: JQuery.AjaxSettings<Any>, data: JQuery.PlainObject<Any>) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, duration: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, duration: String /* "fast" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, duration: String /* "slow" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, duration_easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, duration_easing: Number, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, options: JQuery.EffectsOptions<TElement>): JQuery<TElement> /* this */
-    fun animate(properties: JQuery.PlainObject<Any>, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun ajaxSuccess(handler: (`this`: Document, event: Event<Document, Nothing?>, jqXHR: jqXHR<Any>, ajaxOptions: AjaxSettings<Any>, data: PlainObject<Any>) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, duration: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, duration: String /* "fast" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, duration: String /* "slow" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, duration_easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, duration_easing: Number, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, options: EffectsOptions<TElement>): JQuery<TElement> /* this */
+    fun animate(properties: PlainObject<Any>, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun append(vararg contents: String): JQuery<TElement> /* this */
     fun append(vararg contents: Element): JQuery<TElement> /* this */
     fun append(vararg contents: Text): JQuery<TElement> /* this */
@@ -405,7 +405,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun attr(attributeName: String, value: Number): JQuery<TElement> /* this */
     fun attr(attributeName: String, value: (`this`: TElement, index: Number, attr: String) -> dynamic /* String | Number | Unit | Nothing? */): JQuery<TElement> /* this */
     fun attr(attributeName: String, value: Nothing?): JQuery<TElement> /* this */
-    fun attr(attributes: JQuery.PlainObject<Any>): JQuery<TElement> /* this */
+    fun attr(attributes: PlainObject<Any>): JQuery<TElement> /* this */
     fun attr(attributeName: String): String?
     fun before(vararg contents: String): JQuery<TElement> /* this */
     fun before(vararg contents: Element): JQuery<TElement> /* this */
@@ -414,32 +414,32 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun before(vararg contents: JQuery<dynamic /* Element | Text | Comment */>): JQuery<TElement> /* this */
     fun before(vararg contents: Array<dynamic /* Element | Text | Comment | JQuery<dynamic /* Element | Text | Comment */> */>): JQuery<TElement> /* this */
     fun before(fn: (`this`: TElement, index: Number, html: String) -> dynamic /* String | Element | Text | Comment | JQuery<dynamic /* Element | Text | Comment */> | Array<dynamic /* Element | Text | Comment | JQuery<dynamic /* Element | Text | Comment */> */> */): JQuery<TElement> /* this */
-    fun <TData> bind(eventType: String, eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> bind(eventType: String, eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> bind(eventType: String, eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> bind(eventType: String, eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun bind(eventType: String, handler: Boolean): JQuery<TElement> /* this */
-    fun bind(eventType: String, handler: JQuery.EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
-    fun bind(eventType: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>): JQuery<TElement> /* this */
+    fun bind(eventType: String, handler: EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun bind(eventType: String, handler: EventHandlerBase<Any, Event<TElement, Nothing?>>): JQuery<TElement> /* this */
     fun bind(eventType: String, handler: Nothing?): JQuery<TElement> /* this */
-    fun bind(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, Nothing?> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
-    fun <TData> blur(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> blur(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun bind(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, Nothing?> | EventHandlerBase<Any, Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
+    fun <TData> blur(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> blur(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun blur(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun blur(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun blur(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun blur(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun blur(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun blur(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> change(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> change(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> change(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> change(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun change(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun change(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun change(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun change(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun change(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun change(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun children(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun clearQueue(queueName: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> click(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> click(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> click(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> click(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun click(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun click(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun click(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun click(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun click(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun click(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun clone(withDataAndEvents: Boolean? = definedExternally /* null */, deepWithDataAndEvents: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
     fun closest(selector: String, context: Element): JQuery<TElement> /* this */
@@ -447,39 +447,39 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun closest(selector: Element): JQuery<TElement> /* this */
     fun closest(selector: JQuery<HTMLElement>): JQuery<TElement> /* this */
     fun contents(): JQuery<dynamic /* TElement | Text | Comment */>
-    fun <TData> contextmenu(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> contextmenu(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> contextmenu(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> contextmenu(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun contextmenu(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun contextmenu(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun contextmenu(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun contextmenu(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun contextmenu(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun contextmenu(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun css(propertyName: String, value: String): JQuery<TElement> /* this */
     fun css(propertyName: String, value: Number): JQuery<TElement> /* this */
     fun css(propertyName: String, value: (`this`: TElement, index: Number, value: String) -> dynamic /* String | Number | Unit | Nothing? */): JQuery<TElement> /* this */
-    fun css(properties: JQuery.PlainObject<dynamic /* String | Number | (`this`: TElement, index: Number, value: String) -> dynamic /* String | Number | Unit | Nothing? */ */>): JQuery<TElement> /* this */
+    fun css(properties: PlainObject<dynamic /* String | Number | (`this`: TElement, index: Number, value: String) -> dynamic /* String | Number | Unit | Nothing? */ */>): JQuery<TElement> /* this */
     fun css(propertyName: String): String
-    fun css(propertyNames: Array<String>): JQuery.PlainObject<String>
+    fun css(propertyNames: Array<String>): PlainObject<String>
     fun data(key: String, undefined: Nothing?): Any
     fun data(key: String, value: Any): JQuery<TElement> /* this */
-    fun data(obj: JQuery.PlainObject<Any>): JQuery<TElement> /* this */
+    fun data(obj: PlainObject<Any>): JQuery<TElement> /* this */
     fun data(key: String): Any
-    fun data(): JQuery.PlainObject<Any>
-    fun <TData> dblclick(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> dblclick(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun data(): PlainObject<Any>
+    fun <TData> dblclick(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> dblclick(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun dblclick(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun dblclick(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun dblclick(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun dblclick(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun dblclick(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun dblclick(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun delay(duration: Number, queueName: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun delay(duration: String /* "fast" */, queueName: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun delay(duration: String /* "slow" */, queueName: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> delegate(selector: String, eventType: String, eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> delegate(selector: String, eventType: String, eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> delegate(selector: String, eventType: String, eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> delegate(selector: String, eventType: String, eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun delegate(selector: String, eventType: String, handler: Boolean): JQuery<TElement> /* this */
-    fun delegate(selector: String, eventType: String, handler: JQuery.EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
-    fun delegate(selector: String, eventType: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>): JQuery<TElement> /* this */
+    fun delegate(selector: String, eventType: String, handler: EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun delegate(selector: String, eventType: String, handler: EventHandlerBase<Any, Event<TElement, Nothing?>>): JQuery<TElement> /* this */
     fun delegate(selector: String, eventType: String, handler: Nothing?): JQuery<TElement> /* this */
-    fun delegate(selector: String, events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, Nothing?> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
+    fun delegate(selector: String, events: PlainObject<dynamic /* Boolean | EventHandler<TElement, Nothing?> | EventHandlerBase<Any, Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
     fun dequeue(queueName: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun detach(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun each(fn: (`this`: TElement, index: Number, element: TElement) -> dynamic /* Boolean | Unit */): JQuery<TElement> /* this */
@@ -494,7 +494,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun fadeIn(duration_easing: Number, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun fadeIn(duration_easing_complete_options: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeIn(duration_easing_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun fadeIn(duration_easing_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun fadeIn(duration_easing_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeIn(duration_easing_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeOut(duration: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeOut(duration: String /* "fast" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -503,7 +503,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun fadeOut(duration_easing: Number, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun fadeOut(duration_easing_complete_options: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeOut(duration_easing_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun fadeOut(duration_easing_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun fadeOut(duration_easing_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeOut(duration_easing_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeTo(duration: Number, opacity: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeTo(duration: String /* "fast" */, opacity: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -518,7 +518,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun fadeToggle(duration_easing: Number, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun fadeToggle(duration_easing_complete_options: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeToggle(duration_easing_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun fadeToggle(duration_easing_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun fadeToggle(duration_easing_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun fadeToggle(duration_easing_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun filter(selector: String): JQuery<TElement> /* this */
     fun filter(selector: Element): JQuery<TElement> /* this */
@@ -530,23 +530,23 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun find(selector: JQuery<HTMLElement>): JQuery<TElement> /* this */
     fun finish(queue: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun first(): JQuery<TElement> /* this */
-    fun <TData> focus(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> focus(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> focus(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> focus(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun focus(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun focus(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun focus(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun focus(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun focus(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun focus(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> focusin(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> focusin(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> focusin(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> focusin(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun focusin(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun focusin(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun focusin(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun focusin(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun focusin(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun focusin(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> focusout(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> focusout(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> focusout(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> focusout(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun focusout(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun focusout(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun focusout(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun focusout(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun focusout(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun focusout(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun get(index: Number): TElement
     fun get(): Array<TElement>
@@ -569,12 +569,12 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun hide(duration_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
     fun hide(duration_complete_options: String? /* "fast" */ = definedExternally /* null */): JQuery<TElement> /* this */
     fun hide(duration_complete_options: String? /* "slow" */ = definedExternally /* null */): JQuery<TElement> /* this */
-    fun hide(duration_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun hide(duration_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun hide(duration_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <T> hover(handlerInOut: Boolean, handlerOut: dynamic /* Boolean? | JQuery.EventHandler<TElement, Nothing?>? | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <T> hover(handlerInOut: JQuery.EventHandler<TElement, Nothing?>, handlerOut: dynamic /* Boolean? | JQuery.EventHandler<TElement, Nothing?>? | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <T> hover(handlerInOut: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>, handlerOut: dynamic /* Boolean? | JQuery.EventHandler<TElement, Nothing?>? | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <T> hover(handlerInOut: Nothing?, handlerOut: dynamic /* Boolean? | JQuery.EventHandler<TElement, Nothing?>? | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
+    fun <T> hover(handlerInOut: Boolean, handlerOut: dynamic /* Boolean? | EventHandler<TElement, Nothing?>? | EventHandlerBase<Any, Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
+    fun <T> hover(handlerInOut: EventHandler<TElement, Nothing?>, handlerOut: dynamic /* Boolean? | EventHandler<TElement, Nothing?>? | EventHandlerBase<Any, Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
+    fun <T> hover(handlerInOut: EventHandlerBase<Any, Event<TElement, Nothing?>>, handlerOut: dynamic /* Boolean? | EventHandler<TElement, Nothing?>? | EventHandlerBase<Any, Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
+    fun <T> hover(handlerInOut: Nothing?, handlerOut: dynamic /* Boolean? | EventHandler<TElement, Nothing?>? | EventHandlerBase<Any, Event<TElement, Nothing?>>? | Nothing? */ = definedExternally /* null */): JQuery<TElement> /* this */
     fun html(htmlString: String): JQuery<TElement> /* this */
     fun html(htmlString: (`this`: TElement, index: Number, oldhtml: String) -> String): JQuery<TElement> /* this */
     fun html(): String
@@ -602,72 +602,72 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun `is`(selector: JQuery<HTMLElement>): Boolean
     fun `is`(selector: Array<Element>): Boolean
     fun `is`(selector: (`this`: TElement, index: Number, element: TElement) -> Boolean): Boolean
-    fun <TData> keydown(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> keydown(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> keydown(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> keydown(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun keydown(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun keydown(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun keydown(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun keydown(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun keydown(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun keydown(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> keypress(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> keypress(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> keypress(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> keypress(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun keypress(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun keypress(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun keypress(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun keypress(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun keypress(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun keypress(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> keyup(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> keyup(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> keyup(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> keyup(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun keyup(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun keyup(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun keyup(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun keyup(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun keyup(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun keyup(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun last(): JQuery<TElement> /* this */
-    fun load(url: String, data: String, complete: (`this`: TElement, responseText: String, textStatus: dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, jqXHR: JQuery.jqXHR<Any>) -> Unit): JQuery<TElement> /* this */
-    fun load(url: String, data: JQuery.PlainObject<Any>, complete: (`this`: TElement, responseText: String, textStatus: dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, jqXHR: JQuery.jqXHR<Any>) -> Unit): JQuery<TElement> /* this */
+    fun load(url: String, data: String, complete: (`this`: TElement, responseText: String, textStatus: dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, jqXHR: jqXHR<Any>) -> Unit): JQuery<TElement> /* this */
+    fun load(url: String, data: PlainObject<Any>, complete: (`this`: TElement, responseText: String, textStatus: dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, jqXHR: jqXHR<Any>) -> Unit): JQuery<TElement> /* this */
     fun load(url: String, complete_data: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun load(url: String, complete_data: JQuery.PlainObject<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun load(url: String, complete_data: ((`this`: TElement, responseText: String, textStatus: dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, jqXHR: JQuery.jqXHR<Any>) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun load(url: String, complete_data: PlainObject<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun load(url: String, complete_data: ((`this`: TElement, responseText: String, textStatus: dynamic /* String /* "error" */ | String /* "success" */ | String /* "notmodified" */ | String /* "nocontent" */ | String /* "timeout" */ | String /* "abort" */ | String /* "parsererror" */ */, jqXHR: jqXHR<Any>) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun map(callback: (`this`: TElement, index: Number, domElement: TElement) -> dynamic /* Any | Array<Any> | Nothing? */): JQuery<TElement> /* this */
-    fun <TData> mousedown(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mousedown(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mousedown(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mousedown(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mousedown(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mousedown(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mousedown(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mousedown(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mousedown(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mousedown(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> mouseenter(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mouseenter(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mouseenter(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mouseenter(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mouseenter(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseenter(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseenter(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseenter(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseenter(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mouseenter(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> mouseleave(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mouseleave(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mouseleave(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mouseleave(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mouseleave(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseleave(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseleave(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseleave(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseleave(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mouseleave(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> mousemove(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mousemove(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mousemove(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mousemove(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mousemove(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mousemove(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mousemove(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mousemove(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mousemove(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mousemove(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> mouseout(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mouseout(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mouseout(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mouseout(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mouseout(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseout(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseout(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseout(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseout(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mouseout(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> mouseover(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mouseover(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mouseover(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mouseover(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mouseover(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseover(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseover(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseover(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseover(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mouseover(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> mouseup(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> mouseup(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> mouseup(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> mouseup(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun mouseup(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseup(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun mouseup(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseup(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun mouseup(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun mouseup(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun next(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun nextAll(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -680,48 +680,48 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun not(selector: Array<Element>): JQuery<TElement> /* this */
     fun not(selector: (`this`: TElement, index: Number, element: TElement) -> Boolean): JQuery<TElement> /* this */
     fun off(events: String, selector: String, handler: Boolean): JQuery<TElement> /* this */
-    fun off(events: String, selector: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Any>>): JQuery<TElement> /* this */
+    fun off(events: String, selector: String, handler: EventHandlerBase<Any, Event<TElement, Any>>): JQuery<TElement> /* this */
     fun off(events: String, selector_handler: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun off(events: String, selector_handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun off(events: String, selector_handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Any>>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun off(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Any>> */>, selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun off(event: JQuery.Event<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun offset(coordinates: JQuery.Coordinates): JQuery<TElement> /* this */
-    fun offset(coordinates: (`this`: TElement, index: Number, coords: JQuery.Coordinates) -> JQuery.Coordinates): JQuery<TElement> /* this */
-    fun offset(): JQuery.Coordinates?
+    fun off(events: String, selector_handler: EventHandlerBase<Any, Event<TElement, Any>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun off(events: PlainObject<dynamic /* Boolean | EventHandlerBase<Any, Event<TElement, Any>> */>, selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun off(event: Event<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun offset(coordinates: Coordinates): JQuery<TElement> /* this */
+    fun offset(coordinates: (`this`: TElement, index: Number, coords: Coordinates) -> Coordinates): JQuery<TElement> /* this */
+    fun offset(): Coordinates?
     fun offsetParent(): JQuery<TElement> /* this */
-    fun <TData> on(events: String, selector: String?, data: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> on(events: String, selector: String?, data: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> on(events: String, selector: String?, data: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> on(events: String, selector: String?, data: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun on(events: String, selector: String, handler: Boolean): JQuery<TElement> /* this */
-    fun on(events: String, selector: String, handler: JQuery.EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
-    fun on(events: String, selector: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>): JQuery<TElement> /* this */
+    fun on(events: String, selector: String, handler: EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun on(events: String, selector: String, handler: EventHandlerBase<Any, Event<TElement, Nothing?>>): JQuery<TElement> /* this */
     fun on(events: String, selector: String, handler: Nothing?): JQuery<TElement> /* this */
-    fun <TData> on(events: String, data: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> on(events: String, data: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> on(events: String, data: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> on(events: String, data: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun on(events: String, handler: Boolean): JQuery<TElement> /* this */
-    fun on(events: String, handler: JQuery.EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
-    fun on(events: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>): JQuery<TElement> /* this */
+    fun on(events: String, handler: EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun on(events: String, handler: EventHandlerBase<Any, Event<TElement, Nothing?>>): JQuery<TElement> /* this */
     fun on(events: String, handler: Nothing?): JQuery<TElement> /* this */
-    fun <TData> on(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, TData> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>> */>, selector: String?, data: TData): JQuery<TElement> /* this */
-    fun on(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, Nothing?> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>> | Nothing? */>, selector: String): JQuery<TElement> /* this */
-    fun <TData> on(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, TData> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>> */>, data: TData): JQuery<TElement> /* this */
-    fun on(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, Nothing?> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
-    fun <TData> one(events: String, selector: String?, data: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> one(events: String, selector: String?, data: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> on(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, TData> | EventHandlerBase<Any, Event<TElement, TData>> */>, selector: String?, data: TData): JQuery<TElement> /* this */
+    fun on(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, Nothing?> | EventHandlerBase<Any, Event<TElement, Nothing?>> | Nothing? */>, selector: String): JQuery<TElement> /* this */
+    fun <TData> on(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, TData> | EventHandlerBase<Any, Event<TElement, TData>> */>, data: TData): JQuery<TElement> /* this */
+    fun on(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, Nothing?> | EventHandlerBase<Any, Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
+    fun <TData> one(events: String, selector: String?, data: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> one(events: String, selector: String?, data: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun one(events: String, selector: String, handler: Boolean): JQuery<TElement> /* this */
-    fun one(events: String, selector: String, handler: JQuery.EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
-    fun one(events: String, selector: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>): JQuery<TElement> /* this */
+    fun one(events: String, selector: String, handler: EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun one(events: String, selector: String, handler: EventHandlerBase<Any, Event<TElement, Nothing?>>): JQuery<TElement> /* this */
     fun one(events: String, selector: String, handler: Nothing?): JQuery<TElement> /* this */
-    fun <TData> one(events: String, data: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> one(events: String, data: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> one(events: String, data: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> one(events: String, data: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun one(events: String, handler: Boolean): JQuery<TElement> /* this */
-    fun one(events: String, handler: JQuery.EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
-    fun one(events: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>): JQuery<TElement> /* this */
+    fun one(events: String, handler: EventHandler<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun one(events: String, handler: EventHandlerBase<Any, Event<TElement, Nothing?>>): JQuery<TElement> /* this */
     fun one(events: String, handler: Nothing?): JQuery<TElement> /* this */
-    fun <TData> one(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, TData> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>> */>, selector: String?, data: TData): JQuery<TElement> /* this */
-    fun one(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, Nothing?> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>> | Nothing? */>, selector: String): JQuery<TElement> /* this */
-    fun <TData> one(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, TData> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>> */>, data: TData): JQuery<TElement> /* this */
-    fun one(events: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandler<TElement, Nothing?> | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
+    fun <TData> one(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, TData> | EventHandlerBase<Any, Event<TElement, TData>> */>, selector: String?, data: TData): JQuery<TElement> /* this */
+    fun one(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, Nothing?> | EventHandlerBase<Any, Event<TElement, Nothing?>> | Nothing? */>, selector: String): JQuery<TElement> /* this */
+    fun <TData> one(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, TData> | EventHandlerBase<Any, Event<TElement, TData>> */>, data: TData): JQuery<TElement> /* this */
+    fun one(events: PlainObject<dynamic /* Boolean | EventHandler<TElement, Nothing?> | EventHandlerBase<Any, Event<TElement, Nothing?>> | Nothing? */>): JQuery<TElement> /* this */
     fun outerHeight(value: String): JQuery<TElement> /* this */
     fun outerHeight(value: Number): JQuery<TElement> /* this */
     fun outerHeight(value: (`this`: TElement, index: Number, height: Number) -> dynamic /* String | Number */): JQuery<TElement> /* this */
@@ -735,7 +735,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun parentsUntil(selector: String? = definedExternally /* null */, filter: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun parentsUntil(selector: Element? = definedExternally /* null */, filter: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun parentsUntil(selector: JQuery<HTMLElement>? = definedExternally /* null */, filter: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun position(): JQuery.Coordinates
+    fun position(): Coordinates
     fun prepend(vararg contents: String): JQuery<TElement> /* this */
     fun prepend(vararg contents: Element): JQuery<TElement> /* this */
     fun prepend(vararg contents: Text): JQuery<TElement> /* this */
@@ -752,20 +752,20 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun prevUntil(selector: String? = definedExternally /* null */, filter: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun prevUntil(selector: Element? = definedExternally /* null */, filter: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun prevUntil(selector: JQuery<HTMLElement>? = definedExternally /* null */, filter: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <T : Any> promise(type: String, target: T): T /* T & JQuery.Promise<Any, Any> */
-    fun <T : Any> promise(target: T): T /* T & JQuery.Promise<Any, Any> */
-    fun promise(type: String? = definedExternally /* null */): JQuery.Promise<JQuery<TElement> /* this */, Any>
+    fun <T : Any> promise(type: String, target: T): T /* T & Promise<Any, Any> */
+    fun <T : Any> promise(target: T): T /* T & Promise<Any, Any> */
+    fun promise(type: String? = definedExternally /* null */): Promise<JQuery<TElement> /* this */, Any, Any>
     fun prop(propertyName: String, value: (`this`: TElement, index: Number, oldPropertyValue: Any) -> Any): JQuery<TElement> /* this */
     fun prop(propertyName: String, value: Any): JQuery<TElement> /* this */
-    fun prop(properties: JQuery.PlainObject<Any>): JQuery<TElement> /* this */
+    fun prop(properties: PlainObject<Any>): JQuery<TElement> /* this */
     fun prop(propertyName: String): Any?
-    fun pushStack(elements: ArrayLike<Element>, name: String, args: Array<Any>): JQuery<TElement> /* this */
-    fun pushStack(elements: ArrayLike<Element>): JQuery<TElement> /* this */
-    fun queue(queueName: String, newQueue: JQuery.QueueFunction<TElement>): JQuery<TElement> /* this */
-    fun queue(queueName: String, newQueue: Array<JQuery.QueueFunction<TElement>>): JQuery<TElement> /* this */
-    fun queue(newQueue: JQuery.QueueFunction<TElement>): JQuery<TElement> /* this */
-    fun queue(newQueue: Array<JQuery.QueueFunction<TElement>>): JQuery<TElement> /* this */
-    fun queue(queueName: String? = definedExternally /* null */): `T$1` /* `T$1` & Array<JQuery.QueueFunction<Node>> */
+    fun pushStack(elements: Array<Element>, name: String, args: Array<Any>): JQuery<TElement> /* this */
+    fun pushStack(elements: Array<Element>): JQuery<TElement> /* this */
+    fun queue(queueName: String, newQueue: QueueFunction<TElement>): JQuery<TElement> /* this */
+    fun queue(queueName: String, newQueue: Array<QueueFunction<TElement>>): JQuery<TElement> /* this */
+    fun queue(newQueue: QueueFunction<TElement>): JQuery<TElement> /* this */
+    fun queue(newQueue: Array<QueueFunction<TElement>>): JQuery<TElement> /* this */
+    fun queue(queueName: String? = definedExternally /* null */): Array<QueueFunction<Node>> /* `T$1` & Array<QueueFunction<Node>> */
     fun ready(handler: (`$`: JQueryStatic<TElement>) -> Unit): JQuery<TElement> /* this */
     fun remove(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun removeAttr(attributeName: String): JQuery<TElement> /* this */
@@ -784,30 +784,30 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun replaceWith(newContent: JQuery<HTMLElement>): JQuery<TElement> /* this */
     fun replaceWith(newContent: Array<Element>): JQuery<TElement> /* this */
     fun replaceWith(newContent: (`this`: TElement) -> Any): JQuery<TElement> /* this */
-    fun <TData> resize(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> resize(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> resize(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> resize(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun resize(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun resize(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun resize(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun resize(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun resize(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun resize(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> scroll(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> scroll(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> scroll(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> scroll(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun scroll(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun scroll(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun scroll(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun scroll(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun scroll(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun scroll(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun scrollLeft(value: Number): JQuery<TElement> /* this */
     fun scrollLeft(): Number?
     fun scrollTop(value: Number): JQuery<TElement> /* this */
     fun scrollTop(): Number?
-    fun <TData> select(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> select(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> select(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> select(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun select(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun select(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun select(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun select(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun select(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun select(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun serialize(): String
-    fun serializeArray(): Array<JQuery.NameValuePair>
+    fun serializeArray(): Array<NameValuePair>
     fun show(duration: Number, easing: String, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun show(duration: String /* "fast" */, easing: String, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun show(duration: String /* "slow" */, easing: String, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
@@ -820,7 +820,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun show(duration_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
     fun show(duration_complete_options: String? /* "fast" */ = definedExternally /* null */): JQuery<TElement> /* this */
     fun show(duration_complete_options: String? /* "slow" */ = definedExternally /* null */): JQuery<TElement> /* this */
-    fun show(duration_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun show(duration_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun show(duration_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun siblings(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slice(start: Number, end: Number? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -831,7 +831,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun slideDown(duration_easing: Number, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun slideDown(duration_easing_complete_options: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideDown(duration_easing_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun slideDown(duration_easing_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun slideDown(duration_easing_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideDown(duration_easing_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideToggle(duration: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideToggle(duration: String /* "fast" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -840,7 +840,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun slideToggle(duration_easing: Number, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun slideToggle(duration_easing_complete_options: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideToggle(duration_easing_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun slideToggle(duration_easing_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun slideToggle(duration_easing_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideToggle(duration_easing_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideUp(duration: Number, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideUp(duration: String /* "fast" */, easing: String, complete: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -849,15 +849,15 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun slideUp(duration_easing: Number, complete: (`this`: TElement) -> Unit): JQuery<TElement> /* this */
     fun slideUp(duration_easing_complete_options: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideUp(duration_easing_complete_options: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun slideUp(duration_easing_complete_options: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun slideUp(duration_easing_complete_options: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun slideUp(duration_easing_complete_options: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun stop(queue: String, clearQueue: Boolean? = definedExternally /* null */, jumpToEnd: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
     fun stop(clearQueue: Boolean? = definedExternally /* null */, jumpToEnd: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun <TData> submit(eventData: TData, handler: JQuery.EventHandler<TElement, TData>): JQuery<TElement> /* this */
-    fun <TData> submit(eventData: TData, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, TData>>): JQuery<TElement> /* this */
+    fun <TData> submit(eventData: TData, handler: EventHandler<TElement, TData>): JQuery<TElement> /* this */
+    fun <TData> submit(eventData: TData, handler: EventHandlerBase<Any, Event<TElement, TData>>): JQuery<TElement> /* this */
     fun submit(handler: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun submit(handler: JQuery.EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun submit(handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun submit(handler: EventHandler<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun submit(handler: EventHandlerBase<Any, Event<TElement, Nothing?>>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun submit(handler: Nothing? = definedExternally /* null */): JQuery<TElement> /* this */
     fun text(text: String): JQuery<TElement> /* this */
     fun text(text: Number): JQuery<TElement> /* this */
@@ -875,7 +875,7 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun toggle(duration_complete_options_display: Boolean? = definedExternally /* null */): JQuery<TElement> /* this */
     fun toggle(duration_complete_options_display: String? /* "fast" */ = definedExternally /* null */): JQuery<TElement> /* this */
     fun toggle(duration_complete_options_display: String? /* "slow" */ = definedExternally /* null */): JQuery<TElement> /* this */
-    fun toggle(duration_complete_options_display: JQuery.EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun toggle(duration_complete_options_display: EffectsOptions<TElement>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun toggle(duration_complete_options_display: ((`this`: TElement) -> Unit)? = definedExternally /* null */): JQuery<TElement> /* this */
     fun <TState : Boolean> toggleClass(className: String, state: TState? = definedExternally /* null */): JQuery<TElement> /* this */
     fun <TState : Boolean> toggleClass(className: Array<String>, state: TState? = definedExternally /* null */): JQuery<TElement> /* this */
@@ -884,27 +884,27 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun trigger(eventType: String, extraParameters: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun trigger(eventType: String, extraParameters: Number? = definedExternally /* null */): JQuery<TElement> /* this */
     fun trigger(eventType: String, extraParameters: Array<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun trigger(eventType: String, extraParameters: JQuery.PlainObject<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun trigger(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun trigger(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: Number? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun trigger(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: Array<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun trigger(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: JQuery.PlainObject<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun trigger(eventType: String, extraParameters: PlainObject<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun trigger(eventType: Event<TElement, Nothing?>, extraParameters: String? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun trigger(eventType: Event<TElement, Nothing?>, extraParameters: Number? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun trigger(eventType: Event<TElement, Nothing?>, extraParameters: Array<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun trigger(eventType: Event<TElement, Nothing?>, extraParameters: PlainObject<Any>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun triggerHandler(eventType: String, extraParameters: String? = definedExternally /* null */): Any?
     fun triggerHandler(eventType: String, extraParameters: Number? = definedExternally /* null */): Any?
     fun triggerHandler(eventType: String, extraParameters: Array<Any>? = definedExternally /* null */): Any?
-    fun triggerHandler(eventType: String, extraParameters: JQuery.PlainObject<Any>? = definedExternally /* null */): Any?
-    fun triggerHandler(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: String? = definedExternally /* null */): Any?
-    fun triggerHandler(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: Number? = definedExternally /* null */): Any?
-    fun triggerHandler(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: Array<Any>? = definedExternally /* null */): Any?
-    fun triggerHandler(eventType: JQuery.Event<TElement, Nothing?>, extraParameters: JQuery.PlainObject<Any>? = definedExternally /* null */): Any?
+    fun triggerHandler(eventType: String, extraParameters: PlainObject<Any>? = definedExternally /* null */): Any?
+    fun triggerHandler(eventType: Event<TElement, Nothing?>, extraParameters: String? = definedExternally /* null */): Any?
+    fun triggerHandler(eventType: Event<TElement, Nothing?>, extraParameters: Number? = definedExternally /* null */): Any?
+    fun triggerHandler(eventType: Event<TElement, Nothing?>, extraParameters: Array<Any>? = definedExternally /* null */): Any?
+    fun triggerHandler(eventType: Event<TElement, Nothing?>, extraParameters: PlainObject<Any>? = definedExternally /* null */): Any?
     fun unbind(event: String, handler: Boolean): JQuery<TElement> /* this */
-    fun unbind(event: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Any>>): JQuery<TElement> /* this */
+    fun unbind(event: String, handler: EventHandlerBase<Any, Event<TElement, Any>>): JQuery<TElement> /* this */
     fun unbind(event: String? = definedExternally /* null */): JQuery<TElement> /* this */
-    fun unbind(event: JQuery.Event<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
+    fun unbind(event: Event<TElement, Nothing?>? = definedExternally /* null */): JQuery<TElement> /* this */
     fun undelegate(selector: String, eventType: String, handler: Boolean): JQuery<TElement> /* this */
-    fun undelegate(selector: String, eventType: String, handler: JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Any>>): JQuery<TElement> /* this */
+    fun undelegate(selector: String, eventType: String, handler: EventHandlerBase<Any, Event<TElement, Any>>): JQuery<TElement> /* this */
     fun undelegate(selector: String, eventTypes: String): JQuery<TElement> /* this */
-    fun undelegate(selector: String, eventTypes: JQuery.PlainObject<dynamic /* Boolean | JQuery.EventHandlerBase<Any, JQuery.Event<TElement, Any>> */>): JQuery<TElement> /* this */
+    fun undelegate(selector: String, eventTypes: PlainObject<dynamic /* Boolean | EventHandlerBase<Any, Event<TElement, Any>> */>): JQuery<TElement> /* this */
     fun undelegate(namespace: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun unwrap(selector: String? = definedExternally /* null */): JQuery<TElement> /* this */
     fun `val`(value: String): JQuery<TElement> /* this */
@@ -972,23 +972,23 @@ external interface JQuery<TElement : Node> : Iterable<TElement> {
     fun submit(): JQuery<TElement> /* this */
     fun toggle(): JQuery<TElement> /* this */
     fun trigger(eventType: String): JQuery<TElement> /* this */
-    fun trigger(eventType: JQuery.Event<TElement, Nothing?>): JQuery<TElement> /* this */
+    fun trigger(eventType: Event<TElement, Nothing?>): JQuery<TElement> /* this */
     fun triggerHandler(eventType: String): Any?
-    fun triggerHandler(eventType: JQuery.Event<TElement, Nothing?>): Any?
+    fun triggerHandler(eventType: Event<TElement, Nothing?>): Any?
     fun unbind(): JQuery<TElement> /* this */
 }
 external interface Iterable<T>
-external interface JQueryCallback : JQuery.Callbacks<Function<*>>
-external interface JQueryDeferred<T> : JQuery.Deferred<T, Any, Any>
-external interface JQueryEventConstructor : JQuery.Event<EventTarget, Nothing?>
-external interface JQueryAjaxSettings : JQuery.AjaxSettings<Any>
-external interface JQueryAnimationOptions : JQuery.EffectsOptions<Element>
-external interface JQueryCoordinates : JQuery.Coordinates
-external interface JQueryGenericPromise<T> : JQuery.Thenable<T>
-external interface JQueryXHR : JQuery.jqXHR<Any>
-external interface JQueryPromise<T> : JQuery.Promise<T, Any, Any>
-external interface JQuerySerializeArrayElement : JQuery.NameValuePair
-external interface JQuerySupport : JQuery.PlainObject<Any>
+external interface JQueryCallback : Callbacks<Function<*>>
+external interface JQueryDeferred<T> : Deferred<T, Any, Any>
+external interface JQueryEventConstructor : Event<EventTarget, Nothing?>
+external interface JQueryAjaxSettings : AjaxSettings<Any>
+external interface JQueryAnimationOptions : EffectsOptions<Element>
+external interface JQueryCoordinates : Coordinates
+external interface JQueryGenericPromise<T> : Thenable<T>
+external interface JQueryXHR : jqXHR<Any>
+external interface JQueryPromise<T> : Promise<T, Any, Any>
+external interface JQuerySerializeArrayElement : NameValuePair
+external interface JQuerySupport : PlainObject<Any>
 external interface JQueryPromiseCallback<T> {
     @nativeInvoke
     operator fun invoke(value: T? = definedExternally /* null */, vararg args: Any)
@@ -997,25 +997,25 @@ external interface JQueryParam {
     @nativeInvoke
     operator fun invoke(obj: Any, traditional: Boolean? = definedExternally /* null */): String
 }
-external interface BaseJQueryEventObject : Event {
+external interface BaseJQueryEventObject : Event<Element, Any> {
     override var currentTarget: Element
-    var data: Any
-    var delegateTarget: Element
-    fun isDefaultPrevented(): Boolean
-    fun isImmediatePropagationStopped(): Boolean
-    fun isPropagationStopped(): Boolean
-    var namespace: String
-    var originalEvent: Event
+    override var data: Any
+    override var delegateTarget: Element
+    override fun isDefaultPrevented(): Boolean
+    override fun isImmediatePropagationStopped(): Boolean
+    override fun isPropagationStopped(): Boolean
+    override var namespace: String
+    override var originalEvent: Event<*, *>
     override fun preventDefault(): Any
-    var relatedTarget: Element
-    var result: Any
+    override var relatedTarget: Element?
+    override var result: Any
     override fun stopImmediatePropagation()
     override fun stopPropagation()
     override var target: Element
-    var pageX: Number
-    var pageY: Number
-    var which: Number
-    var metaKey: Boolean
+    override var pageX: Number
+    override var pageY: Number
+    override var which: Number
+    override var metaKey: Boolean
 }
 external interface JQueryInputEventObject : BaseJQueryEventObject {
     var altKey: Boolean
