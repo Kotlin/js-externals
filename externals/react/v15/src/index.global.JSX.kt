@@ -2,20 +2,8 @@
 @file:JsQualifier("global.JSX")
 package global.JSX
 
-import kotlin.js.*
-import kotlin.js.Json
-import org.khronos.webgl.*
 import org.w3c.dom.*
-import org.w3c.dom.events.*
-import org.w3c.dom.parsing.*
 import org.w3c.dom.svg.*
-import org.w3c.dom.url.*
-import org.w3c.fetch.*
-import org.w3c.files.*
-import org.w3c.notifications.*
-import org.w3c.performance.*
-import org.w3c.workers.*
-import org.w3c.xhr.*
 
 external interface Element : React.ReactElement<Any>
 external interface ElementClass : React.Component<Any, Any?> {
@@ -130,10 +118,10 @@ external interface IntrinsicElements {
     var sup: React.ClassAttributes<HTMLElement> /* React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement> */
     var table: React.ClassAttributes<HTMLTableElement> /* React.ClassAttributes<HTMLTableElement> & React.TableHTMLAttributes<HTMLTableElement> */
     var tbody: React.ClassAttributes<HTMLTableSectionElement> /* React.ClassAttributes<HTMLTableSectionElement> & React.HTMLAttributes<HTMLTableSectionElement> */
-    var td: React.ClassAttributes<HTMLTableDataCellElement> /* React.ClassAttributes<HTMLTableDataCellElement> & React.TdHTMLAttributes<HTMLTableDataCellElement> */
+//    var td: React.ClassAttributes<HTMLTableDataCellElement> /* React.ClassAttributes<HTMLTableDataCellElement> & React.TdHTMLAttributes<HTMLTableDataCellElement> */
     var textarea: React.ClassAttributes<HTMLTextAreaElement> /* React.ClassAttributes<HTMLTextAreaElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement> */
     var tfoot: React.ClassAttributes<HTMLTableSectionElement> /* React.ClassAttributes<HTMLTableSectionElement> & React.HTMLAttributes<HTMLTableSectionElement> */
-    var th: React.ClassAttributes<HTMLTableHeaderCellElement> /* React.ClassAttributes<HTMLTableHeaderCellElement> & React.ThHTMLAttributes<HTMLTableHeaderCellElement> */
+//    var th: React.ClassAttributes<HTMLTableHeaderCellElement> /* React.ClassAttributes<HTMLTableHeaderCellElement> & React.ThHTMLAttributes<HTMLTableHeaderCellElement> */
     var thead: React.ClassAttributes<HTMLTableSectionElement> /* React.ClassAttributes<HTMLTableSectionElement> & React.HTMLAttributes<HTMLTableSectionElement> */
     var time: React.ClassAttributes<HTMLElement> /* React.ClassAttributes<HTMLElement> & React.TimeHTMLAttributes<HTMLElement> */
     var title: React.ClassAttributes<HTMLTitleElement> /* React.ClassAttributes<HTMLTitleElement> & React.HTMLAttributes<HTMLTitleElement> */
@@ -148,42 +136,42 @@ external interface IntrinsicElements {
     var animate: React.SVGProps<SVGElement>
     var animateTransform: React.SVGProps<SVGElement>
     var circle: React.SVGProps<SVGCircleElement>
-    var clipPath: React.SVGProps<SVGClipPathElement>
+//    var clipPath: React.SVGProps<SVGClipPathElement>
     var defs: React.SVGProps<SVGDefsElement>
     var desc: React.SVGProps<SVGDescElement>
     var ellipse: React.SVGProps<SVGEllipseElement>
-    var feBlend: React.SVGProps<SVGFEBlendElement>
-    var feColorMatrix: React.SVGProps<SVGFEColorMatrixElement>
-    var feComponentTransfer: React.SVGProps<SVGFEComponentTransferElement>
-    var feComposite: React.SVGProps<SVGFECompositeElement>
-    var feConvolveMatrix: React.SVGProps<SVGFEConvolveMatrixElement>
-    var feDiffuseLighting: React.SVGProps<SVGFEDiffuseLightingElement>
-    var feDisplacementMap: React.SVGProps<SVGFEDisplacementMapElement>
-    var feDistantLight: React.SVGProps<SVGFEDistantLightElement>
-    var feFlood: React.SVGProps<SVGFEFloodElement>
-    var feFuncA: React.SVGProps<SVGFEFuncAElement>
-    var feFuncB: React.SVGProps<SVGFEFuncBElement>
-    var feFuncG: React.SVGProps<SVGFEFuncGElement>
-    var feFuncR: React.SVGProps<SVGFEFuncRElement>
-    var feGaussianBlur: React.SVGProps<SVGFEGaussianBlurElement>
-    var feImage: React.SVGProps<SVGFEImageElement>
-    var feMerge: React.SVGProps<SVGFEMergeElement>
-    var feMergeNode: React.SVGProps<SVGFEMergeNodeElement>
-    var feMorphology: React.SVGProps<SVGFEMorphologyElement>
-    var feOffset: React.SVGProps<SVGFEOffsetElement>
-    var fePointLight: React.SVGProps<SVGFEPointLightElement>
-    var feSpecularLighting: React.SVGProps<SVGFESpecularLightingElement>
-    var feSpotLight: React.SVGProps<SVGFESpotLightElement>
-    var feTile: React.SVGProps<SVGFETileElement>
-    var feTurbulence: React.SVGProps<SVGFETurbulenceElement>
-    var filter: React.SVGProps<SVGFilterElement>
+//    var feBlend: React.SVGProps<SVGFEBlendElement>
+//    var feColorMatrix: React.SVGProps<SVGFEColorMatrixElement>
+//    var feComponentTransfer: React.SVGProps<SVGFEComponentTransferElement>
+//    var feComposite: React.SVGProps<SVGFECompositeElement>
+//    var feConvolveMatrix: React.SVGProps<SVGFEConvolveMatrixElement>
+//    var feDiffuseLighting: React.SVGProps<SVGFEDiffuseLightingElement>
+//    var feDisplacementMap: React.SVGProps<SVGFEDisplacementMapElement>
+//    var feDistantLight: React.SVGProps<SVGFEDistantLightElement>
+//    var feFlood: React.SVGProps<SVGFEFloodElement>
+//    var feFuncA: React.SVGProps<SVGFEFuncAElement>
+//    var feFuncB: React.SVGProps<SVGFEFuncBElement>
+//    var feFuncG: React.SVGProps<SVGFEFuncGElement>
+//    var feFuncR: React.SVGProps<SVGFEFuncRElement>
+//    var feGaussianBlur: React.SVGProps<SVGFEGaussianBlurElement>
+//    var feImage: React.SVGProps<SVGFEImageElement>
+//    var feMerge: React.SVGProps<SVGFEMergeElement>
+//    var feMergeNode: React.SVGProps<SVGFEMergeNodeElement>
+//    var feMorphology: React.SVGProps<SVGFEMorphologyElement>
+//    var feOffset: React.SVGProps<SVGFEOffsetElement>
+//    var fePointLight: React.SVGProps<SVGFEPointLightElement>
+//    var feSpecularLighting: React.SVGProps<SVGFESpecularLightingElement>
+//    var feSpotLight: React.SVGProps<SVGFESpotLightElement>
+//    var feTile: React.SVGProps<SVGFETileElement>
+//    var feTurbulence: React.SVGProps<SVGFETurbulenceElement>
+//    var filter: React.SVGProps<SVGFilterElement>
     var foreignObject: React.SVGProps<SVGForeignObjectElement>
     var g: React.SVGProps<SVGGElement>
     var image: React.SVGProps<SVGImageElement>
     var line: React.SVGProps<SVGLineElement>
     var linearGradient: React.SVGProps<SVGLinearGradientElement>
     var marker: React.SVGProps<SVGMarkerElement>
-    var mask: React.SVGProps<SVGMaskElement>
+//    var mask: React.SVGProps<SVGMaskElement>
     var metadata: React.SVGProps<SVGMetadataElement>
     var path: React.SVGProps<SVGPathElement>
     var pattern: React.SVGProps<SVGPatternElement>
