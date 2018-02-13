@@ -166,62 +166,30 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
 
         sourceSets {
             main.kotlin.srcDirs += "$projectDir/src"
-            test.kotlin.srcDirs += "$projectDir/test"
+            testUMD {
+                kotlin.srcDirs += "$projectDir/test"
+                kotlin.srcDirs += "$projectDir/testUMD"
+                kotlin.srcDirs += "$projectDir/../_testShared"
+                kotlin.srcDirs += "$projectDir/../_testSharedUMD"
+
+                compileClasspath = test.compileClasspath
+            }
 
             testPlain {
                 kotlin.srcDirs += "$projectDir/test"
+                kotlin.srcDirs += "$projectDir/testPlain"
+                kotlin.srcDirs += "$projectDir/../_testShared"
+                kotlin.srcDirs += "$projectDir/../_testSharedPlain"
+
                 compileClasspath = test.compileClasspath
             }
 
             testCommonJS {
                 kotlin.srcDirs += "$projectDir/test"
-                compileClasspath = test.compileClasspath
-            }
-
-            testUmdOnly {
-                kotlin.srcDirs += "$projectDir/testUMD"
-                compileClasspath = test.compileClasspath
-            }
-
-            testPlainOnly {
-                kotlin.srcDirs += "$projectDir/testPlain"
-                compileClasspath = test.compileClasspath
-            }
-
-            testCommonJsOnly {
                 kotlin.srcDirs += "$projectDir/testCommonJS"
-                compileClasspath = test.compileClasspath
-            }
-
-            // Shared
-
-            testSharedUMD {
                 kotlin.srcDirs += "$projectDir/../_testShared"
-                compileClasspath = test.compileClasspath
-            }
-
-            testSharedPlain {
-                kotlin.srcDirs += "$projectDir/../_testShared"
-                compileClasspath = test.compileClasspath
-            }
-
-            testSharedCommonJS {
-                kotlin.srcDirs += "$projectDir/../_testShared"
-                compileClasspath = test.compileClasspath
-            }
-
-            testSharedUmdOnly {
-                kotlin.srcDirs += "$projectDir/../_testSharedUMD"
-                compileClasspath = test.compileClasspath
-            }
-
-            testSharedPlainOnly {
-                kotlin.srcDirs += "$projectDir/../_testSharedPlain"
-                compileClasspath = test.compileClasspath
-            }
-
-            testSharedCommonJsOnly {
                 kotlin.srcDirs += "$projectDir/../_testSharedCommonJS"
+
                 compileClasspath = test.compileClasspath
             }
         }
@@ -229,8 +197,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         tasks.withType(org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile).forEach {
             if (it.name.startsWith("compileTest") && it.name.endsWith("Kotlin2Js")) {
 
-                def prefix = it.name.startsWith("compileTestShared") ? "compileTestShared" : "compileTest";
-                def start = prefix.length()
+                def start = "compileTest".length()
 
                 def end = it.name.lastIndexOf("OnlyKotlin2Js")
                 if (end < 0) {
