@@ -1,10 +1,15 @@
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 @file:JsQualifier("React")
-package React
+package js.externals.react
 
 import org.w3c.dom.*
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.EventTarget
+import org.w3c.dom.DragEvent
+import org.w3c.dom.events.*
+import org.w3c.dom.events.CompositionEvent
+import org.w3c.dom.events.FocusEvent
+import org.w3c.dom.events.KeyboardEvent
+import org.w3c.dom.events.UIEvent
+import org.w3c.dom.events.WheelEvent
 import org.w3c.dom.svg.SVGElement
 import kotlin.js.*
 
@@ -23,7 +28,7 @@ external interface ReactElement<P> {
 external interface SFCElement<P> : ReactElement<P> {
     override var type: StatelessComponent<P>
 }
-external interface ComponentElement<P, T : Component<P, React.ComponentState>> : ReactElement<P> {
+external interface ComponentElement<P, T : Component<P, ComponentState>> : ReactElement<P> {
     override var type: ComponentClass<P>
     var ref: dynamic /* String | Any? */ get() = definedExternally; set(value) = definedExternally
 }
@@ -83,8 +88,8 @@ external fun <T : HTMLElement> createFactory(type: dynamic /* String /* "object"
 external fun createFactory(type: dynamic /* String /* "symbol" */ | String /* "animate" */ | String /* "circle" */ | String /* "clipPath" */ | String /* "defs" */ | String /* "desc" */ | String /* "ellipse" */ | String /* "feBlend" */ | String /* "feColorMatrix" */ | String /* "feComponentTransfer" */ | String /* "feComposite" */ | String /* "feConvolveMatrix" */ | String /* "feDiffuseLighting" */ | String /* "feDisplacementMap" */ | String /* "feDistantLight" */ | String /* "feDropShadow" */ | String /* "feFlood" */ | String /* "feFuncA" */ | String /* "feFuncB" */ | String /* "feFuncG" */ | String /* "feFuncR" */ | String /* "feGaussianBlur" */ | String /* "feImage" */ | String /* "feMerge" */ | String /* "feMergeNode" */ | String /* "feMorphology" */ | String /* "feOffset" */ | String /* "fePointLight" */ | String /* "feSpecularLighting" */ | String /* "feSpotLight" */ | String /* "feTile" */ | String /* "feTurbulence" */ | String /* "filter" */ | String /* "foreignObject" */ | String /* "g" */ | String /* "image" */ | String /* "line" */ | String /* "linearGradient" */ | String /* "marker" */ | String /* "mask" */ | String /* "metadata" */ | String /* "path" */ | String /* "pattern" */ | String /* "polygon" */ | String /* "polyline" */ | String /* "radialGradient" */ | String /* "rect" */ | String /* "stop" */ | String /* "svg" */ | String /* "switch" */ | String /* "text" */ | String /* "textPath" */ | String /* "tspan" */ | String /* "use" */ | String /* "view" */ */): SVGFactory = definedExternally
 external fun <P : DOMAttributes<T>, T : Element> createFactory(type: String): (props: ClassAttributes<T>? /* ClassAttributes<T> & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> DOMElement<P, T> = definedExternally
 external fun <P> createFactory(type: StatelessComponent<P>): (props: Attributes? /* Attributes & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> SFCElement<P> = definedExternally
-external fun <P> createFactory(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */): (props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<T> & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createFactory(type: C /* C & Any? & Any? */): (props: ClassAttributes<T>? /* ClassAttributes<T> & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> ComponentElement<P, T> = definedExternally
+external fun <P> createFactory(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */): (props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<T> & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createFactory(type: C /* C & Any? & Any? */): (props: ClassAttributes<T>? /* ClassAttributes<T> & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> ComponentElement<P, T> = definedExternally
 external fun <P> createFactory(type: ComponentClass<P>): (props: Attributes? /* Attributes & P */ /*= null*/, children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */) -> ReactElement<P> = definedExternally
 external fun createElement(type: String /* "input" */, props: InputHTMLAttributes<HTMLInputElement>? /* InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement> */ = definedExternally /* null */, vararg children: String): DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = definedExternally
 external fun createElement(type: String /* "input" */, props: InputHTMLAttributes<HTMLInputElement>? /* InputHTMLAttributes<HTMLInputElement> & ClassAttributes<HTMLInputElement> */ = definedExternally /* null */, vararg children: Number): DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> = definedExternally
@@ -126,22 +131,22 @@ external fun <P> createElement(type: StatelessComponent<P>, props: Attributes? /
 external fun <P> createElement(type: StatelessComponent<P>, props: Attributes? /* Attributes & P */ = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): SFCElement<P> = definedExternally
 external fun <P> createElement(type: StatelessComponent<P>, props: Attributes? /* Attributes & P */ = definedExternally /* null */, vararg children: ReactPortal): SFCElement<P> = definedExternally
 //external fun <P> createElement(type: StatelessComponent<P>, props: Attributes? /* Attributes & P */ = definedExternally /* null */, vararg children: Nothing?): SFCElement<P> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: String): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: Number): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: Boolean): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: Any?): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: ReactElement<Any>): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: ReactPortal): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-//external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, React.ComponentState>>? /* ClassAttributes<ClassicComponent<P, React.ComponentState>> & P */ = definedExternally /* null */, vararg children: Nothing?): ComponentElement<P, ClassicComponent<P, React.ComponentState>> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: String): ComponentElement<P, T> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Number): ComponentElement<P, T> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Boolean): ComponentElement<P, T> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Any?): ComponentElement<P, T> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: ReactElement<Any>): ComponentElement<P, T> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): ComponentElement<P, T> = definedExternally
-external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: ReactPortal): ComponentElement<P, T> = definedExternally
-//external fun <P, T : Component<P, React.ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Nothing?): ComponentElement<P, T> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: String): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: Number): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: Boolean): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: Any?): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: ReactElement<Any>): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: ReactPortal): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+//external fun <P> createElement(type: ClassicComponentClass<P> /* ClassicComponentClass<P> & Any? & Any? */, props: ClassAttributes<ClassicComponent<P, ComponentState>>? /* ClassAttributes<ClassicComponent<P, ComponentState>> & P */ = definedExternally /* null */, vararg children: Nothing?): ComponentElement<P, ClassicComponent<P, ComponentState>> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: String): ComponentElement<P, T> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Number): ComponentElement<P, T> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Boolean): ComponentElement<P, T> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Any?): ComponentElement<P, T> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: ReactElement<Any>): ComponentElement<P, T> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): ComponentElement<P, T> = definedExternally
+external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: ReactPortal): ComponentElement<P, T> = definedExternally
+//external fun <P, T : Component<P, ComponentState>, C : ComponentClass<P>> createElement(type: C /* C & Any? & Any? */, props: ClassAttributes<T>? /* ClassAttributes<T> & P */ = definedExternally /* null */, vararg children: Nothing?): ComponentElement<P, T> = definedExternally
 external fun <P> createElement(type: String, props: Attributes? /* Attributes & P */ = definedExternally /* null */, vararg children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */): ReactElement<P> = definedExternally
 external fun <P> createElement(type: StatelessComponent<P>, props: Attributes? /* Attributes & P */ = definedExternally /* null */, vararg children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */): ReactElement<P> = definedExternally
 external fun <P> createElement(type: ComponentClass<P>, props: Attributes? /* Attributes & P */ = definedExternally /* null */, vararg children: dynamic /* String | Number | Boolean | Any? | ReactElement<Any> | Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */> | ReactPortal | Nothing? */): ReactElement<P> = definedExternally
@@ -185,14 +190,14 @@ external fun <P : Q, Q> cloneElement(element: SFCElement<P>, props: Q? = defined
 external fun <P : Q, Q> cloneElement(element: SFCElement<P>, props: Q? = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): SFCElement<P> = definedExternally
 external fun <P : Q, Q> cloneElement(element: SFCElement<P>, props: Q? = definedExternally /* null */, vararg children: ReactPortal): SFCElement<P> = definedExternally
 //external fun <P : Q, Q> cloneElement(element: SFCElement<P>, props: Q? = definedExternally /* null */, vararg children: Nothing?): SFCElement<P> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: String): ComponentElement<P, T> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Number): ComponentElement<P, T> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Boolean): ComponentElement<P, T> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Any?): ComponentElement<P, T> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: ReactElement<Any>): ComponentElement<P, T> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): ComponentElement<P, T> = definedExternally
-external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: ReactPortal): ComponentElement<P, T> = definedExternally
-//external fun <P : Q, Q, T : Component<P, React.ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Nothing?): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: String): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Number): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Boolean): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Any?): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: ReactElement<Any>): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Array<dynamic /* String | Number | Boolean | Array<Any> | ReactElement<Any> */>): ComponentElement<P, T> = definedExternally
+external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: ReactPortal): ComponentElement<P, T> = definedExternally
+//external fun <P : Q, Q, T : Component<P, ComponentState>> cloneElement(element: ComponentElement<P, T>, props: Q? = definedExternally /* null */, vararg children: Nothing?): ComponentElement<P, T> = definedExternally
 external fun <P : Q, Q> cloneElement(element: ReactElement<P>, props: Q? = definedExternally /* null */, vararg children: String): ReactElement<P> = definedExternally
 external fun <P : Q, Q> cloneElement(element: ReactElement<P>, props: Q? = definedExternally /* null */, vararg children: Number): ReactElement<P> = definedExternally
 external fun <P : Q, Q> cloneElement(element: ReactElement<P>, props: Q? = definedExternally /* null */, vararg children: Boolean): ReactElement<P> = definedExternally
@@ -305,14 +310,14 @@ external interface ClipboardEvent<T> : SyntheticEvent<T> {
 }
 external interface CompositionEvent<T> : SyntheticEvent<T> {
     var data: String
-    override val nativeEvent: org.w3c.dom.events.CompositionEvent
+    override val nativeEvent: CompositionEvent
 }
 external interface DragEvent<T> : MouseEvent<T> {
     var dataTransfer: DataTransfer
-    override val nativeEvent: org.w3c.dom.DragEvent
+    override val nativeEvent: DragEvent
 }
 external interface FocusEvent<T> : SyntheticEvent<T> {
-    override val nativeEvent: org.w3c.dom.events.FocusEvent
+    override val nativeEvent: FocusEvent
     var relatedTarget: EventTarget
 }
 external interface FormEvent<T> : SyntheticEvent<T>
@@ -332,7 +337,7 @@ external interface KeyboardEvent<T> : SyntheticEvent<T> {
     var locale: String
     var location: Number
     var metaKey: Boolean
-    override val nativeEvent: org.w3c.dom.events.KeyboardEvent
+    override val nativeEvent: KeyboardEvent
     var repeat: Boolean
     var shiftKey: Boolean
     var which: Number
@@ -368,7 +373,7 @@ external interface TouchEvent<T> : SyntheticEvent<T> {
 }
 external interface UIEvent<T> : SyntheticEvent<T> {
     var detail: Number
-    override val nativeEvent: org.w3c.dom.events.UIEvent
+    override val nativeEvent: UIEvent
     var view: AbstractView
 }
 external interface WheelEvent<T> : MouseEvent<T> {
@@ -376,7 +381,7 @@ external interface WheelEvent<T> : MouseEvent<T> {
     var deltaX: Number
     var deltaY: Number
     var deltaZ: Number
-    override val nativeEvent: org.w3c.dom.events.WheelEvent
+    override val nativeEvent: WheelEvent
 }
 external interface AnimationEvent<T> : SyntheticEvent<T> {
     var animationName: String
