@@ -1,0 +1,4 @@
+{
+  "version": "0.52.0-0",
+  "dependencies" : [":react:v16"]
+}
