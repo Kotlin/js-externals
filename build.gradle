@@ -90,25 +90,36 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             mavenCentral()
         }
 
-        dependencies {
-            compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-        }
-
         def libraryPath = projectDir.parent
         def libraryName = file(libraryPath).name
         def packageJsonPath = "$libraryPath/package.json"
         def readmePath = "$libraryPath/README.md"
         def deployDir = "$buildDir/deploy_to_npm"
         def konfigPath = "$projectDir/konfig.json"
+        def konfigFile = file(konfigPath)
 
-        def deployVersion = '0.0.0'
-        def versionLoadingErrors = false
-        // Attempt to load version. Version '0.0.0' will be used on error.
-        // Errors will be reported in the 'validate' task.
-        try {
-            deployVersion = new JsonSlurper().parseText(file(konfigPath).text).version
-        } catch (Throwable t) {
-            versionLoadingErrors = true
+        def problems = []
+
+        def konfig
+        if (!konfigFile.exists()) {
+            konfig = [:]
+            problems.add("Configuration file $konfigPath doesn't exist")
+        } else {
+            konfig = new JsonSlurper().parseText(konfigFile.text)
+        }
+
+        if (konfig.version == null) {
+            problems.add("Error while processing $konfigPath")
+        }
+
+        def deployVersion = konfig.version ?: "0.0.0"
+
+        dependencies {
+            compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+
+            konfig.dependencies?.forEach {
+                compile(project(it))
+            }
         }
 
         task packToJar(type: Jar, dependsOn: "preparePublish") {
@@ -119,7 +130,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             from "$projectDir/src"
 
             classifier = 'sources'
-        } 
+        }
 
         publishing {
             publications {
@@ -219,11 +230,8 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             doFirst {
                 if (!file(packageJsonPath).exists()) throw new GradleException("$packageJsonPath doesn't exist")
                 if (!file(readmePath).exists()) throw new GradleException("Readme file $readmePath doesn't exist")
-                if (!file(konfigPath).exists()) throw new GradleException("Configuration file $konfigPath doesn't exist")
+                if (!problems.isEmpty()) throw new GradleException("Found problems:\n" + problems.join("\n"))
 
-                if (versionLoadingErrors) {
-                    throw new GradleException("Error while processing $konfigPath", e)
-                }
             }
         }
 
