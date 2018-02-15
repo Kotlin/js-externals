@@ -1,3 +1,26 @@
+// Generated using ts2kt(https://github.com/Kotlin/ts2kt)
+// from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/56ce1312c8afcb526adfe93a09c9f1005644a02a/types/react/index.d.ts
+//
+// Original copyrights:
+//
+// Type definitions for React 16.0
+// Project: http://facebook.github.io/react/
+// Definitions by: Asana <https://asana.com>
+//                 AssureSign <http://www.assuresign.com>
+//                 Microsoft <https://microsoft.com>
+//                 John Reilly <https://github.com/johnnyreilly>
+//                 Benoit Benezech <https://github.com/bbenezech>
+//                 Patricio Zavolinsky <https://github.com/pzavolinsky>
+//                 Digiguru <https://github.com/digiguru>
+//                 Eric Anderson <https://github.com/ericanderson>
+//                 Albert Kurniawan <https://github.com/morcerf>
+//                 Tanguy Krotoff <https://github.com/tkrotoff>
+//                 Dovydas Navickas <https://github.com/DovydasNavickas>
+//                 Stéphane Goetz <https://github.com/onigoetz>
+//                 Rich Seviora <https://github.com/richseviora>
+//                 Josh Rutherford <https://github.com/theruther4d>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 @file:JsQualifier("React")
 package js.externals.react
