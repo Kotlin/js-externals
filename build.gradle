@@ -1,4 +1,5 @@
 import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
 
 import java.nio.file.Paths
 
@@ -113,6 +114,8 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         }
 
         def deployVersion = konfig.version ?: "0.0.0"
+
+        project.version = deployVersion
 
         dependencies {
             compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
@@ -242,11 +245,32 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         }
 
         task copyTemplate(type: Copy, dependsOn: [validate, cleanDeployDir]) {
-            from packageJsonPath
             from readmePath
             into deployDir
+        }
 
-            expand(version: deployVersion, scope: npmScope)
+        task preparePackageJson(dependsOn: [validate, cleanDeployDir]) {
+            doFirst {
+                def packageJson = new JsonSlurper().parseText(file(packageJsonPath).text)
+
+                packageJson.version = konfig.version
+                packageJson.name = "@$npmScope/$libraryName"
+
+                def deps = konfig.dependencies
+
+                if (deps != null && !deps.isEmpty()) {
+                    if (packageJson.dependencies == null) {
+                        packageJson.dependencies = [:]
+                    }
+
+                    deps.forEach {
+                        def depProject = project(it)
+                        packageJson.dependencies["@$npmScope/${depProject.name}"] = depProject.version
+                    }
+                }
+
+                file("$deployDir/package.json").write(JsonOutput.toJson(packageJson))
+            }
         }
 
         task copySources(type: Copy, dependsOn: [compileKotlin2Js, cleanDeployDir]) {
@@ -254,7 +278,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             into deployDir
         }
 
-        task preparePublish(dependsOn: [copyTemplate, copySources])
+        task preparePublish(dependsOn: [copyTemplate, preparePackageJson, copySources])
 
         bintrayUpload.dependsOn(preparePublish)
 
