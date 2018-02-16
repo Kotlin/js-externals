@@ -1,19 +1,29 @@
+// Generated using ts2kt(https://github.com/Kotlin/ts2kt)
+// from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/56ce1312c8afcb526adfe93a09c9f1005644a02a/types/react-native/index.d.ts
+//
+// Original copyrights:
+//
+// Type definitions for react-native 0.52
+// Project: https://github.com/facebook/react-native
+// Definitions by: Eloy Durán <https://github.com/alloy>
+//                 HuHuanming <https://github.com/huhuanming>
+//                 Kyle Roach <https://github.com/iRoachie>
+//                 Tim Wang <https://github.com/timwangdev>
+//                 Kamal Mahyuddin <https://github.com/kamal>
+//                 Naoufal El Yousfi <https://github.com/nelyousfi>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+// TypeScript Version: 2.3
+
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 
+package js.externals.react_native
+
+import js.externals.react.ClassicComponentClass
+import js.externals.react.Component
+import js.externals.react.ComponentClass
+import js.externals.react.ReactElement
+import js.externals.react.global.JSX.Element
 import kotlin.js.*
-import kotlin.js.Json
-import org.khronos.webgl.*
-import org.w3c.dom.*
-import org.w3c.dom.events.*
-import org.w3c.dom.parsing.*
-import org.w3c.dom.svg.*
-import org.w3c.dom.url.*
-import org.w3c.fetch.*
-import org.w3c.files.*
-import org.w3c.notifications.*
-import org.w3c.performance.*
-import org.w3c.workers.*
-import org.w3c.xhr.*
 
 external interface EventSubscription {
     var eventType: String
@@ -48,9 +58,9 @@ external interface EventEmitter : EventEmitterListener {
 }
 external interface `T$0` {
     @nativeGetter
-    operator fun get(key: String): React.Component<Any, Any>?
+    operator fun get(key: String): Component<Any, Any>?
     @nativeSetter
-    operator fun set(key: String, value: React.Component<Any, Any>)
+    operator fun set(key: String, value: Component<Any, Any>)
 }
 external interface NativeMethodsMixinStatic {
     fun measure(callback: (x: Number, y: Number, width: Number, height: Number, pageX: Number, pageY: Number) -> Unit)
@@ -106,7 +116,7 @@ external interface Touchable {
 }
 external interface AppConfig {
     var appKey: String
-    var component: (() -> React.ComponentType<Any>)? get() = definedExternally; set(value) = definedExternally
+    var component: (() -> Any /* ComponentClass<Any> | StatelessComponent<Any> */)? get() = definedExternally; set(value) = definedExternally
     var run: ((appParameters: Any) -> Unit)? get() = definedExternally; set(value) = definedExternally
 }
 external interface LayoutAnimationTypes {
@@ -335,7 +345,7 @@ external interface TextPropertiesAndroid {
     var selectionColor: String? get() = definedExternally; set(value) = definedExternally
     var textBreakStrategy: dynamic /* String /* "simple" */ | String /* "highQuality" */ | String /* "balanced" */ */ get() = definedExternally; set(value) = definedExternally
 }
-external interface `T$5` {
+external interface `T$5`<T> {
     var __registeredStyleBrand: T
 }
 external interface TextProperties : TextPropertiesIOS, TextPropertiesAndroid, AccessibilityProperties {
@@ -348,7 +358,7 @@ external interface TextProperties : TextPropertiesIOS, TextPropertiesAndroid, Ac
     var style: dynamic /* Boolean | TextStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | TextStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var testID: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface TextStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<TextProperties>
+external interface TextStatic : NativeMethodsMixinStatic, ClassicComponentClass<TextProperties>
 external interface DocumentSelectionState : EventEmitter {
     fun update(anchor: Number, focus: Number)
     fun constrainLength(maxLength: Number)
@@ -452,7 +462,7 @@ external interface TextInputState {
     fun focusTextInput(textFieldID: Number? = definedExternally /* null */)
     fun blurTextInput(textFieldID: Number? = definedExternally /* null */)
 }
-external interface TextInputStatic : NativeMethodsMixinStatic, TimerMixin, React.ComponentClass<TextInputProperties> {
+external interface TextInputStatic : NativeMethodsMixinStatic, TimerMixin, ComponentClass<TextInputProperties> {
     var State: TextInputState
     var isFocused: () -> Boolean
     var clear: () -> Unit
@@ -464,7 +474,7 @@ external interface ToolbarAndroidAction {
     var showWithText: Boolean? get() = definedExternally; set(value) = definedExternally
 }
 external interface ToolbarAndroidProperties : ViewProperties {
-    var actions: Array<`"/Users/user/tmp/DefinitelyTyped/types/react-native/index".ToolbarAndroidAction`>? get() = definedExternally; set(value) = definedExternally
+    var actions: Array<ToolbarAndroidAction>? get() = definedExternally; set(value) = definedExternally
     var contentInsetEnd: Number? get() = definedExternally; set(value) = definedExternally
     var contentInsetStart: Number? get() = definedExternally; set(value) = definedExternally
     var logo: ImageURISource? get() = definedExternally; set(value) = definedExternally
@@ -479,7 +489,7 @@ external interface ToolbarAndroidProperties : ViewProperties {
     var title: String? get() = definedExternally; set(value) = definedExternally
     var titleColor: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface ToolbarAndroidStatic : NativeMethodsMixinStatic, React.ComponentClass<ToolbarAndroidProperties>
+external interface ToolbarAndroidStatic : NativeMethodsMixinStatic, ComponentClass<ToolbarAndroidProperties>
 external interface GestureResponderHandlers {
     var onStartShouldSetResponder: ((event: GestureResponderEvent) -> Boolean)? get() = definedExternally; set(value) = definedExternally
     var onMoveShouldSetResponder: ((event: GestureResponderEvent) -> Boolean)? get() = definedExternally; set(value) = definedExternally
@@ -532,7 +542,7 @@ external interface ViewPropertiesAndroid {
     var needsOffscreenAlphaCompositing: Boolean? get() = definedExternally; set(value) = definedExternally
     var renderToHardwareTextureAndroid: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface RecursiveArray<T> : Array<dynamic /* RecursiveArray<T> | T */>
+//external interface RecursiveArray<T> : Array<dynamic /* RecursiveArray<T> | T */>
 external interface AccessibilityProperties : AccessibilityPropertiesAndroid, AccessibilityPropertiesIOS {
     var accessible: Boolean? get() = definedExternally; set(value) = definedExternally
     var accessibilityLabel: String? get() = definedExternally; set(value) = definedExternally
@@ -555,7 +565,7 @@ external interface ViewProperties : ViewPropertiesAndroid, ViewPropertiesIOS, Ge
     var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var testID: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface ViewStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<ViewProperties> {
+external interface ViewStatic : NativeMethodsMixinStatic, ClassicComponentClass<ViewProperties> {
     var forceTouchAvailable: Boolean
 }
 external interface ViewPagerAndroidOnPageScrollEventData {
@@ -574,11 +584,11 @@ external interface ViewPagerAndroidProperties : ViewProperties {
     var keyboardDismissMode: dynamic /* String /* "none" */ | String /* "on-drag" */ */ get() = definedExternally; set(value) = definedExternally
     var pageMargin: Number? get() = definedExternally; set(value) = definedExternally
 }
-external interface ViewPagerAndroidStatic : NativeMethodsMixinStatic, React.ComponentClass<ViewPagerAndroidProperties> {
+external interface ViewPagerAndroidStatic : NativeMethodsMixinStatic, ComponentClass<ViewPagerAndroidProperties> {
     fun setPage(selectedPage: Number)
     fun setPageWithoutAnimation(selectedPage: Number)
 }
-external interface KeyboardAvoidingViewStatic : TimerMixin, React.ClassicComponentClass<KeyboardAvoidingViewProps>
+external interface KeyboardAvoidingViewStatic : TimerMixin, ClassicComponentClass<KeyboardAvoidingViewProps>
 external interface KeyboardAvoidingViewProps : ViewProperties {
     var behavior: dynamic /* String /* "height" */ | String /* "position" */ | String /* "padding" */ */ get() = definedExternally; set(value) = definedExternally
     var contentContainerStyle: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
@@ -643,8 +653,8 @@ external interface WebViewProperties : ViewProperties, WebViewPropertiesAndroid,
     var onLoadStart: ((event: NavState) -> Unit)? get() = definedExternally; set(value) = definedExternally
     var onMessage: ((event: NativeSyntheticEvent<WebViewMessageEventData>) -> Unit)? get() = definedExternally; set(value) = definedExternally
     var onNavigationStateChange: ((event: NavState) -> Unit)? get() = definedExternally; set(value) = definedExternally
-    var renderError: (() -> React.ReactElement<ViewProperties>)? get() = definedExternally; set(value) = definedExternally
-    var renderLoading: (() -> React.ReactElement<ViewProperties>)? get() = definedExternally; set(value) = definedExternally
+    var renderError: (() -> ReactElement<ViewProperties>)? get() = definedExternally; set(value) = definedExternally
+    var renderLoading: (() -> ReactElement<ViewProperties>)? get() = definedExternally; set(value) = definedExternally
     var startInLoadingState: Boolean? get() = definedExternally; set(value) = definedExternally
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var url: String? get() = definedExternally; set(value) = definedExternally
@@ -652,7 +662,7 @@ external interface WebViewProperties : ViewProperties, WebViewPropertiesAndroid,
     var mediaPlaybackRequiresUserAction: Boolean? get() = definedExternally; set(value) = definedExternally
     var scalesPageToFit: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface WebViewStatic : React.ClassicComponentClass<WebViewProperties> {
+external interface WebViewStatic : ClassicComponentClass<WebViewProperties> {
     var goBack: () -> Unit
     var goForward: () -> Unit
     var postMessage: (message: String) -> Unit
@@ -674,8 +684,8 @@ external interface SegmentedControlIOSProperties : ViewProperties {
     var tintColor: String? get() = definedExternally; set(value) = definedExternally
     var values: Array<String>? get() = definedExternally; set(value) = definedExternally
 }
-external interface SafeAreaViewStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<ViewProperties>
-external interface SegmentedControlIOSStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<SegmentedControlIOSProperties>
+external interface SafeAreaViewStatic : NativeMethodsMixinStatic, ClassicComponentClass<ViewProperties>
+external interface SegmentedControlIOSStatic : NativeMethodsMixinStatic, ClassicComponentClass<SegmentedControlIOSProperties>
 external interface NavigatorIOSProperties {
     var barTintColor: String? get() = definedExternally; set(value) = definedExternally
     var initialRoute: Route
@@ -699,7 +709,7 @@ external interface NavigationIOS {
     fun popToRoute(route: Route)
     fun popToTop()
 }
-external interface NavigatorIOSStatic : NavigationIOS, React.ComponentClass<NavigatorIOSProperties>
+external interface NavigatorIOSStatic : NavigationIOS, ComponentClass<NavigatorIOSProperties>
 external interface ActivityIndicatorProperties : ViewProperties {
     var animating: Boolean? get() = definedExternally; set(value) = definedExternally
     var color: String? get() = definedExternally; set(value) = definedExternally
@@ -707,7 +717,7 @@ external interface ActivityIndicatorProperties : ViewProperties {
     var size: dynamic /* Number | String /* "small" */ | String /* "large" */ */ get() = definedExternally; set(value) = definedExternally
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
 }
-external interface ActivityIndicatorStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<ActivityIndicatorProperties>
+external interface ActivityIndicatorStatic : NativeMethodsMixinStatic, ClassicComponentClass<ActivityIndicatorProperties>
 external interface `T$16` {
     var x: Number
     var y: Number
@@ -724,11 +734,11 @@ external interface ActivityIndicatorIOSProperties : ViewProperties {
     var animating: Boolean? get() = definedExternally; set(value) = definedExternally
     var color: String? get() = definedExternally; set(value) = definedExternally
     var hidesWhenStopped: Boolean? get() = definedExternally; set(value) = definedExternally
-    override var onLayout: ((event: `T$18`) -> Unit)? get() = definedExternally; set(value) = definedExternally
+//    override var onLayout: ((event: `T$18`) -> Unit)? get() = definedExternally; set(value) = definedExternally
     var size: dynamic /* String /* "small" */ | String /* "large" */ */ get() = definedExternally; set(value) = definedExternally
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
 }
-external interface ActivityIndicatorIOSStatic : React.ComponentClass<ActivityIndicatorIOSProperties>
+external interface ActivityIndicatorIOSStatic : ComponentClass<ActivityIndicatorIOSProperties>
 external interface DatePickerIOSProperties : ViewProperties {
     var date: Date
     var locale: String? get() = definedExternally; set(value) = definedExternally
@@ -739,7 +749,7 @@ external interface DatePickerIOSProperties : ViewProperties {
     var onDateChange: (newDate: Date) -> Unit
     var timeZoneOffsetInMinutes: Number? get() = definedExternally; set(value) = definedExternally
 }
-external interface DatePickerIOSStatic : NativeMethodsMixinStatic, React.ComponentClass<DatePickerIOSProperties>
+external interface DatePickerIOSStatic : NativeMethodsMixinStatic, ComponentClass<DatePickerIOSProperties>
 external interface DrawerSlideEvent : NativeSyntheticEvent<NativeTouchEvent>
 external interface DrawerLayoutAndroidProperties : ViewProperties {
     var drawerBackgroundColor: String? get() = definedExternally; set(value) = definedExternally
@@ -751,14 +761,14 @@ external interface DrawerLayoutAndroidProperties : ViewProperties {
     var onDrawerOpen: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
     var onDrawerSlide: ((event: DrawerSlideEvent) -> Unit)? get() = definedExternally; set(value) = definedExternally
     var onDrawerStateChanged: ((event: dynamic /* String /* "Idle" */ | String /* "Dragging" */ | String /* "Settling" */ */) -> Unit)? get() = definedExternally; set(value) = definedExternally
-    var renderNavigationView: () -> JSX.Element
+    var renderNavigationView: () -> Element
     var statusBarBackgroundColor: String? get() = definedExternally; set(value) = definedExternally
 }
 external interface DrawerPosition {
     var Left: Number
     var Right: Number
 }
-external interface DrawerLayoutAndroidStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<DrawerLayoutAndroidProperties> {
+external interface DrawerLayoutAndroidStatic : NativeMethodsMixinStatic, ClassicComponentClass<DrawerLayoutAndroidProperties> {
     var positions: DrawerPosition
     fun openDrawer()
     fun closeDrawer()
@@ -767,14 +777,14 @@ external interface PickerIOSItemProperties {
     var value: dynamic /* String | Number */ get() = definedExternally; set(value) = definedExternally
     var label: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface PickerIOSItemStatic : React.ComponentClass<PickerIOSItemProperties>
+external interface PickerIOSItemStatic : ComponentClass<PickerIOSItemProperties>
 external interface PickerItemProperties {
     var testID: String? get() = definedExternally; set(value) = definedExternally
     var color: String? get() = definedExternally; set(value) = definedExternally
     var label: String
     var value: Any? get() = definedExternally; set(value) = definedExternally
 }
-external interface PickerItem : React.ComponentClass<PickerItemProperties>
+external interface PickerItem : ComponentClass<PickerItemProperties>
 external interface PickerPropertiesIOS : ViewProperties {
     var itemStyle: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
 }
@@ -789,7 +799,7 @@ external interface PickerProperties : PickerPropertiesIOS, PickerPropertiesAndro
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var testId: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface PickerStatic : React.ComponentClass<PickerProperties> {
+external interface PickerStatic : ComponentClass<PickerProperties> {
     var MODE_DIALOG: String
     var MODE_DROPDOWN: String
     var Item: PickerItem
@@ -799,7 +809,7 @@ external interface PickerIOSProperties : ViewProperties {
     var onValueChange: ((value: dynamic /* String | Number */) -> Unit)? get() = definedExternally; set(value) = definedExternally
     var selectedValue: dynamic /* String | Number */ get() = definedExternally; set(value) = definedExternally
 }
-external interface PickerIOSStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<PickerIOSProperties> {
+external interface PickerIOSStatic : NativeMethodsMixinStatic, ClassicComponentClass<PickerIOSProperties> {
     var Item: PickerIOSItemStatic
 }
 external interface ProgressBarAndroidProperties : ViewProperties {
@@ -809,7 +819,7 @@ external interface ProgressBarAndroidProperties : ViewProperties {
     var color: String? get() = definedExternally; set(value) = definedExternally
     override var testID: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface ProgressBarAndroidStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<ProgressBarAndroidProperties>
+external interface ProgressBarAndroidStatic : NativeMethodsMixinStatic, ClassicComponentClass<ProgressBarAndroidProperties>
 external interface ProgressViewIOSProperties : ViewProperties {
     var progressViewStyle: dynamic /* String /* "default" */ | String /* "bar" */ */ get() = definedExternally; set(value) = definedExternally
     var progress: Number? get() = definedExternally; set(value) = definedExternally
@@ -818,7 +828,7 @@ external interface ProgressViewIOSProperties : ViewProperties {
     var progressImage: dynamic /* ImageURISource | Array<ImageURISource> */ get() = definedExternally; set(value) = definedExternally
     var trackImage: dynamic /* ImageURISource | Array<ImageURISource> */ get() = definedExternally; set(value) = definedExternally
 }
-external interface ProgressViewIOSStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<ProgressViewIOSProperties>
+external interface ProgressViewIOSStatic : NativeMethodsMixinStatic, ClassicComponentClass<ProgressViewIOSProperties>
 external interface RefreshControlPropertiesIOS : ViewProperties {
     var tintColor: String? get() = definedExternally; set(value) = definedExternally
     var title: String? get() = definedExternally; set(value) = definedExternally
@@ -835,7 +845,7 @@ external interface RefreshControlProperties : RefreshControlPropertiesIOS, Refre
     var onRefresh: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
     var refreshing: Boolean
 }
-external interface RefreshControlStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<RefreshControlProperties> {
+external interface RefreshControlStatic : NativeMethodsMixinStatic, ClassicComponentClass<RefreshControlProperties> {
     var SIZE: Any
 }
 external interface RecyclerViewBackedScrollViewProperties : ScrollViewProperties
@@ -844,10 +854,10 @@ external interface `T$19` {
     var y: Number? get() = definedExternally; set(value) = definedExternally
     var animated: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface RecyclerViewBackedScrollViewStatic : ScrollResponderMixin, React.ClassicComponentClass<RecyclerViewBackedScrollViewProperties> {
+external interface RecyclerViewBackedScrollViewStatic : ScrollResponderMixin, ClassicComponentClass<RecyclerViewBackedScrollViewProperties> {
     fun scrollTo(y: Number? = definedExternally /* null */, x: Number? = definedExternally /* null */, animated: Boolean? = definedExternally /* null */)
     fun scrollTo(y: `T$19`? = definedExternally /* null */, x: Number? = definedExternally /* null */, animated: Boolean? = definedExternally /* null */)
-    fun getScrollResponder(): JSX.Element
+    fun getScrollResponder(): Element
     fun scrollTo()
 }
 external interface SliderPropertiesAndroid : ViewProperties {
@@ -872,7 +882,7 @@ external interface SliderProperties : SliderPropertiesIOS, SliderPropertiesAndro
     override var testID: String? get() = definedExternally; set(value) = definedExternally
     var value: Number? get() = definedExternally; set(value) = definedExternally
 }
-external interface SliderStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<SliderProperties>
+external interface SliderStatic : NativeMethodsMixinStatic, ClassicComponentClass<SliderProperties>
 external interface SwitchIOSProperties : ViewProperties {
     var disabled: Boolean? get() = definedExternally; set(value) = definedExternally
     var onTintColor: String? get() = definedExternally; set(value) = definedExternally
@@ -881,7 +891,7 @@ external interface SwitchIOSProperties : ViewProperties {
     var tintColor: String? get() = definedExternally; set(value) = definedExternally
     var value: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface SwitchIOSStatic : React.ComponentClass<SwitchIOSProperties>
+external interface SwitchIOSStatic : ComponentClass<SwitchIOSProperties>
 external interface ImageResizeModeStatic {
     var contain: dynamic /* String /* "center" */ | String /* "stretch" */ | String /* "contain" */ | String /* "cover" */ | String /* "repeat" */ */
     var cover: dynamic /* String /* "center" */ | String /* "stretch" */ | String /* "contain" */ | String /* "cover" */ | String /* "repeat" */ */
@@ -968,7 +978,7 @@ external interface ImageProperties : ImagePropertiesIOS, ImagePropertiesAndroid,
     var style: dynamic /* Boolean | ImageStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ImageStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var testID: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface ImageStatic : NativeMethodsMixinStatic, React.ComponentClass<ImageProperties> {
+external interface ImageStatic : NativeMethodsMixinStatic, ComponentClass<ImageProperties> {
     var resizeMode: dynamic /* String /* "center" */ | String /* "stretch" */ | String /* "contain" */ | String /* "cover" */ | String /* "repeat" */ */
     fun getSize(uri: String, success: (width: Number, height: Number) -> Unit, failure: (error: Any) -> Unit): Any
     fun prefetch(url: String): Any
@@ -979,7 +989,7 @@ external interface ImageBackgroundProperties : ImageProperties {
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var imageStyle: dynamic /* Boolean | ImageStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ImageStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
 }
-external interface ImageBackgroundStatic : NativeMethodsMixinStatic, React.ComponentClass<ImageBackgroundProperties> {
+external interface ImageBackgroundStatic : NativeMethodsMixinStatic, ComponentClass<ImageBackgroundProperties> {
     var resizeMode: dynamic /* String /* "center" */ | String /* "stretch" */ | String /* "contain" */ | String /* "cover" */ | String /* "repeat" */ */
     fun getSize(uri: String, success: (width: Number, height: Number) -> Unit, failure: (error: Any) -> Unit): Any
     fun prefetch(url: String): Any
@@ -1022,15 +1032,15 @@ external interface `T$27` {
     var changed: Array<ViewToken>
 }
 external interface FlatListProperties<ItemT> : VirtualizedListProperties<ItemT> {
-    var ItemSeparatorComponent: dynamic /* React.ComponentType<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    override var ListEmptyComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    override var ListFooterComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    override var ListHeaderComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var ItemSeparatorComponent: dynamic /* ComponentType<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    override var ListEmptyComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    override var ListFooterComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    override var ListHeaderComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
     var columnWrapperStyle: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     override var keyboardShouldPersistTaps: dynamic /* Boolean | String /* "never" */ | String /* "always" */ | String /* "handled" */ */ get() = definedExternally; set(value) = definedExternally
-    override var data: ReadonlyArray<ItemT>?
+//    override var data: Array<ItemT>?
     override var extraData: Any? get() = definedExternally; set(value) = definedExternally
-    override var getItemLayout: ((data: Array<ItemT>?, index: Number) -> `T$25`)? get() = definedExternally; set(value) = definedExternally
+//    override var getItemLayout: ((data: Array<ItemT>?, index: Number) -> `T$25`)? get() = definedExternally; set(value) = definedExternally
     override var horizontal: Boolean? get() = definedExternally; set(value) = definedExternally
     override var initialNumToRender: Number? get() = definedExternally; set(value) = definedExternally
     override var initialScrollIndex: Number? get() = definedExternally; set(value) = definedExternally
@@ -1042,8 +1052,8 @@ external interface FlatListProperties<ItemT> : VirtualizedListProperties<ItemT> 
     override var onRefresh: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
     override var onViewableItemsChanged: ((info: `T$27`) -> Unit)? get() = definedExternally; set(value) = definedExternally
     override var refreshing: Boolean? get() = definedExternally; set(value) = definedExternally
-    override var renderItem: (info: ListRenderItemInfo<ItemT>) -> React.ReactElement<Any>?
-    override var viewabilityConfig: Any? get() = definedExternally; set(value) = definedExternally
+    override var renderItem: (info: ListRenderItemInfo<ItemT>) -> ReactElement<Any>?
+//    override var viewabilityConfig: Any? get() = definedExternally; set(value) = definedExternally
     override var removeClippedSubviews: Boolean? get() = definedExternally; set(value) = definedExternally
 }
 external interface `T$28` {
@@ -1060,7 +1070,7 @@ external interface `T$30` {
     var index: Number
     var viewPosition: Number? get() = definedExternally; set(value) = definedExternally
 }
-external interface `T$31` {
+external interface `T$31`<ItemT> {
     var animated: Boolean? get() = definedExternally; set(value) = definedExternally
     var item: ItemT
     var viewPosition: Number? get() = definedExternally; set(value) = definedExternally
@@ -1069,19 +1079,19 @@ external interface `T$32` {
     var animated: Boolean? get() = definedExternally; set(value) = definedExternally
     var offset: Number
 }
-external interface FlatListStatic<ItemT> : React.ComponentClass<FlatListProperties<ItemT>> {
+external interface FlatListStatic<ItemT> : ComponentClass<FlatListProperties<ItemT>> {
     var getMetrics: () -> `T$28`
     var scrollToEnd: (params: `T$29`? /*= null*/) -> Unit
     var scrollToIndex: (params: `T$30`) -> Unit
-    var scrollToItem: (params: `T$31`) -> Unit
+    var scrollToItem: (params: `T$31`<ItemT>) -> Unit
     var scrollToOffset: (params: `T$32`) -> Unit
     var recordInteraction: () -> Unit
 }
 external interface SectionBase<ItemT> {
     var data: Array<ItemT>
     var key: String? get() = definedExternally; set(value) = definedExternally
-    var renderItem: ((info: ListRenderItemInfo<ItemT>) -> React.ReactElement<Any>?)? get() = definedExternally; set(value) = definedExternally
-    var ItemSeparatorComponent: dynamic /* React.ComponentClass<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var renderItem: ((info: ListRenderItemInfo<ItemT>) -> ReactElement<Any>?)? get() = definedExternally; set(value) = definedExternally
+    var ItemSeparatorComponent: dynamic /* ComponentClass<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
     var keyExtractor: ((item: ItemT, index: Number) -> String)? get() = definedExternally; set(value) = definedExternally
 }
 external interface SectionListData<ItemT> : SectionBase<ItemT> {
@@ -1090,34 +1100,34 @@ external interface SectionListData<ItemT> : SectionBase<ItemT> {
     @nativeSetter
     operator fun set(key: String, value: Any)
 }
-external interface `T$33` {
+external interface `T$33`<ItemT> {
     var section: SectionListData<ItemT>
 }
 external interface SectionListProperties<ItemT> : VirtualizedListProperties<ItemT> {
-    var ItemSeparatorComponent: React.ComponentType<Any>? get() = definedExternally; set(value) = definedExternally
-    override var ListEmptyComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    override var ListFooterComponent: dynamic /* React.ComponentClass<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    override var ListHeaderComponent: dynamic /* React.ComponentClass<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    var SectionSeparatorComponent: dynamic /* React.ComponentClass<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var ItemSeparatorComponent: Any? /* ComponentClass<Any> | StatelessComponent<Any> */ get() = definedExternally; set(value) = definedExternally
+    override var ListEmptyComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    override var ListFooterComponent: dynamic /* ComponentClass<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    override var ListHeaderComponent: dynamic /* ComponentClass<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var SectionSeparatorComponent: dynamic /* ComponentClass<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
     override var extraData: Any? get() = definedExternally; set(value) = definedExternally
-    override var getItemLayout: ((data: Array<SectionListData<ItemT>>?, index: Number) -> `T$25`)? get() = definedExternally; set(value) = definedExternally
+//    override var getItemLayout: ((data: Array<SectionListData<ItemT>>?, index: Number) -> `T$25`)? get() = definedExternally; set(value) = definedExternally
     override var initialNumToRender: Number? get() = definedExternally; set(value) = definedExternally
     override var keyExtractor: ((item: ItemT, index: Number) -> String)? get() = definedExternally; set(value) = definedExternally
     override var onRefresh: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
     override var refreshing: Boolean? get() = definedExternally; set(value) = definedExternally
-    override var renderItem: (info: ListRenderItemInfo<ItemT>) -> React.ReactElement<Any>?
-    var renderSectionHeader: ((info: `T$33`) -> React.ReactElement<Any>?)? get() = definedExternally; set(value) = definedExternally
-    var renderSectionFooter: ((info: `T$33`) -> React.ReactElement<Any>?)? get() = definedExternally; set(value) = definedExternally
+    override var renderItem: (info: ListRenderItemInfo<ItemT>) -> ReactElement<Any>?
+    var renderSectionHeader: ((info: `T$33`<ItemT>) -> ReactElement<Any>?)? get() = definedExternally; set(value) = definedExternally
+    var renderSectionFooter: ((info: `T$33`<ItemT>) -> ReactElement<Any>?)? get() = definedExternally; set(value) = definedExternally
     var sections: Array<SectionListData<ItemT>>
-    override var renderScrollComponent: ((props: ScrollViewProperties) -> React.ReactElement<ScrollViewProperties>)? get() = definedExternally; set(value) = definedExternally
+    override var renderScrollComponent: ((props: ScrollViewProperties) -> ReactElement<ScrollViewProperties>)? get() = definedExternally; set(value) = definedExternally
     override var removeClippedSubviews: Boolean? get() = definedExternally; set(value) = definedExternally
     var stickySectionHeadersEnabled: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface SectionListStatic<SectionT> : React.ComponentClass<SectionListProperties<SectionT>>
+external interface SectionListStatic<SectionT> : ComponentClass<SectionListProperties<SectionT>>
 external interface VirtualizedListProperties<ItemT> : ScrollViewProperties {
-    var ListEmptyComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    var ListFooterComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
-    var ListHeaderComponent: dynamic /* React.ComponentClass<Any> | React.ReactElement<Any> | () -> React.ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var ListEmptyComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var ListFooterComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
+    var ListHeaderComponent: dynamic /* ComponentClass<Any> | ReactElement<Any> | () -> ReactElement<Any> | Nothing? */ get() = definedExternally; set(value) = definedExternally
     var data: Any? get() = definedExternally; set(value) = definedExternally
     var debug: Boolean? get() = definedExternally; set(value) = definedExternally
     var disableVirtualization: Boolean? get() = definedExternally; set(value) = definedExternally
@@ -1139,8 +1149,8 @@ external interface VirtualizedListProperties<ItemT> : ScrollViewProperties {
     var progressViewOffset: Number? get() = definedExternally; set(value) = definedExternally
     var refreshing: Boolean? get() = definedExternally; set(value) = definedExternally
     override var removeClippedSubviews: Boolean? get() = definedExternally; set(value) = definedExternally
-    var renderItem: (info: ListRenderItemInfo<ItemT>) -> React.ReactElement<Any>?
-    var renderScrollComponent: ((props: ScrollViewProperties) -> React.ReactElement<ScrollViewProperties>)? get() = definedExternally; set(value) = definedExternally
+    var renderItem: (info: ListRenderItemInfo<ItemT>) -> ReactElement<Any>?
+    var renderScrollComponent: ((props: ScrollViewProperties) -> ReactElement<ScrollViewProperties>)? get() = definedExternally; set(value) = definedExternally
     var updateCellsBatchingPeriod: Number? get() = definedExternally; set(value) = definedExternally
     var viewabilityConfig: ViewabilityConfig? get() = definedExternally; set(value) = definedExternally
     var windowSize: Number? get() = definedExternally; set(value) = definedExternally
@@ -1166,12 +1176,12 @@ external interface ListViewProperties : ScrollViewProperties {
     var onEndReachedThreshold: Number? get() = definedExternally; set(value) = definedExternally
     var pageSize: Number? get() = definedExternally; set(value) = definedExternally
     override var removeClippedSubviews: Boolean? get() = definedExternally; set(value) = definedExternally
-    var renderFooter: (() -> React.ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
-    var renderHeader: (() -> React.ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
-    var renderRow: (rowData: Any, sectionID: dynamic /* String | Number */, rowID: dynamic /* String | Number */, highlightRow: Boolean? /*= null*/) -> React.ReactElement<Any>
-    var renderScrollComponent: ((props: ScrollViewProperties) -> React.ReactElement<ScrollViewProperties>)? get() = definedExternally; set(value) = definedExternally
-    var renderSectionHeader: ((sectionData: Any, sectionId: dynamic /* String | Number */) -> React.ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
-    var renderSeparator: ((sectionID: dynamic /* String | Number */, rowID: dynamic /* String | Number */, adjacentRowHighlighted: Boolean? /*= null*/) -> React.ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
+    var renderFooter: (() -> ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
+    var renderHeader: (() -> ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
+    var renderRow: (rowData: Any, sectionID: dynamic /* String | Number */, rowID: dynamic /* String | Number */, highlightRow: Boolean? /*= null*/) -> ReactElement<Any>
+    var renderScrollComponent: ((props: ScrollViewProperties) -> ReactElement<ScrollViewProperties>)? get() = definedExternally; set(value) = definedExternally
+    var renderSectionHeader: ((sectionData: Any, sectionId: dynamic /* String | Number */) -> ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
+    var renderSeparator: ((sectionID: dynamic /* String | Number */, rowID: dynamic /* String | Number */, adjacentRowHighlighted: Boolean? /*= null*/) -> ReactElement<Any>)? get() = definedExternally; set(value) = definedExternally
     var scrollRenderAheadDistance: Number? get() = definedExternally; set(value) = definedExternally
     override var stickyHeaderIndices: Array<Number>? get() = definedExternally; set(value) = definedExternally
     var stickySectionHeadersEnabled: Boolean? get() = definedExternally; set(value) = definedExternally
@@ -1186,7 +1196,7 @@ external interface TimerMixin {
     var requestAnimationFrame: Any?
     var cancelAnimationFrame: Any?
 }
-external interface ListViewStatic : ScrollResponderMixin, TimerMixin, React.ComponentClass<ListViewProperties> {
+external interface ListViewStatic : ScrollResponderMixin, TimerMixin, ComponentClass<ListViewProperties> {
     var DataSource: ListViewDataSource
     var getMetrics: () -> `T$28`
     var getScrollResponder: () -> Any
@@ -1202,12 +1212,12 @@ external interface MapViewAnnotation {
     var onBlur: (() -> Any)? get() = definedExternally; set(value) = definedExternally
     var title: String? get() = definedExternally; set(value) = definedExternally
     var subtitle: String? get() = definedExternally; set(value) = definedExternally
-    var leftCalloutView: React.ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
-    var rightCalloutView: React.ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
-    var detailCalloutView: React.ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
+    var leftCalloutView: ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
+    var rightCalloutView: ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
+    var detailCalloutView: ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
     var tintColor: String? get() = definedExternally; set(value) = definedExternally
     var image: ImageURISource? get() = definedExternally; set(value) = definedExternally
-    var view: React.ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
+    var view: ReactElement<Any>? get() = definedExternally; set(value) = definedExternally
     var hasLeftCallout: Boolean? get() = definedExternally; set(value) = definedExternally
     var hasRightCallout: Boolean? get() = definedExternally; set(value) = definedExternally
     var onLeftCalloutPress: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
@@ -1257,13 +1267,13 @@ external interface `T$37` {
     var GREEN: String
     var PURPLE: String
 }
-external interface MapViewStatic : NativeMethodsMixinStatic, React.ComponentClass<MapViewProperties> {
+external interface MapViewStatic : NativeMethodsMixinStatic, ComponentClass<MapViewProperties> {
     var PinColors: `T$37`
 }
 external interface MaskedViewProperties : ViewProperties {
-    var maskElement: React.ReactElement<Any>
+    var maskElement: ReactElement<Any>
 }
-external interface MaskedViewStatic : NativeMethodsMixinStatic, React.ComponentClass<MaskedViewProperties>
+external interface MaskedViewStatic : NativeMethodsMixinStatic, ComponentClass<MaskedViewProperties>
 external interface ModalProperties {
     var animated: Boolean? get() = definedExternally; set(value) = definedExternally
     var animationType: dynamic /* String /* "none" */ | String /* "slide" */ | String /* "fade" */ */ get() = definedExternally; set(value) = definedExternally
@@ -1275,7 +1285,7 @@ external interface ModalProperties {
     var onOrientationChange: ((event: NativeSyntheticEvent<Any>? /*= null*/) -> Unit)? get() = definedExternally; set(value) = definedExternally
     var onDismiss: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
 }
-external interface ModalStatic : React.ComponentClass<ModalProperties>
+external interface ModalStatic : ComponentClass<ModalProperties>
 external interface TouchableMixin {
     fun touchableHandleActivePressIn(e: GestureResponderEvent)
     fun touchableHandleActivePressOut(e: GestureResponderEvent)
@@ -1303,7 +1313,7 @@ external interface TouchableWithoutFeedbackProperties : AccessibilityProperties 
     var testID: String? get() = definedExternally; set(value) = definedExternally
 }
 external interface TouchableWithoutFeedbackProps : TouchableWithoutFeedbackProperties
-external interface TouchableWithoutFeedbackStatic : TimerMixin, TouchableMixin, React.ClassicComponentClass<TouchableWithoutFeedbackProps>
+external interface TouchableWithoutFeedbackStatic : TimerMixin, TouchableMixin, ClassicComponentClass<TouchableWithoutFeedbackProps>
 external interface TouchableHighlightProperties : TouchableWithoutFeedbackProperties {
     var activeOpacity: Number? get() = definedExternally; set(value) = definedExternally
     var onHideUnderlay: (() -> Unit)? get() = definedExternally; set(value) = definedExternally
@@ -1311,11 +1321,11 @@ external interface TouchableHighlightProperties : TouchableWithoutFeedbackProper
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
     var underlayColor: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface TouchableHighlightStatic : NativeMethodsMixinStatic, TimerMixin, TouchableMixin, React.ClassicComponentClass<TouchableHighlightProperties>
+external interface TouchableHighlightStatic : NativeMethodsMixinStatic, TimerMixin, TouchableMixin, ClassicComponentClass<TouchableHighlightProperties>
 external interface TouchableOpacityProperties : TouchableWithoutFeedbackProperties {
     var activeOpacity: Number? get() = definedExternally; set(value) = definedExternally
 }
-external interface TouchableOpacityStatic : TimerMixin, TouchableMixin, NativeMethodsMixinStatic, React.ClassicComponentClass<TouchableOpacityProperties> {
+external interface TouchableOpacityStatic : TimerMixin, TouchableMixin, NativeMethodsMixinStatic, ClassicComponentClass<TouchableOpacityProperties> {
     var setOpacityTo: (value: Number) -> Unit
 }
 external interface BaseBackgroundPropType {
@@ -1334,13 +1344,13 @@ external interface TouchableNativeFeedbackProperties : TouchableWithoutFeedbackP
     var background: dynamic /* RippleBackgroundPropType | ThemeAttributeBackgroundPropType */ get() = definedExternally; set(value) = definedExternally
     var useForeground: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface TouchableNativeFeedbackStatic : TouchableMixin, React.ClassicComponentClass<TouchableNativeFeedbackProperties> {
+external interface TouchableNativeFeedbackStatic : TouchableMixin, ClassicComponentClass<TouchableNativeFeedbackProperties> {
     fun SelectableBackground(): ThemeAttributeBackgroundPropType
     fun SelectableBackgroundBorderless(): ThemeAttributeBackgroundPropType
     fun Ripple(color: String, borderless: Boolean? = definedExternally /* null */): RippleBackgroundPropType
 }
 external interface Route {
-    var component: React.ComponentType<Any>? get() = definedExternally; set(value) = definedExternally
+    var component: Any? /* ComponentClass<Any> | StatelessComponent<Any> */ get() = definedExternally; set(value) = definedExternally
     var id: String? get() = definedExternally; set(value) = definedExternally
     var title: String? get() = definedExternally; set(value) = definedExternally
     var passProps: Any? get() = definedExternally; set(value) = definedExternally
@@ -1413,7 +1423,7 @@ external interface TabBarItemProperties : ViewProperties {
     var systemIcon: dynamic /* String /* "search" */ | String /* "bookmarks" */ | String /* "contacts" */ | String /* "downloads" */ | String /* "favorites" */ | String /* "featured" */ | String /* "history" */ | String /* "more" */ | String /* "most-recent" */ | String /* "most-viewed" */ | String /* "recents" */ | String /* "top-rated" */ */ get() = definedExternally; set(value) = definedExternally
     var title: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface TabBarItemStatic : React.ComponentClass<TabBarItemProperties>
+external interface TabBarItemStatic : ComponentClass<TabBarItemProperties>
 external interface TabBarIOSProperties : ViewProperties {
     var barTintColor: String? get() = definedExternally; set(value) = definedExternally
     var itemPositioning: dynamic /* String /* "center" */ | String /* "auto" */ | String /* "fill" */ */ get() = definedExternally; set(value) = definedExternally
@@ -1422,7 +1432,7 @@ external interface TabBarIOSProperties : ViewProperties {
     var unselectedTintColor: String? get() = definedExternally; set(value) = definedExternally
     var unselectedItemTintColor: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface TabBarIOSStatic : React.ComponentClass<TabBarIOSProperties> {
+external interface TabBarIOSStatic : ComponentClass<TabBarIOSProperties> {
     var Item: TabBarItemStatic
 }
 external interface PixelRatioStatic {
@@ -1475,8 +1485,8 @@ external interface `T$41` {
 external interface InteractionManagerStatic : EventEmitterListener {
     var Events: `T$40`
     fun runAfterInteractions(task: (() -> Any)? = definedExternally /* null */): `T$41`
-    fun runAfterInteractions(task: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".SimpleTask`? = definedExternally /* null */): `T$41`
-    fun runAfterInteractions(task: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".PromiseTask`? = definedExternally /* null */): `T$41`
+    fun runAfterInteractions(task: SimpleTask? = definedExternally /* null */): `T$41`
+    fun runAfterInteractions(task: PromiseTask? = definedExternally /* null */): `T$41`
     fun createInteractionHandle(): Number
     fun clearInteractionHandle(handle: Number)
     fun setDeadline(deadline: Number)
@@ -1596,17 +1606,17 @@ external interface ScrollViewProperties : ViewProperties, ScrollViewPropertiesIO
     var showsHorizontalScrollIndicator: Boolean? get() = definedExternally; set(value) = definedExternally
     var showsVerticalScrollIndicator: Boolean? get() = definedExternally; set(value) = definedExternally
     override var style: dynamic /* Boolean | ScrollViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ScrollViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
-    var refreshControl: React.ReactElement<RefreshControlProperties>? get() = definedExternally; set(value) = definedExternally
+    var refreshControl: ReactElement<RefreshControlProperties>? get() = definedExternally; set(value) = definedExternally
 }
 external interface ScrollViewProps : ScrollViewProperties
 external interface `T$43` {
     var animated: Boolean
 }
-external interface ScrollViewStatic : ScrollResponderMixin, React.ComponentClass<ScrollViewProps> {
+external interface ScrollViewStatic : ScrollResponderMixin, ComponentClass<ScrollViewProps> {
     fun scrollTo(y: Number? = definedExternally /* null */, x: Number? = definedExternally /* null */, animated: Boolean? = definedExternally /* null */)
     fun scrollTo(y: `T$19`? = definedExternally /* null */, x: Number? = definedExternally /* null */, animated: Boolean? = definedExternally /* null */)
     fun scrollToEnd(options: `T$43`? = definedExternally /* null */)
-    fun getScrollResponder(): JSX.Element
+    fun getScrollResponder(): Element
     fun getScrollableNode(): Any
     fun getInnerViewNode(): Any
     var scrollWithoutAnimationTo: ((y: Number, x: Number) -> Unit)? get() = definedExternally; set(value) = definedExternally
@@ -1642,7 +1652,7 @@ external interface SnapshotViewIOSProperties : ViewProperties {
     fun onSnapshotReady(): Any
     var testIdentifier: String
 }
-external interface SnapshotViewIOSStatic : NativeMethodsMixinStatic, React.ComponentClass<SnapshotViewIOSProperties>
+external interface SnapshotViewIOSStatic : NativeMethodsMixinStatic, ComponentClass<SnapshotViewIOSProperties>
 external interface SwipeableListViewDataSource {
     fun cloneWithRowsAndSections(dataBlob: Any, sectionIdentities: Array<String>? = definedExternally /* null */, rowIdentities: Array<Array<String>>? = definedExternally /* null */): SwipeableListViewDataSource
     fun getDataSource(): ListViewDataSource
@@ -1654,13 +1664,13 @@ external interface SwipeableListViewProps {
     var bounceFirstRowOnMount: Boolean
     var dataSource: SwipeableListViewDataSource
     var maxSwipeDistance: Number
-    var renderRow: (rowData: Any, sectionID: dynamic /* String | Number */, rowID: dynamic /* String | Number */, highlightRow: Boolean? /*= null*/) -> React.ReactElement<Any>
-    fun renderQuickActions(rowData: Any, sectionID: String, rowID: String): React.ReactElement<Any>
-    fun renderQuickActions(rowData: Any, sectionID: String, rowID: Number): React.ReactElement<Any>
-    fun renderQuickActions(rowData: Any, sectionID: Number, rowID: String): React.ReactElement<Any>
-    fun renderQuickActions(rowData: Any, sectionID: Number, rowID: Number): React.ReactElement<Any>
+    var renderRow: (rowData: Any, sectionID: dynamic /* String | Number */, rowID: dynamic /* String | Number */, highlightRow: Boolean? /*= null*/) -> ReactElement<Any>
+    fun renderQuickActions(rowData: Any, sectionID: String, rowID: String): ReactElement<Any>
+    fun renderQuickActions(rowData: Any, sectionID: String, rowID: Number): ReactElement<Any>
+    fun renderQuickActions(rowData: Any, sectionID: Number, rowID: String): ReactElement<Any>
+    fun renderQuickActions(rowData: Any, sectionID: Number, rowID: Number): ReactElement<Any>
 }
-external interface SwipeableListViewStatic : React.ComponentClass<SwipeableListViewProps> {
+external interface SwipeableListViewStatic : ComponentClass<SwipeableListViewProps> {
     fun getNewDataSource(): SwipeableListViewDataSource
 }
 external interface ActionSheetIOSOptions {
@@ -1694,8 +1704,8 @@ external interface `T$45` {
     var url: String
 }
 external interface ShareStatic {
-    fun share(content: `T$44`, options: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".ShareOptions`? = definedExternally /* null */): Promise<Any>
-    fun share(content: `T$45`, options: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".ShareOptions`? = definedExternally /* null */): Promise<Any>
+    fun share(content: `T$44`, options: ShareOptions? = definedExternally /* null */): Promise<Any>
+    fun share(content: `T$45`, options: ShareOptions? = definedExternally /* null */): Promise<Any>
     var sharedAction: String
     var dismissedAction: String
 }
@@ -1771,7 +1781,7 @@ external interface ButtonProperties {
     var disabled: Boolean? get() = definedExternally; set(value) = definedExternally
     var testID: String? get() = definedExternally; set(value) = definedExternally
 }
-external interface ButtonStatic : React.ComponentClass<ButtonProperties>
+external interface ButtonStatic : ComponentClass<ButtonProperties>
 external interface CameraRollFetchParams {
     var first: Number
     var after: String? get() = definedExternally; set(value) = definedExternally
@@ -1876,7 +1886,7 @@ external interface IntentAndroidStatic {
 external interface `T$52` {
     var url: String
 }
-external interface LinkingStatic : `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".NativeEventEmitter` {
+external interface LinkingStatic : NativeEventEmitter {
     fun addEventListener(type: String, handler: (event: `T$52`) -> Unit)
     fun removeEventListener(type: String, handler: (event: `T$52`) -> Unit)
     fun openURL(url: String): Promise<Any>
@@ -2052,13 +2062,13 @@ external interface FetchResult {
     var ResultFailed: String /* "UIBackgroundFetchResultFailed" */
 }
 external interface PushNotificationIOSStatic {
-    fun presentLocalNotification(details: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".PresentLocalNotificationDetails`)
-    fun scheduleLocalNotification(details: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".ScheduleLocalNotificationDetails`)
+    fun presentLocalNotification(details: PresentLocalNotificationDetails)
+    fun scheduleLocalNotification(details: ScheduleLocalNotificationDetails)
     fun cancelAllLocalNotifications()
     fun cancelLocalNotifications(userInfo: Any)
     fun setApplicationIconBadgeNumber(number: Number)
     fun getApplicationIconBadgeNumber(callback: (badge: Number) -> Unit)
-    fun getScheduledLocalNotifications(callback: (notifications: Array<`"/Users/user/tmp/DefinitelyTyped/types/react-native/index".ScheduleLocalNotificationDetails`>) -> Unit)
+    fun getScheduledLocalNotifications(callback: (notifications: Array<ScheduleLocalNotificationDetails>) -> Unit)
     fun addEventListener(type: String /* "notification" */, handler: (notification: PushNotification) -> Unit)
     fun addEventListener(type: String /* "localNotification" */, handler: (notification: PushNotification) -> Unit)
     fun addEventListener(type: String /* "register" */, handler: (notification: PushNotification) -> Unit)
@@ -2072,7 +2082,7 @@ external interface PushNotificationIOSStatic {
     fun abandonPermissions()
     fun checkPermissions(callback: (permissions: PushNotificationPermissions) -> Unit)
     fun getInitialNotification(): Promise<PushNotification>
-    var FetchResult: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".FetchResult`
+    var FetchResult: FetchResult
 }
 external interface SettingsStatic {
     fun get(key: String): Any
@@ -2094,7 +2104,7 @@ external interface StatusBarProperties : StatusBarPropertiesIOS, StatusBarProper
     var animated: Boolean? get() = definedExternally; set(value) = definedExternally
     var hidden: Boolean? get() = definedExternally; set(value) = definedExternally
 }
-external interface StatusBarStatic : React.ComponentClass<StatusBarProperties> {
+external interface StatusBarStatic : ComponentClass<StatusBarProperties> {
     var currentHeight: Number? get() = definedExternally; set(value) = definedExternally
     var setHidden: (hidden: Boolean, animation: dynamic /* String /* "none" */ | String /* "slide" */ | String /* "fade" */ */ /*= null*/) -> Unit
     var setBarStyle: (style: dynamic /* String /* "default" */ | String /* "light-content" */ | String /* "dark-content" */ */, animated: Boolean? /*= null*/) -> Unit
@@ -2102,7 +2112,7 @@ external interface StatusBarStatic : React.ComponentClass<StatusBarProperties> {
     var setBackgroundColor: (color: String, animated: Boolean? /*= null*/) -> Unit
     var setTranslucent: (translucent: Boolean) -> Unit
 }
-external interface StatusBarIOSStatic : `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".NativeEventEmitter`
+external interface StatusBarIOSStatic : NativeEventEmitter
 external interface TimePickerAndroidOpenOptions {
     var hour: Number? get() = definedExternally; set(value) = definedExternally
     var minute: Number? get() = definedExternally; set(value) = definedExternally
@@ -2114,7 +2124,7 @@ external interface `T$56` {
     var minute: Number
 }
 external interface TimePickerAndroidStatic {
-    fun open(options: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".TimePickerAndroidOpenOptions`): Promise<`T$56`>
+    fun open(options: TimePickerAndroidOpenOptions): Promise<`T$56`>
     var timeSetAction: String
     var dismissedAction: String
 }
@@ -2134,7 +2144,7 @@ external interface `T$57` {
     var quality: Number? get() = definedExternally; set(value) = definedExternally
 }
 external interface UIManagerStatic {
-    var takeSnapshot: (view: dynamic /* String /* "window" */ | React.ReactElement<Any> | Number */ /*= null*/, options: `T$57`? /*= null*/) -> Promise<String>
+    var takeSnapshot: (view: dynamic /* String /* "window" */ | ReactElement<Any> | Number */ /*= null*/, options: `T$57`? /*= null*/) -> Promise<String>
     fun measure(node: Number, callback: (x: Number, y: Number, width: Number, height: Number, pageX: Number, pageY: Number) -> Unit)
     fun measureInWindow(node: Number, callback: (x: Number, y: Number, width: Number, height: Number) -> Unit)
     fun measureLayout(node: Number, relativeToNativeNode: Number, onFail: () -> Unit, onSuccess: (left: Number, top: Number, width: Number, height: Number) -> Unit)
@@ -2152,7 +2162,7 @@ external interface SwitchProperties : SwitchPropertiesIOS {
     var value: Boolean? get() = definedExternally; set(value) = definedExternally
     override var style: dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ | RecursiveArray<dynamic /* Boolean | ViewStyle | Number /* Number & `T$5` */ */> */ get() = definedExternally; set(value) = definedExternally
 }
-external interface SwitchStatic : NativeMethodsMixinStatic, React.ClassicComponentClass<SwitchProperties>
+external interface SwitchStatic : NativeMethodsMixinStatic, ClassicComponentClass<SwitchProperties>
 external interface VibrationIOSStatic {
     fun vibrate()
 }
@@ -2186,12 +2196,12 @@ external interface I18nManagerStatic {
     var forceRTL: (forceRTL: Boolean) -> Any
 }
 external interface GeolocationStatic {
-    fun getCurrentPosition(geo_success: (position: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeolocationReturnType`) -> Unit, geo_error: ((error: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeolocationError`) -> Unit)? = definedExternally /* null */, geo_options: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeoOptions`? = definedExternally /* null */)
-    fun watchPosition(success: (position: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeolocationReturnType`) -> Unit, error: ((error: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeolocationError`) -> Unit)? = definedExternally /* null */, options: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeoOptions`? = definedExternally /* null */): Number
+    fun getCurrentPosition(geo_success: (position: GeolocationReturnType) -> Unit, geo_error: ((error: GeolocationError) -> Unit)? = definedExternally /* null */, geo_options: GeoOptions? = definedExternally /* null */)
+    fun watchPosition(success: (position: GeolocationReturnType) -> Unit, error: ((error: GeolocationError) -> Unit)? = definedExternally /* null */, options: GeoOptions? = definedExternally /* null */): Number
     fun clearWatch(watchID: Number)
     fun stopObserving()
     fun requestAuthorization()
-    fun setRNConfiguration(config: `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".GeoConfiguration`)
+    fun setRNConfiguration(config: GeoConfiguration)
 }
 external interface OpenCameraDialogOptions {
     var videoMode: Boolean? get() = definedExternally; set(value) = definedExternally
@@ -2239,13 +2249,13 @@ external interface ARTSurfaceProps {
     var width: Number
     var height: Number
 }
-external interface ShapeStatic : React.ComponentClass<ARTShapeProps>
-external interface SurfaceStatic : React.ComponentClass<ARTSurfaceProps>
+external interface ShapeStatic : ComponentClass<ARTShapeProps>
+external interface SurfaceStatic : ComponentClass<ARTSurfaceProps>
 external interface ARTStatic {
     var Shape: ShapeStatic
     var Surface: SurfaceStatic
 }
-external interface KeyboardStatic : `"/Users/user/tmp/DefinitelyTyped/types/react-native/index".NativeEventEmitter` {
+external interface KeyboardStatic : NativeEventEmitter {
     var dismiss: () -> Unit
 }
 external interface NativeModulesStatic {
@@ -2265,4 +2275,17 @@ external interface `T$64` {
 external interface ErrorUtils {
     var setGlobalHandler: (callback: (error: Any, isFatal: Boolean? /*= null*/) -> Unit) -> Unit
     var getGlobalHandler: () -> (error: Any, isFatal: Boolean? /*= null*/) -> Unit
+}
+
+external interface INativeEventEmitter : EventEmitter
+
+open external class NativeEventEmitter : INativeEventEmitter {
+    override fun addListener(eventType: String, listener: (args: Any) -> Any, context: Any?): EmitterSubscription
+    override fun once(eventType: String, listener: (args: Any) -> Any, context: Any): EmitterSubscription
+    override fun removeAllListeners(eventType: String?)
+    override fun removeCurrentListener()
+    override fun removeSubscription(subscription: EmitterSubscription)
+    override fun listeners(eventType: String): Array<EmitterSubscription>
+    override fun emit(eventType: String, vararg params: Any)
+    override fun removeListener(eventType: String, listener: (args: Any) -> Any)
 }
