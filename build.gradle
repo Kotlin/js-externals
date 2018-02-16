@@ -125,10 +125,6 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             }
         }
 
-        task packToJar(type: Jar, dependsOn: "preparePublish") {
-            from deployDir
-        }
-
         task sourcesJar(type: Jar) {
             from "$projectDir/src"
 
@@ -138,11 +134,11 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         publishing {
             publications {
                 maven(MavenPublication) {
+                    from components.java
                     groupId 'kotlin.js.externals'
                     artifactId "kotlin-js-$libraryName"
                     version deployVersion
 
-                    artifact packToJar
                     artifact sourcesJar
                 }
             }
