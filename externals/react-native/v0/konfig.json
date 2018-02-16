@@ -1,8 +1,4 @@
 {
   "version": "0.52.0-0",
-  "dependencies" : {
-    "subprojects" : [
-      ":react:v16"
-    ]
-  }
+  "dependencies" : [":react:v16"]
 }

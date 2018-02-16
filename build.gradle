@@ -120,13 +120,9 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         dependencies {
             compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
 
-            konfig.dependencies?.subprojects?.forEach {
+            konfig.dependencies?.forEach {
                 compile(project(it))
             }
-        }
-
-        task packToJar(type: Jar, dependsOn: "preparePublish") {
-            from deployDir
         }
 
         task sourcesJar(type: Jar) {
@@ -138,11 +134,11 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
         publishing {
             publications {
                 maven(MavenPublication) {
+                    from components.java
                     groupId 'kotlin.js.externals'
                     artifactId "kotlin-js-$libraryName"
                     version deployVersion
 
-                    artifact packToJar
                     artifact sourcesJar
                 }
             }
@@ -256,7 +252,7 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
                 packageJson.version = konfig.version
                 packageJson.name = "@$npmScope/$libraryName"
 
-                def deps = konfig.dependencies?.subprojects
+                def deps = konfig.dependencies
 
                 if (deps != null && !deps.isEmpty()) {
                     if (packageJson.dependencies == null) {
