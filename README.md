@@ -67,9 +67,11 @@ For a JavaScript library of version `X.Y.Z`, use an external declarations librar
 
 ## How to contribute?
 * [Report](https://github.com/Kotlin/js-externals/issues) any issues you find in existing declarations.
-* Or fix them and send a Pull Request!
+* Or fix them and send a Pull Request.
 * [Request](https://github.com/Kotlin/js-externals/issues) declarations that are missing.
-* Or create them yourself and send a Pull Request. Please feel free to ask any questions in [#javascript](https://kotlinlang.slack.com/messages/C0B8L3U69/) channel of [kotl.in/slack](https://kotl.in/slack))
+* Or create them yourself and send a Pull Request. 
+
+Please feel free to ask any questions in [#javascript](https://kotlinlang.slack.com/messages/C0B8L3U69/) channel of [kotl.in/slack](https://kotl.in/slack)
 
 ## How to write declarations?
 
