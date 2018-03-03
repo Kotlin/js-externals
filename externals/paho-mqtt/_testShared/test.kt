@@ -8,7 +8,7 @@ fun test() {
     val password = "secret1"
 
     val client = Paho.MQTT.Client(hostname, port, clientId)
-    val opt: Paho.MQTT.Options = js("({})")
+    val opt: Paho.MQTT.ConnectOptions = js("({})")
     opt.userName = username
     opt.password = password
     opt.onSuccess = {
