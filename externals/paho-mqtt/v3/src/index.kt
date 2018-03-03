@@ -1,6 +1,7 @@
-//headers for Paho JavaScript Client
-//The Paho JavaScript Client is an MQTT browser-based client library written in Javascript that uses WebSockets to connect to an MQTT Broker.
-//https://github.com/eclipse/paho.mqtt.javascript
+// headers for Paho JavaScript Client
+// The Paho JavaScript Client is an MQTT browser-based client library written in Javascript that uses WebSockets to connect to an MQTT Broker.
+// https://github.com/eclipse/paho.mqtt.javascript
+// Contributed by: Jako <simone.giacomelli@gmail.com>
 
 package js.externals.paho_mqtt
 
