@@ -38,26 +38,3 @@ external object Paho {
         }
     }
 }
-
-object PahoTest {
-    fun tryit(conf: dynamic) {
-        val client = Paho.MQTT.Client(conf.hostname, conf.port, conf.params["clientId"]!!)
-        val opt: Paho.MQTT.Options = js("({})")
-        opt.userName = conf.username
-        opt.password = conf.password
-        opt.onSuccess = {
-            println("SUCCESS")
-            client.subscribe("destination1")
-            client.send(Paho.MQTT.Message("debug: hello world").also { it.destinationName = "destination2" })
-        }
-        opt.onFailure = { println("FAILURE ${it.errorCode} ${it.errorMessage}") }
-        opt.reconnect = true
-        opt.useSSL = true
-
-
-
-        client.onMessageArrived = { println("payload=${it.payloadString}") }
-
-        client.connect(opt)
-    }
-}
