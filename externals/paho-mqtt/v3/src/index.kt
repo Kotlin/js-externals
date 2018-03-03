@@ -7,11 +7,11 @@ package js.externals.paho_mqtt
 
 external object Paho {
     object MQTT {
-        class Client(hostname: String, port: Int, clientId: String) {
-            val hostname: String
+        class Client(host: String, port: Int, clientId: String) {
+            val host: String
             val port: Int
             val clientId: String
-            fun connect(options: Options)
+            fun connect(connectOptions: ConnectOptions)
             fun send(message: Message)
             fun subscribe(destination: String)
             fun disconnect()
@@ -24,12 +24,12 @@ external object Paho {
             var destinationName: String
         }
 
-        class Response {
+        interface Response {
             val errorCode: Int
             val errorMessage: String
         }
 
-        interface Options {
+        interface ConnectOptions {
             var userName: String
             var password: String
             var reconnect: Boolean
