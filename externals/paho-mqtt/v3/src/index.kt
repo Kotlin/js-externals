@@ -40,7 +40,7 @@ external object Paho {
 }
 
 object PahoTest {
-    fun tryit(conf:dynamic) {
+    fun tryit(conf: dynamic) {
         val client = Paho.MQTT.Client(conf.hostname, conf.port, conf.params["clientId"]!!)
         val opt: Paho.MQTT.Options = js("({})")
         opt.userName = conf.username
