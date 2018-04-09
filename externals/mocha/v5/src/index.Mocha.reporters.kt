@@ -22,13 +22,13 @@ external open class List : Base
 external open class Markdown : Base
 external open class Min : Base
 external open class Nyan : Base
-external interface `T$1` {
+external interface ProgressOptions {
     var open: String? get() = definedExternally; set(value) = definedExternally
     var complete: String? get() = definedExternally; set(value) = definedExternally
     var incomplete: String? get() = definedExternally; set(value) = definedExternally
     var close: String? get() = definedExternally; set(value) = definedExternally
 }
-external open class Progress(runner: IRunner, options: `T$1`? = definedExternally /* null */) : Base
+external open class Progress(runner: IRunner, options: ProgressOptions? = definedExternally /* null */) : Base
 external open class Spec : Base
 external open class TAP : Base
 external open class XUnit(runner: IRunner, options: Any? = definedExternally /* null */) : Base

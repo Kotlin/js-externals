@@ -7,7 +7,7 @@ package js.externals.mocha.Mocha
 import kotlin.js.*
 import js.externals.mocha.*
 
-external interface `T$0` {
+external interface MochaOptions {
     var grep: RegExp? get() = definedExternally; set(value) = definedExternally
     var ui: String? get() = definedExternally; set(value) = definedExternally
     var reporter: dynamic /* String | ReporterConstructor */ get() = definedExternally; set(value) = definedExternally
@@ -17,7 +17,7 @@ external interface `T$0` {
     var bail: Boolean? get() = definedExternally; set(value) = definedExternally
 }
 
-external open class Mocha(options: `T$0`? = definedExternally /* null */) {
+external open class Mocha(options: MochaOptions? = definedExternally /* null */) {
     open var currentTest: ITestDefinition = definedExternally
     open fun setup(`interface`: String /* "bdd" */): Mocha = definedExternally
     open fun setup(`interface`: String /* "tdd" */): Mocha = definedExternally

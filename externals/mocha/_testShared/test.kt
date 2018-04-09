@@ -1,5 +1,5 @@
 import js.externals.mocha.Mocha.Mocha
-import js.externals.mocha.Mocha.`T$0`
+import js.externals.mocha.Mocha.MochaOptions
 import js.externals.mocha.Mocha.describe
 import js.externals.mocha.Mocha.it
 
@@ -13,7 +13,7 @@ fun mul(i: Int, j: Int) = i * j
 fun testMocha() {
     Mocha()
     Mocha(null)
-    val m = Mocha(object : `T$0` {})
+    val m = Mocha(object : MochaOptions {})
     m.checkLeaks()
     m.invert().invert().invert()
 
