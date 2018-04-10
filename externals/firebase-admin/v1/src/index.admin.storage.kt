@@ -1,3 +1,13 @@
+// Generated using ts2kt(https://github.com/Kotlin/ts2kt)
+//
+// Headers for firebase-admin
+// 
+// Package: firebase-admin (https://www.npmjs.com/package/firebase-admin)
+//
+// Firebase Admin Node.js SDK is licensed under the Apache License, version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+//
+// Contributed by: Pavlos-Petros Tournaris <p.tournaris@gmail.com>
+
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 @file:JsQualifier("admin.storage")
 package js.externals.firebase.admin.storage

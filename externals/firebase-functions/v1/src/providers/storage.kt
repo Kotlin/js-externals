@@ -1,3 +1,13 @@
+// Generated using ts2kt(https://github.com/Kotlin/ts2kt)
+//
+// Headers for firebase-functions
+// 
+// Package: firebase-functions (https://www.npmjs.com/package/firebase-functions)
+//
+// © Google, 2017. Licensed under The MIT License. (https://github.com/firebase/firebase-functions/blob/master/LICENSE)
+//
+// Contributed by: Pavlos-Petros Tournaris <p.tournaris@gmail.com>
+
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 package js.externals.firebase.functions.providers.storage
 
