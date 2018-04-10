@@ -1,0 +1,1 @@
+## Kotlin JS External Definitions for firebase-functions
