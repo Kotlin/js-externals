@@ -95,6 +95,10 @@ external interface ListUsersResult {
     var users: Array<UserRecord>
     var pageToken: String? get() = definedExternally; set(value) = definedExternally
 }
+external interface HashAlgorithmType {
+    @nativeInvoke
+    operator fun invoke(): dynamic /* String /* "SCRYPT" */ | String /* "STANDARD_SCRYPT" */ | String /* "HMAC_SHA512" */ | String /* "HMAC_SHA256" */ | String /* "HMAC_SHA1" */ | String /* "HMAC_MD5" */ | String /* "MD5" */ | String /* "PBKDF_SHA1" */ | String /* "BCRYPT" */ | String /* "PBKDF2_SHA256" */ | String /* "SHA512" */ | String /* "SHA256" */ | String /* "SHA1" */ */
+}
 external interface `T$1` {
     var algorithm: dynamic /* String /* "SCRYPT" */ | String /* "STANDARD_SCRYPT" */ | String /* "HMAC_SHA512" */ | String /* "HMAC_SHA256" */ | String /* "HMAC_SHA1" */ | String /* "HMAC_MD5" */ | String /* "MD5" */ | String /* "PBKDF_SHA1" */ | String /* "BCRYPT" */ | String /* "PBKDF2_SHA256" */ | String /* "SHA512" */ | String /* "SHA256" */ | String /* "SHA1" */ */
     var key: Buffer? get() = definedExternally; set(value) = definedExternally

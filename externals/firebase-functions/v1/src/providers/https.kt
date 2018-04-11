@@ -26,6 +26,10 @@ import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
 
+external interface FunctionsErrorCode {
+    @nativeInvoke
+    operator fun invoke(): dynamic /* String /* "ok" */ | String /* "cancelled" */ | String /* "unknown" */ | String /* "invalid-argument" */ | String /* "deadline-exceeded" */ | String /* "not-found" */ | String /* "already-exists" */ | String /* "permission-denied" */ | String /* "resource-exhausted" */ | String /* "failed-precondition" */ | String /* "aborted" */ | String /* "out-of-range" */ | String /* "unimplemented" */ | String /* "internal" */ | String /* "unavailable" */ | String /* "data-loss" */ | String /* "unauthenticated" */ */
+}
 external fun onRequest(handler: (req: express.Request, resp: express.Response) -> Unit): HttpsFunction = definedExternally
 external open class HttpsError(code: dynamic /* String /* "ok" */ | String /* "cancelled" */ | String /* "unknown" */ | String /* "invalid-argument" */ | String /* "deadline-exceeded" */ | String /* "not-found" */ | String /* "already-exists" */ | String /* "permission-denied" */ | String /* "resource-exhausted" */ | String /* "failed-precondition" */ | String /* "aborted" */ | String /* "out-of-range" */ | String /* "unimplemented" */ | String /* "internal" */ | String /* "unavailable" */ | String /* "data-loss" */ | String /* "unauthenticated" */ */, message: String? = definedExternally /* null */, details: Any? = definedExternally /* null */) : Error {
     open var code: dynamic /* String /* "ok" */ | String /* "cancelled" */ | String /* "unknown" */ | String /* "invalid-argument" */ | String /* "deadline-exceeded" */ | String /* "not-found" */ | String /* "already-exists" */ | String /* "permission-denied" */ | String /* "resource-exhausted" */ | String /* "failed-precondition" */ | String /* "aborted" */ | String /* "out-of-range" */ | String /* "unimplemented" */ | String /* "internal" */ | String /* "unavailable" */ | String /* "data-loss" */ | String /* "unauthenticated" */ */ = definedExternally

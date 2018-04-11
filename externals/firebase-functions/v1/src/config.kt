@@ -26,4 +26,4 @@ import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
 
-external fun config(): `"node_modules/firebase-functions/lib/config".config.Config` = definedExternally
+external fun config(): config.Config = definedExternally

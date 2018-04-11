@@ -45,4 +45,8 @@ external open class UserBuilder {
         fun dataConstructor(raw: Any): Unit = definedExternally
     }
 }
+external interface UserRecord {
+    @nativeInvoke
+    operator fun invoke(): dynamic /* firebase.auth.UserRecord */
+}
 external fun userRecordConstructor(wireData: Any): firebase.auth.UserRecord = definedExternally

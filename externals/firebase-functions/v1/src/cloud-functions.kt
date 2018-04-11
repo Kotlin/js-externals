@@ -43,8 +43,8 @@ external open class Change<T>(before: T? = definedExternally /* null */, after: 
     open var before: T = definedExternally
     open var after: T = definedExternally
     companion object {
-        fun <T> fromObjects(before: T, after: T): `"node_modules/firebase-functions/lib/cloud-functions".Change`<T> = definedExternally
-        fun <T> fromJSON(json: ChangeJson, customizer: ((any: Any) -> T)? = definedExternally /* null */): `"node_modules/firebase-functions/lib/cloud-functions".Change`<T> = definedExternally
+        fun <T> fromObjects(before: T, after: T): Change<T> = definedExternally
+        fun <T> fromJSON(json: ChangeJson, customizer: ((any: Any) -> T)? = definedExternally /* null */): Change<T> = definedExternally
     }
 }
 external interface ChangeJson {
@@ -78,4 +78,12 @@ external interface TriggerAnnotated {
 }
 external interface Runnable<T> {
     var run: (data: T, context: EventContext? /*= null*/) -> dynamic /* PromiseLike<Any> | Any */
+}
+external interface HttpsFunction: TriggerAnnotated {
+    @nativeInvoke
+    operator fun invoke(req: Request, resp: Response)
+}
+external interface CloudFunction<T>: Runnable<T>, TriggerAnnotated {
+    @nativeInvoke
+    operator fun invoke(input: Any): dynamic /* PromiseLike<Any> | Any */
 }
