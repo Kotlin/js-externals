@@ -1,6 +1,4 @@
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
-@file:JsModule("mocha")
-@file:JsNonModule
 
 package js.externals.mocha.Mocha
 
@@ -17,7 +15,7 @@ external interface MochaOptions {
     var bail: Boolean? get() = definedExternally; set(value) = definedExternally
 }
 
-external open class Mocha(options: MochaOptions? = definedExternally /* null */) {
+open external class Mocha(options: MochaOptions? = definedExternally /* null */) {
     open var currentTest: ITestDefinition = definedExternally
     open fun setup(`interface`: String /* "bdd" */): Mocha = definedExternally
     open fun setup(`interface`: String /* "tdd" */): Mocha = definedExternally
@@ -94,6 +92,7 @@ external interface ISuite {
     var title: String
     fun fullTitle(): String
 }
+
 external interface ITest : IRunnable {
     var parent: ISuite
     var pending: Boolean
@@ -125,19 +124,30 @@ external interface IRunner {
     var abort: () -> IRunner /* this */
     var run: (fn: ((failures: Number) -> Unit)? /*= null*/) -> IRunner /* this */
 }
+
+external interface IAsyncCallback {
+    @nativeInvoke
+    operator fun invoke(error: Any? = definedExternally)
+}
+
+typealias ICallback = (async: IAsyncCallback) -> Unit
+
 external interface IContextDefinition {
     @nativeInvoke
-    operator fun invoke(description: String, callback: (`this`: ISuiteCallbackContext) -> Unit): ISuite
-    fun only(description: String, callback: (`this`: ISuiteCallbackContext) -> Unit): ISuite
-    fun skip(description: String, callback: (`this`: ISuiteCallbackContext) -> Unit)
+    operator fun invoke(description: String, callback: ICallback): ISuite
+
+    fun only(description: String, callback: ICallback): ISuite
+    fun skip(description: String, callback: ICallback)
     fun timeout(ms: String)
     fun timeout(ms: Number)
 }
+
 external interface ITestDefinition {
     @nativeInvoke
-    operator fun invoke(expectation: String, callback: ((`this`: ITestCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */)? = definedExternally /* null */): ITest
-    fun only(expectation: String, callback: ((`this`: ITestCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */)? = definedExternally /* null */): ITest
-    fun skip(expectation: String, callback: ((`this`: ITestCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */)? = definedExternally /* null */)
+    operator fun invoke(description: String, callback: ICallback? = definedExternally): ITest
+
+    fun only(expectation: String, callback: ICallback? = definedExternally): ITest
+    fun skip(expectation: String, callback: ICallback? = definedExternally)
     fun timeout(ms: String)
     fun timeout(ms: Number)
     var state: dynamic /* String /* "failed" */ | String /* "passed" */ | Nothing? */
@@ -150,15 +160,15 @@ external var it: ITestDefinition = definedExternally
 external var xit: ITestDefinition = definedExternally
 external var test: ITestDefinition = definedExternally
 external var specify: ITestDefinition = definedExternally
-external fun setup(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun teardown(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun suiteSetup(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun suiteTeardown(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun before(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun before(description: String, callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun after(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun after(description: String, callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun beforeEach(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun beforeEach(description: String, callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun afterEach(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun afterEach(description: String, callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
+external fun setup(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun teardown(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun suiteSetup(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun suiteTeardown(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun before(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun before(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
+external fun after(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun after(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
+external fun beforeEach(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun beforeEach(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
+external fun afterEach(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun afterEach(description: String, callback: ICallback? = definedExternally): Unit = definedExternally

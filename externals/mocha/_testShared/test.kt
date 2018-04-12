@@ -20,18 +20,24 @@ fun testMocha() {
 }
 
 fun testGitSample() {
-    describe("Calc test") { _ ->
-        describe("Additional test") { _ ->
-            it("returns 1 + 1 == 2") { _, done ->
+    describe("Calc test") {
+        describe("Additional test") {
+            it("returns 1 + 1 == 2") {
                 assert(add(1, 1) == 2)
-                done(null)
+            }
+            it("returns 1 + 1 == 2") {d ->
+                assert(add(1, 1) == 2)
+                d()
+            }
+            it("returns 1 + 1 == 2") {d ->
+                assert(add(1, 1) == 2)
+                d("msg")
             }
         }
 
-        describe("Multiplication test") { _ ->
-            it("returns 2 * 2 == 4") { _, done ->
+        describe("Multiplication test") {
+            it("returns 2 * 2 == 4") {
                 assert(mul(2, 2) == 4)
-                done("")
             }
         }
     }

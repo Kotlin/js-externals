@@ -4,6 +4,7 @@ package js.externals.mocha
 
 import js.externals.mocha.Mocha.*
 
+
 external interface MochaSetupOptions {
     var slow: Number? get() = definedExternally; set(value) = definedExternally
     var timeout: Number? get() = definedExternally; set(value) = definedExternally
@@ -25,16 +26,16 @@ external var xit: ITestDefinition = definedExternally
 external var test: ITestDefinition = definedExternally
 external var specify: ITestDefinition = definedExternally
 external fun run(): Unit = definedExternally
-external fun setup(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun teardown(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun suiteSetup(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun suiteTeardown(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun before(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun before(description: String, callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun after(callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun after(description: String, callback: (`this`: IHookCallbackContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun beforeEach(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun beforeEach(description: String, callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun afterEach(callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
-external fun afterEach(description: String, callback: (`this`: IBeforeAndAfterContext, done: (error: Any? /*= null*/) -> Unit) -> dynamic /* Unit | PromiseLike<Any> */): Unit = definedExternally
+external fun setup(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun teardown(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun suiteSetup(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun suiteTeardown(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun before(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun before(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
+external fun after(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun after(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
+external fun beforeEach(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun beforeEach(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
+external fun afterEach(callback: ICallback? = definedExternally): Unit = definedExternally
+external fun afterEach(description: String, callback: ICallback? = definedExternally): Unit = definedExternally
 external interface ReporterConstructor
