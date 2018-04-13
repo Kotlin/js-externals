@@ -26,8 +26,9 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.app.App
 
 external interface InstanceId {
-    var app: admin.app.App
+    var app: App
     fun deleteInstanceId(instanceId: String): Promise<Unit>
 }

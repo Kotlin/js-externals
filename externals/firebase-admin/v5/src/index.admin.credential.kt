@@ -26,12 +26,14 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.GoogleOAuthAccessToken
+import js.externals.firebase.admin.ServiceAccount
 
 external interface Credential {
-    fun getAccessToken(): Promise<admin.GoogleOAuthAccessToken>
+    fun getAccessToken(): Promise<GoogleOAuthAccessToken>
 }
 external fun applicationDefault(): Credential = definedExternally
 external fun cert(serviceAccountPathOrObject: String): Credential = definedExternally
-external fun cert(serviceAccountPathOrObject: admin.ServiceAccount): Credential = definedExternally
+external fun cert(serviceAccountPathOrObject: ServiceAccount): Credential = definedExternally
 external fun refreshToken(refreshTokenPathOrObject: String): Credential = definedExternally
 external fun refreshToken(refreshTokenPathOrObject: Any): Credential = definedExternally

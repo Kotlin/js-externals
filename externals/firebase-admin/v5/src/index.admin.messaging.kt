@@ -26,6 +26,12 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.app.App
+import js.externals.firebase.ConditionMessage
+import js.externals.firebase.TokenMessage
+import js.externals.firebase.TopicMessage
+import js.externals.firebase.admin.FirebaseError
+import js.externals.firebase.admin.FirebaseArrayIndexError
 
 external interface `T$6` {
     @nativeGetter
@@ -39,7 +45,7 @@ external interface AndroidConfig {
     var ttl: Number? get() = definedExternally; set(value) = definedExternally
     var restrictedPackageName: String? get() = definedExternally; set(value) = definedExternally
     var data: `T$6`? get() = definedExternally; set(value) = definedExternally
-    var notification: admin.messaging.AndroidNotification? get() = definedExternally; set(value) = definedExternally
+    var notification: AndroidNotification? get() = definedExternally; set(value) = definedExternally
 }
 external interface AndroidNotification {
     var title: String? get() = definedExternally; set(value) = definedExternally
@@ -56,10 +62,10 @@ external interface AndroidNotification {
 }
 external interface ApnsConfig {
     var headers: `T$6`? get() = definedExternally; set(value) = definedExternally
-    var payload: admin.messaging.ApnsPayload? get() = definedExternally; set(value) = definedExternally
+    var payload: ApnsPayload? get() = definedExternally; set(value) = definedExternally
 }
 external interface ApnsPayload {
-    var aps: admin.messaging.Aps
+    var aps: Aps
     @nativeGetter
     operator fun get(customData: String): Any?
     @nativeSetter
@@ -90,7 +96,7 @@ external interface Notification {
 external interface WebpushConfig {
     var headers: `T$6`? get() = definedExternally; set(value) = definedExternally
     var data: `T$6`? get() = definedExternally; set(value) = definedExternally
-    var notification: admin.messaging.WebpushNotification? get() = definedExternally; set(value) = definedExternally
+    var notification: WebpushNotification? get() = definedExternally; set(value) = definedExternally
 }
 external interface WebpushNotification {
     var title: String? get() = definedExternally; set(value) = definedExternally
@@ -122,8 +128,8 @@ external interface NotificationMessagePayload {
     operator fun set(key: String, value: String?)
 }
 external interface MessagingPayload {
-    var data: admin.messaging.DataMessagePayload? get() = definedExternally; set(value) = definedExternally
-    var notification: admin.messaging.NotificationMessagePayload? get() = definedExternally; set(value) = definedExternally
+    var data: DataMessagePayload? get() = definedExternally; set(value) = definedExternally
+    var notification: NotificationMessagePayload? get() = definedExternally; set(value) = definedExternally
 }
 external interface MessagingOptions {
     var dryRun: Boolean? get() = definedExternally; set(value) = definedExternally
@@ -139,7 +145,7 @@ external interface MessagingOptions {
     operator fun set(key: String, value: Any?)
 }
 external interface MessagingDeviceResult {
-    var error: admin.FirebaseError? get() = definedExternally; set(value) = definedExternally
+    var error: FirebaseError? get() = definedExternally; set(value) = definedExternally
     var messageId: String? get() = definedExternally; set(value) = definedExternally
     var canonicalRegistrationToken: String? get() = definedExternally; set(value) = definedExternally
 }
@@ -147,7 +153,7 @@ external interface MessagingDevicesResponse {
     var canonicalRegistrationTokenCount: Number
     var failureCount: Number
     var multicastId: Number
-    var results: Array<admin.messaging.MessagingDeviceResult>
+    var results: Array<MessagingDeviceResult>
     var successCount: Number
 }
 external interface MessagingDeviceGroupResponse {
@@ -164,20 +170,20 @@ external interface MessagingConditionResponse {
 external interface MessagingTopicManagementResponse {
     var failureCount: Number
     var successCount: Number
-    var errors: Array<admin.FirebaseArrayIndexError>
+    var errors: Array<FirebaseArrayIndexError>
 }
 external interface Messaging {
-    var app: admin.app.App
+    var app: App
     fun send(message: TokenMessage, dryRun: Boolean? = definedExternally /* null */): Promise<String>
     fun send(message: TopicMessage, dryRun: Boolean? = definedExternally /* null */): Promise<String>
     fun send(message: ConditionMessage, dryRun: Boolean? = definedExternally /* null */): Promise<String>
-    fun sendToDevice(registrationToken: String, payload: admin.messaging.MessagingPayload, options: admin.messaging.MessagingOptions? = definedExternally /* null */): Promise<admin.messaging.MessagingDevicesResponse>
-    fun sendToDevice(registrationToken: Array<String>, payload: admin.messaging.MessagingPayload, options: admin.messaging.MessagingOptions? = definedExternally /* null */): Promise<admin.messaging.MessagingDevicesResponse>
-    fun sendToDeviceGroup(notificationKey: String, payload: admin.messaging.MessagingPayload, options: admin.messaging.MessagingOptions? = definedExternally /* null */): Promise<admin.messaging.MessagingDeviceGroupResponse>
-    fun sendToTopic(topic: String, payload: admin.messaging.MessagingPayload, options: admin.messaging.MessagingOptions? = definedExternally /* null */): Promise<admin.messaging.MessagingTopicResponse>
-    fun sendToCondition(condition: String, payload: admin.messaging.MessagingPayload, options: admin.messaging.MessagingOptions? = definedExternally /* null */): Promise<admin.messaging.MessagingConditionResponse>
-    fun subscribeToTopic(registrationToken: String, topic: String): Promise<admin.messaging.MessagingTopicManagementResponse>
-    fun subscribeToTopic(registrationTokens: Array<String>, topic: String): Promise<admin.messaging.MessagingTopicManagementResponse>
-    fun unsubscribeFromTopic(registrationToken: String, topic: String): Promise<admin.messaging.MessagingTopicManagementResponse>
-    fun unsubscribeFromTopic(registrationTokens: Array<String>, topic: String): Promise<admin.messaging.MessagingTopicManagementResponse>
+    fun sendToDevice(registrationToken: String, payload: MessagingPayload, options: MessagingOptions? = definedExternally /* null */): Promise<MessagingDevicesResponse>
+    fun sendToDevice(registrationToken: Array<String>, payload: MessagingPayload, options: MessagingOptions? = definedExternally /* null */): Promise<MessagingDevicesResponse>
+    fun sendToDeviceGroup(notificationKey: String, payload: MessagingPayload, options: MessagingOptions? = definedExternally /* null */): Promise<MessagingDeviceGroupResponse>
+    fun sendToTopic(topic: String, payload: MessagingPayload, options: MessagingOptions? = definedExternally /* null */): Promise<MessagingTopicResponse>
+    fun sendToCondition(condition: String, payload: MessagingPayload, options: MessagingOptions? = definedExternally /* null */): Promise<MessagingConditionResponse>
+    fun subscribeToTopic(registrationToken: String, topic: String): Promise<MessagingTopicManagementResponse>
+    fun subscribeToTopic(registrationTokens: Array<String>, topic: String): Promise<MessagingTopicManagementResponse>
+    fun unsubscribeFromTopic(registrationToken: String, topic: String): Promise<MessagingTopicManagementResponse>
+    fun unsubscribeFromTopic(registrationTokens: Array<String>, topic: String): Promise<MessagingTopicManagementResponse>
 }

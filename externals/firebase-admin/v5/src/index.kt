@@ -25,6 +25,9 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.messaging.AndroidConfig
+import js.externals.firebase.admin.messaging.WebpushConfig
+import js.externals.firebase.admin.messaging.ApnsConfig
 
 external interface `T$5` {
     @nativeGetter
@@ -34,10 +37,10 @@ external interface `T$5` {
 }
 external interface BaseMessage {
     var data: `T$5`? get() = definedExternally; set(value) = definedExternally
-    var notification: admin.messaging.Notification? get() = definedExternally; set(value) = definedExternally
-    var android: admin.messaging.AndroidConfig? get() = definedExternally; set(value) = definedExternally
-    var webpush: admin.messaging.WebpushConfig? get() = definedExternally; set(value) = definedExternally
-    var apns: admin.messaging.ApnsConfig? get() = definedExternally; set(value) = definedExternally
+    var notification: Notification? get() = definedExternally; set(value) = definedExternally
+    var android: AndroidConfig? get() = definedExternally; set(value) = definedExternally
+    var webpush: WebpushConfig? get() = definedExternally; set(value) = definedExternally
+    var apns: ApnsConfig? get() = definedExternally; set(value) = definedExternally
 }
 external interface TokenMessage : BaseMessage {
     var token: String

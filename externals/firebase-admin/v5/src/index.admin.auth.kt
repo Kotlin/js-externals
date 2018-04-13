@@ -26,6 +26,8 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.app.App
+import js.externals.firebase.admin.FirebaseArrayIndexError
 
 external interface UserMetadata {
     var lastSignInTime: String
@@ -115,7 +117,7 @@ external interface UserImportOptions {
 external interface UserImportResult {
     var failureCount: Number
     var successCount: Number
-    var errors: Array<admin.FirebaseArrayIndexError>
+    var errors: Array<FirebaseArrayIndexError>
 }
 external interface `T$2` {
     var lastSignInTime: String? get() = definedExternally; set(value) = definedExternally
@@ -143,7 +145,7 @@ external interface UserImportRecord {
     var passwordSalt: Buffer? get() = definedExternally; set(value) = definedExternally
 }
 external interface Auth {
-    var app: admin.app.App
+    var app: App
     fun createCustomToken(uid: String, developerClaims: Any? = definedExternally /* null */): Promise<String>
     fun createUser(properties: CreateRequest): Promise<UserRecord>
     fun deleteUser(uid: String): Promise<Unit>

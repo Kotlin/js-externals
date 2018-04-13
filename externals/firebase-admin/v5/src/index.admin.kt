@@ -26,6 +26,15 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.app.App
+import js.externals.firebase.admin.AppOptions
+import js.externals.firebase.admin.auth.Auth
+import js.externals.firebase.admin.credential.Credential
+import js.externals.firebase.admin.database.Database
+import js.externals.firebase.admin.FirebaseFirestore.Firestore
+import js.externals.firebase.admin.messaging.Messaging
+import js.externals.firebase.admin.storage.Storage
+import js.externals.firebase.admin.instanceId.InstanceId
 
 external interface FirebaseError {
     var code: String
@@ -47,19 +56,19 @@ external interface GoogleOAuthAccessToken {
     var expires_in: Number
 }
 external interface AppOptions {
-    var credential: admin.credential.Credential? get() = definedExternally; set(value) = definedExternally
+    var credential: Credential? get() = definedExternally; set(value) = definedExternally
     var databaseAuthVariableOverride: Any? get() = definedExternally; set(value) = definedExternally
     var databaseURL: String? get() = definedExternally; set(value) = definedExternally
     var storageBucket: String? get() = definedExternally; set(value) = definedExternally
     var projectId: String? get() = definedExternally; set(value) = definedExternally
 }
 external var SDK_VERSION: String = definedExternally
-external var apps: Array<admin.app.App> = definedExternally
-external fun app(name: String? = definedExternally /* null */): admin.app.App = definedExternally
-external fun auth(app: admin.app.App? = definedExternally /* null */): admin.auth.Auth = definedExternally
-external fun database(app: admin.app.App? = definedExternally /* null */): admin.database.Database = definedExternally
-external fun messaging(app: admin.app.App? = definedExternally /* null */): admin.messaging.Messaging = definedExternally
-external fun storage(app: admin.app.App? = definedExternally /* null */): admin.storage.Storage = definedExternally
-external fun firestore(app: admin.app.App? = definedExternally /* null */): admin.firestore.Firestore = definedExternally
-external fun instanceId(app: admin.app.App? = definedExternally /* null */): admin.instanceId.InstanceId = definedExternally
-external fun initializeApp(options: AppOptions? = definedExternally /* null */, name: String? = definedExternally /* null */): admin.app.App = definedExternally
+external var apps: Array<App> = definedExternally
+external fun app(name: String? = definedExternally /* null */): App = definedExternally
+external fun auth(app: App? = definedExternally /* null */): Auth = definedExternally
+external fun database(app: App? = definedExternally /* null */): Database = definedExternally
+external fun messaging(app: App? = definedExternally /* null */): Messaging = definedExternally
+external fun storage(app: App? = definedExternally /* null */): Storage = definedExternally
+external fun firestore(app: App? = definedExternally /* null */): Firestore = definedExternally
+external fun instanceId(app: App? = definedExternally /* null */): InstanceId = definedExternally
+external fun initializeApp(options: AppOptions? = definedExternally /* null */, name: String? = definedExternally /* null */): App = definedExternally

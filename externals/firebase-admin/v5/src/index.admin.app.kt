@@ -26,15 +26,22 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.admin.AppOptions
+import js.externals.firebase.admin.auth.Auth
+import js.externals.firebase.admin.database.Database
+import js.externals.firebase.admin.FirebaseFirestore.Firestore
+import js.externals.firebase.admin.instanceId.InstanceId
+import js.externals.firebase.admin.messaging.Messaging
+import js.externals.firebase.admin.storage.Storage
 
 external interface App {
     var name: String
-    var options: admin.AppOptions
-    fun auth(): admin.auth.Auth
-    fun database(url: String? = definedExternally /* null */): admin.database.Database
-    fun firestore(): admin.firestore.Firestore
-    fun instanceId(): admin.instanceId.InstanceId
-    fun messaging(): admin.messaging.Messaging
-    fun storage(): admin.storage.Storage
+    var options: AppOptions
+    fun auth(): Auth
+    fun database(url: String? = definedExternally /* null */): Database
+    fun firestore(): Firestore
+    fun instanceId(): InstanceId
+    fun messaging(): Messaging
+    fun storage(): Storage
     fun delete(): Promise<Unit>
 }
