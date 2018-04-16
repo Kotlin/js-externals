@@ -111,7 +111,7 @@ external interface Reference : Query {
     var path: String
     fun child(path: String): Reference
     fun onDisconnect(): OnDisconnect
-    fun push(value: Any? = definedExternally /* null */, onComplete: ((a: Error?) -> Any)? = definedExternally /* null */): ThenableReference
+    // fun push(value: Any? = definedExternally /* null */, onComplete: ((a: Error?) -> Any)? = definedExternally /* null */): ThenableReference
     fun remove(onComplete: ((a: Error?) -> Any)? = definedExternally /* null */): Promise<Unit>
     fun set(value: Any, onComplete: ((a: Error?) -> Any)? = definedExternally /* null */): Promise<Unit>
     fun setPriority(priority: String, onComplete: (a: Error?) -> Any): Promise<Unit>
@@ -123,7 +123,7 @@ external interface Reference : Query {
     fun transaction(transactionUpdate: (a: Any) -> Any, onComplete: ((a: Error?, b: Boolean, c: DataSnapshot?) -> Any)? = definedExternally /* null */, applyLocally: Boolean? = definedExternally /* null */): Promise<`T$4`>
     fun update(values: Any, onComplete: ((a: Error?) -> Any)? = definedExternally /* null */): Promise<Unit>
 }
-external interface ThenableReference : Reference, PromiseLike<Any>
+// external interface ThenableReference : Reference, PromiseLike<Any>
 external fun enableLogging(logger: Boolean? = definedExternally /* null */, persistent: Boolean? = definedExternally /* null */): Any = definedExternally
 external fun enableLogging(logger: ((message: String) -> Any)? = definedExternally /* null */, persistent: Boolean? = definedExternally /* null */): Any = definedExternally
 external fun enableLogging(): Any = definedExternally

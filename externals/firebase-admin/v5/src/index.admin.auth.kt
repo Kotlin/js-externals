@@ -103,7 +103,7 @@ external interface HashAlgorithmType {
 }
 external interface `T$1` {
     var algorithm: dynamic /* String /* "SCRYPT" */ | String /* "STANDARD_SCRYPT" */ | String /* "HMAC_SHA512" */ | String /* "HMAC_SHA256" */ | String /* "HMAC_SHA1" */ | String /* "HMAC_MD5" */ | String /* "MD5" */ | String /* "PBKDF_SHA1" */ | String /* "BCRYPT" */ | String /* "PBKDF2_SHA256" */ | String /* "SHA512" */ | String /* "SHA256" */ | String /* "SHA1" */ */
-    var key: Buffer? get() = definedExternally; set(value) = definedExternally
+    // var key: Buffer? get() = definedExternally; set(value) = definedExternally
     var saltSeparator: String? get() = definedExternally; set(value) = definedExternally
     var rounds: Number? get() = definedExternally; set(value) = definedExternally
     var memoryCost: Number? get() = definedExternally; set(value) = definedExternally
@@ -141,8 +141,8 @@ external interface UserImportRecord {
     var metadata: `T$2`? get() = definedExternally; set(value) = definedExternally
     var providerData: Array<`T$3`>? get() = definedExternally; set(value) = definedExternally
     var customClaims: Any? get() = definedExternally; set(value) = definedExternally
-    var passwordHash: Buffer? get() = definedExternally; set(value) = definedExternally
-    var passwordSalt: Buffer? get() = definedExternally; set(value) = definedExternally
+    // var passwordHash: Buffer? get() = definedExternally; set(value) = definedExternally
+    // var passwordSalt: Buffer? get() = definedExternally; set(value) = definedExternally
 }
 external interface Auth {
     var app: App

@@ -25,16 +25,24 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.EventContext
+import js.externals.firebase.functions.CloudFunction
+
+external interface UserMetadata {
+    var lastSignInTime: String
+    var creationTime: String
+    fun toJSON(): Any
+}
 
 external fun user(): UserBuilder = definedExternally
 external interface `T$0` {
     var creationTime: String
     var lastSignInTime: String
 }
-external open class UserRecordMetadata(creationTime: String, lastSignInTime: String) : firebase.auth.UserMetadata {
-    open var creationTime: String = definedExternally
-    open var lastSignInTime: String = definedExternally
-    open fun toJSON(): `T$0` = definedExternally
+external open class UserRecordMetadata(creationTime: String, lastSignInTime: String) : UserMetadata {
+    override var creationTime: String = definedExternally
+    override var lastSignInTime: String = definedExternally
+    override fun toJSON(): `T$0` = definedExternally
 }
 external open class UserBuilder {
     open var triggerResource: Any = definedExternally
@@ -47,6 +55,6 @@ external open class UserBuilder {
 }
 external interface UserRecord {
     @nativeInvoke
-    operator fun invoke(): dynamic /* firebase.auth.UserRecord */
+    operator fun invoke(): dynamic /* UserRecord */
 }
-external fun userRecordConstructor(wireData: Any): firebase.auth.UserRecord = definedExternally
+external fun userRecordConstructor(wireData: Any): UserRecord = definedExternally

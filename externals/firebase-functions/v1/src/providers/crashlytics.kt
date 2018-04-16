@@ -25,6 +25,8 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.EventContext
+import js.externals.firebase.functions.CloudFunction
 
 external fun issue(): IssueBuilder = definedExternally
 external open class IssueBuilder {

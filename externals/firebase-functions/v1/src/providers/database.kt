@@ -25,7 +25,12 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.EventContext
+import js.externals.firebase.functions.CloudFunction
+import js.externals.firebase.functions.Change
 
+external interface App {}
+external interface Reference {}
 external fun instance(instance: String): InstanceBuilder = definedExternally
 external open class InstanceBuilder {
     open var instance: Any = definedExternally
@@ -42,14 +47,14 @@ external open class RefBuilder {
     open fun <T> onOperation(handler: Any, eventType: Any, dataConstructor: Any): Unit = definedExternally
     open var changeConstructor: Any = definedExternally
 }
-external open class DataSnapshot(data: Any, path: String? = definedExternally /* null */, app: firebase.app.App? = definedExternally /* null */, instance: String? = definedExternally /* null */) {
+external open class DataSnapshot(data: Any, path: String? = definedExternally /* null */, app: App? = definedExternally /* null */, instance: String? = definedExternally /* null */) {
     open var app: Any = definedExternally
     open var instance: String = definedExternally
     open var _ref: Any = definedExternally
     open var _path: Any = definedExternally
     open var _data: Any = definedExternally
     open var _childPath: Any = definedExternally
-    open var ref: firebase.database.Reference = definedExternally
+    open var ref: Reference = definedExternally
     open var key: String = definedExternally
     open fun `val`(): Any = definedExternally
     open fun exportVal(): Any = definedExternally

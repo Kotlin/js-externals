@@ -25,5 +25,6 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.config.config.Config
 
-external fun config(): config.Config = definedExternally
+external fun config(): Config = definedExternally

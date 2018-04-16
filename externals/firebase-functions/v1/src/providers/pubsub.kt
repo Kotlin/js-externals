@@ -25,6 +25,8 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.CloudFunction
+import js.externals.firebase.functions.EventContext
 
 external fun topic(topic: String): TopicBuilder = definedExternally
 external open class TopicBuilder {

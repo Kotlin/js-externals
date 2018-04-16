@@ -40,7 +40,7 @@ external open class Bucket(storage: Storage, name: String) {
     open fun file(name: String, options: BucketFileOptions? = definedExternally /* null */): File = definedExternally
     open fun get(options: BucketGetOptions? = definedExternally /* null */): Promise<dynamic /* JsTuple<Bucket, ApiResponse> */> = definedExternally
     open fun getFiles(query: BucketQuery? = definedExternally /* null */): Promise<dynamic /* JsTuple<Array<File>> */> = definedExternally
-    open fun getFilesStream(query: BucketQuery? = definedExternally /* null */): ReadStream = definedExternally
+    // open fun getFilesStream(query: BucketQuery? = definedExternally /* null */): ReadStream = definedExternally
     open fun getMetadata(): Promise<dynamic /* JsTuple<BucketMetadata, ApiResponse> */> = definedExternally
     open var id: String = definedExternally
     open var iam: Iam = definedExternally
@@ -104,9 +104,9 @@ external open class File(bucket: Bucket, name: String, options: BucketFileOption
     open fun copy(destination: String): Promise<dynamic /* JsTuple<File, ApiResponse> */> = definedExternally
     open fun copy(destination: File): Promise<dynamic /* JsTuple<File, ApiResponse> */> = definedExternally
     open fun copy(destination: Bucket): Promise<dynamic /* JsTuple<File, ApiResponse> */> = definedExternally
-    open fun createReadStream(options: ReadStreamOptions? = definedExternally /* null */): ReadStream = definedExternally
+    // open fun createReadStream(options: ReadStreamOptions? = definedExternally /* null */): ReadStream = definedExternally
     open fun createResumableUpload(options: ResumableUploadOptions? = definedExternally /* null */): Promise<dynamic /* JsTuple<String> */> = definedExternally
-    open fun createWriteStream(options: WriteStreamOptions? = definedExternally /* null */): WriteStream = definedExternally
+    // open fun createWriteStream(options: WriteStreamOptions? = definedExternally /* null */): WriteStream = definedExternally
     open fun delete(): Promise<dynamic /* JsTuple<ApiResponse> */> = definedExternally
     open fun download(options: DownloadOptions? = definedExternally /* null */): Promise<dynamic /* JsTuple<Any> */> = definedExternally
     open fun exists(): Promise<dynamic /* JsTuple<Boolean> */> = definedExternally
@@ -121,9 +121,9 @@ external open class File(bucket: Bucket, name: String, options: BucketFileOption
     open fun move(destination: Bucket): Promise<dynamic /* JsTuple<File, ApiResponse> */> = definedExternally
     open var name: String = definedExternally
     open fun save(data: String, options: WriteStreamOptions? = definedExternally /* null */): Promise<Unit> = definedExternally
-    open fun save(data: Buffer, options: WriteStreamOptions? = definedExternally /* null */): Promise<Unit> = definedExternally
+    // open fun save(data: Buffer, options: WriteStreamOptions? = definedExternally /* null */): Promise<Unit> = definedExternally
     open fun setEncryptionKey(encryptionKey: String): File = definedExternally
-    open fun setEncryptionKey(encryptionKey: Buffer): File = definedExternally
+    // open fun setEncryptionKey(encryptionKey: Buffer): File = definedExternally
     open fun setMetadata(metadata: FileMetadata): Promise<dynamic /* JsTuple<ApiResponse> */> = definedExternally
     open var metadata: FileMetadata = definedExternally
 }
@@ -242,7 +242,7 @@ external interface ConfigurationObject {
     var keyFilename: String? get() = definedExternally; set(value) = definedExternally
     var maxRetries: Number? get() = definedExternally; set(value) = definedExternally
     var projectId: String? get() = definedExternally; set(value) = definedExternally
-    var promise: (() -> PromiseLike<Any>)? get() = definedExternally; set(value) = definedExternally
+    // var promise: (() -> PromiseLike<Any>)? get() = definedExternally; set(value) = definedExternally
 }
 external interface DownloadOptions : ReadStreamOptions {
     var destination: String? get() = definedExternally; set(value) = definedExternally

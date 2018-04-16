@@ -25,19 +25,23 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.CloudFunction
+import js.externals.firebase.functions.EventContext
+import js.externals.firebase.functions.HttpsFunction
 
+external interface Error {}
 external interface FunctionsErrorCode {
     @nativeInvoke
     operator fun invoke(): dynamic /* String /* "ok" */ | String /* "cancelled" */ | String /* "unknown" */ | String /* "invalid-argument" */ | String /* "deadline-exceeded" */ | String /* "not-found" */ | String /* "already-exists" */ | String /* "permission-denied" */ | String /* "resource-exhausted" */ | String /* "failed-precondition" */ | String /* "aborted" */ | String /* "out-of-range" */ | String /* "unimplemented" */ | String /* "internal" */ | String /* "unavailable" */ | String /* "data-loss" */ | String /* "unauthenticated" */ */
 }
-external fun onRequest(handler: (req: express.Request, resp: express.Response) -> Unit): HttpsFunction = definedExternally
+external fun onRequest(handler: (req: dynamic /* express.Request */, resp: dynamic /* express.Response */) -> Unit): HttpsFunction = definedExternally
 external open class HttpsError(code: dynamic /* String /* "ok" */ | String /* "cancelled" */ | String /* "unknown" */ | String /* "invalid-argument" */ | String /* "deadline-exceeded" */ | String /* "not-found" */ | String /* "already-exists" */ | String /* "permission-denied" */ | String /* "resource-exhausted" */ | String /* "failed-precondition" */ | String /* "aborted" */ | String /* "out-of-range" */ | String /* "unimplemented" */ | String /* "internal" */ | String /* "unavailable" */ | String /* "data-loss" */ | String /* "unauthenticated" */ */, message: String? = definedExternally /* null */, details: Any? = definedExternally /* null */) : Error {
     open var code: dynamic /* String /* "ok" */ | String /* "cancelled" */ | String /* "unknown" */ | String /* "invalid-argument" */ | String /* "deadline-exceeded" */ | String /* "not-found" */ | String /* "already-exists" */ | String /* "permission-denied" */ | String /* "resource-exhausted" */ | String /* "failed-precondition" */ | String /* "aborted" */ | String /* "out-of-range" */ | String /* "unimplemented" */ | String /* "internal" */ | String /* "unavailable" */ | String /* "data-loss" */ | String /* "unauthenticated" */ */ = definedExternally
     open var details: Any = definedExternally
 }
 external interface `T$0` {
     var uid: String
-    var token: firebase.auth.DecodedIdToken
+    // var token: firebase.auth.DecodedIdToken
 }
 external interface CallableContext {
     var auth: `T$0`? get() = definedExternally; set(value) = definedExternally

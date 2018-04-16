@@ -25,7 +25,14 @@ import org.w3c.notifications.*
 import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
+import js.externals.firebase.functions.CloudFunction
+import js.externals.firebase.functions.Change
+import js.externals.firebase.functions.EventContext
 
+external interface DocumentSnapshot {
+    @nativeInvoke
+    operator fun invoke(): dynamic /* DocumentSnapshot */
+}
 external fun document(path: String): DocumentBuilder = definedExternally
 external open class DatabaseBuilder {
     open var database: Any = definedExternally
