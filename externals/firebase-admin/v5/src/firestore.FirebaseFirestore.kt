@@ -1,3 +1,11 @@
+// Generated using ts2kt(https://github.com/Kotlin/ts2kt)
+//
+// Headers for firebase-firestore
+// 
+// Package: firebase-firestore
+//
+// Contributed by: Pavlos-Petros Tournaris <p.tournaris@gmail.com>
+
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 @file:JsModule("@google-cloud/firestore")
 @file:JsNonModule()
