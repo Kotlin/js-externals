@@ -10,6 +10,8 @@
 
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 @file:JsQualifier("config")
+@file:JsNonModule
+@file:JsModule("firebase-functions")
 package js.externals.firebase.functions.config.config
 
 import kotlin.js.*
