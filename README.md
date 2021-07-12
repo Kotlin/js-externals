@@ -6,7 +6,7 @@ This repository contains sources of external declarations for Kotlin/JS.
 
 ### Bintray
 
-All libraries are available in the maven repository https://bintray.com/kotlin/js-externals/
+All libraries are available in the maven repository https://jcenter.bintray.com/
 with group id `kotlin.js.externals` and artifact id `kotlin-js-<library-name>`.
 
 To use declarations from a library `foo`, you need to add
@@ -15,7 +15,7 @@ this repository to your repository list for your build tool, and then add a depe
 Gradle:
 ```gradle
 repositories {
-    maven { url "https://kotlin.bintray.com/js-externals" }
+    jcenter()
 }
 
 dependencies {
@@ -29,7 +29,7 @@ Maven:
     <repository>
         <id>kotlin-js-externals</id>
         <name>Kotlin/JS externals</name>
-        <url>https://kotlin.bintray.com/js-externals</url>
+        <url>https://jcenter.bintray.com</url>
     </repository>
 </repositories>
 
@@ -78,4 +78,4 @@ Please feel free to ask any questions in [#javascript](https://kotlinlang.slack.
 To write declarations from scratch or to improve existing declarations
 you have to read about [external modifier](https://kotlinlang.org/docs/reference/js-interop.html#external-modifier) and [JS interop annotations](https://kotlinlang.org/docs/reference/js-modules.html#jsmodule-annotation).
 
-The simplest way to get external declarations is converting TypeScript declarations (d.ts) to Kotlin [using ts2kt](https://kotlinlang.org/docs/tutorials/javascript/working-with-javascript.html#using-ts2kt-to-generate-header-files-for-kotlin).
+The simplest way to get external declarations is converting TypeScript declarations (d.ts) to Kotlin [using Dukat](https://kotlinlang.org/docs/js-external-declarations-with-dukat.html).
