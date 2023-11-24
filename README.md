@@ -1,6 +1,7 @@
 # External declarations for Kotlin/JS
 
 This repository contains sources of external declarations for Kotlin/JS.
+The repository is no longer supported and signatures are no longer updated.
 
 ## How to use?
 
