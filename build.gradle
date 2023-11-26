@@ -4,7 +4,7 @@ import groovy.json.JsonOutput
 import java.nio.file.Paths
 
 buildscript {
-    ext.kotlin_version = '1.2.20'
+    ext.kotlin_version = '1.2.51'
 
     repositories {
         mavenCentral()
@@ -245,7 +245,13 @@ subprojects.stream().filter { it.parent != rootProject }.each { p ->
             into deployDir
         }
 
-        task preparePackageJson(dependsOn: [validate, cleanDeployDir]) {
+        task ensureDeployDir {
+            doLast {
+                mkdir "$deployDir"
+            }
+        }
+
+        task preparePackageJson(dependsOn: [validate, cleanDeployDir, ensureDeployDir]) {
             doFirst {
                 def packageJson = new JsonSlurper().parseText(file(packageJsonPath).text)
 
